@@ -8,7 +8,7 @@ Created on Mon Apr 16 11:49:45 2018
 
 import os #to handle filesystem files
 import cv2 #for image manipulation
-import numpy as np #numerical computation
+import numpy as np
 import matplotlib.pyplot as plt #for data visualization
 import matplotlib.patches as patches #for legends and rectangle drawing in QTD
 
@@ -38,7 +38,7 @@ class quadTree:
             :type linewidth:
             :return: plot with image and leaves of the quadTree Decomposition
         """
-        
+        plt.figure()
         fig = plt.imshow(self.img)
         for block in self.blocks:
             rect = patches.Rectangle((block[0],block[1]),block[3],block[2],linewidth=linewidth,edgecolor=edgecolor,facecolor=facecolor)
@@ -94,7 +94,36 @@ class quadTree:
         self.img = img
         self.params = [minStd,minSize]
         self.quadTreeDecomposition(img,0,0,minStd,minSize)
+
+def getSymmetry(img,minSize, minStd):
+    """ This function returns the degree of symmetry (0-100) between the left and right side of an image 
+    
+    :param img: img to analyze
+    :type img: numpy.ndarray
+    :minStd: Std threshold for subsequent splitting
+    :type minStd: int
+    :minSize: Size threshold for subsequent splitting, in pixel
+    :type minStd: int
+    :return: degree of vertical symmetry
+    :rtype: float
+    """
+    h,w = img.shape
+    if(h%2 != 0):
+        img = img[:-1,:]
+    if(w%2 != 0):
+        img = img[:,:-1]
         
+    left = img[0:,0:int(w/2)]
+    right = np.flip(img[0:,int(w/2):],1)
+    left = quadTree(left,minStd,minSize)
+    right = quadTree(right,minStd,minSize)
+    counter = 0
+    tot =  (len(right.blocks) + len(left.blocks))
+    for block in right.blocks:
+        for block2 in left.blocks:
+            if(block[0:4] == block2[0:4]):
+                counter+=1
+    return(counter /tot * 200)
 ###############################################################################
 #                                                                             #
 #                                  DEBUG                                      #
@@ -107,10 +136,14 @@ if(__name__=='__main__'):
     
     basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
     datafolder = "/".join(basepath.split("/")[:-1])+"/data/"
-    img = datafolder + "sample.png"
-    minStd = 10 #min STD of each block
-    minSize = 25 #min size of each block    
+    img = datafolder + "2.png"
+    minStd = 15 #min STD of each block
+    minSize = 40 #min size of each block    
     imgcolor = cv2.imread(img) #read the image in color for plotting purposes
     img = cv2.imread(img,0) #read the image in B/W
-    mydecomposition = quadTree(img,minStd,minSize)
-    mydecomposition.plot()
+    #mydecomposition = quadTree(img,minStd,minSize)
+    #mydecomposition.plot()
+    
+    #Symmetry using QT
+    h,w = img.shape
+    print(getSymmetry(img,minSize,minStd))
