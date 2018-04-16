@@ -19,7 +19,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Website Aesthetic Analyzer'
+project = 'PrettyWebsite'
 copyright = '2018, Giulio Gabrieli'
 author = 'Giulio Gabrieli'
 
