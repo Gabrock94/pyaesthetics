@@ -12,37 +12,17 @@ import os
 import cv2
 import matplotlib.pyplot as plt
 import pytesseract 
-from PIL import Image
 
 ###############################################################################
 #                                                                             #
 #                      Quadratic Tree Decomposition                           #
 #                                                                             #
 ###############################################################################
-def textDetection(img):
-    """ This function uses pytesseract to get information about the presence of text in an image
-        
-        :param img: image to analyze, in RGB
-        :type img: numpy.ndarray
-        :return: number of character in the text
-        :rtype: int
-    
-    """
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    filename = "{}.png".format(os.getpid())
-    cv2.imwrite(filename, img)
-    text = pytesseract.image_to_string(Image.open(filename))
-    os.remove(filename)
-    return(len(text))
-    
+
 def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize = 20):
-    """ This functions act as entrypoint for dummy analysis of a website aesthetic features """
-    
     resultdict = {}
     imageColor = cv2.imread(pathToImg)
     imageBW = cv2.imread(pathToImg,0)
-    
-    resultdict["Text"] = textDetection(imageColor) #this has to be done before preprocessing
     if(resize):
         imageBW = cv2.resize(imageBW,newSize,interpolation=cv2.INTER_CUBIC)
         imageColor = cv2.resize(imageColor,newSize,interpolation=cv2.INTER_CUBIC)
@@ -55,7 +35,7 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     resultdict["Colorfulness_HSV"] = colorfulness.colorfulnessHSV(imageColor)
     resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
     resultdict["Faces"] = faceDetection.getFaces(imageColor)
-    resultdict["Number_of_Faces"] = resultdict["Faces"]
+    resultdict["Number_of_Faces"] = len(resultdict["Faces"])
     return(resultdict)
 
 if(__name__=='__main__'):

@@ -12,6 +12,7 @@ Welcome to Website Aesthetic Analyzer's documentation!
    
    brightness
    colorfulness
+   faceDetection
    quadTree
    symmetry
 

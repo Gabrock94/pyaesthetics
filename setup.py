@@ -1,4 +1,8 @@
 from setuptools import setup
+import os
+
+datadir = os.path.join("share","data")
+datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.walk(datadir)]
 
 setup(name='prettywebsite',
     version='0.0.1',
@@ -34,4 +38,6 @@ setup(name='prettywebsite',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
-    zip_safe=False)
+    zip_safe=False,
+    include_package_data=True,
+    data_files = datafiles)

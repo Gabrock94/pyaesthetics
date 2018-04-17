@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: prettywebsite
+Version: 0.0.1
+Summary: Website aesthetic analysis in Python
+Home-page: https://github.com/Gabrock94/PrettyWebsite
+Author: Giulio Gabrieli
+Author-email: gack94@gmail.com
+License: GPL
+Description: A simple python package for aesthetic analysis of web pages.
+Keywords: Website,Analysis,Aesthetic
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: License :: OSI Approved ::  GNU General Public License v3 (GPLv3)
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
