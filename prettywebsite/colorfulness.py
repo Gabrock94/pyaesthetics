@@ -17,6 +17,28 @@ import numpy as np #numerical computation
 ###############################################################################
 """ Thìs sections handles colorfulness estimation. """
 
+def sRGB2RGB(img):
+    """ this function converts a sRGB img to  linear RGB values.
+    
+        :param img: image to analyze, in sRGB
+        :type img: numpy.ndarray
+        :return: image to analyze, in RGB
+        :rtyipe: numpy.ndarray
+    """
+    newimg = []
+    for row in img:
+        thisrow = [] 
+        for pixel in row:
+            thispixel = []
+            for value in pixel:
+                if(value/255 <= 0.04045):
+                    thispixel.append(value/(255*12.92))
+                else:
+                    thispixel.append((((value/255) + 0.055) / 1.055)**2.4)
+            thisrow.append(thispixel)
+        newimg.append(thisrow)
+    return(newimg)
+    
 def colorfulnessHSV(img):
     """ This function evaluates the colorfulness of a picture using the formula described in Yendrikhovskij et al., 1998.
         Input image is first converted to the HSV color space, then the S values are selected.
@@ -40,8 +62,7 @@ def colorfulnessHSV(img):
     
 def colorfulnessRGB(img):
     """ This function evaluates the colorfulness of a picture using Metric 3 described in Hasler & Suesstrunk, 2003.
-        Input image is first converted to the HSV color space, then the S values are selected.
-        Ci is evaluated with a sum of the mean S and its std, as in:
+        Ci is evaluated with as:
             
         Ci =std(rgyb) + 0.3 mean(rgyb)   [Equation Y] 
         std(rgyb) = sqrt(std(rg)^2+std(yb)^2)

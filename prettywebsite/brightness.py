@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+This module contains function to evaluate the brightness of an image.
+It includes a converter for sRGB to RGB, evaluation of relative luminance according to
+BT.709 and BT.601
+
+
 Created on Mon Apr 16 16:01:04 2018
 
 @author: giulio
@@ -20,23 +25,26 @@ import numpy as np #numerical computation
 def sRGB2RGB(img):
     """ this function converts a sRGB img to  linear RGB values.
     
+        It loops through each pixel, and apply a conversion to pass from sRGB to linear RGB value.
+        
+    
         :param img: image to analyze, in sRGB
         :type img: numpy.ndarray
         :return: image to analyze, in RGB
         :rtyipe: numpy.ndarray
     """
-    newimg = []
-    for row in img:
-        thisrow = [] 
-        for pixel in row:
-            thispixel = []
-            for value in pixel:
-                if(value/255 <= 0.04045):
-                    thispixel.append(value/(255*12.92))
-                else:
-                    thispixel.append((((value/255) + 0.055) / 1.055)**2.4)
-            thisrow.append(thispixel)
-        newimg.append(thisrow)
+    newimg = [] #initialize the new img
+    for row in img: #for each row
+        thisrow = [] #initialize the row
+        for pixel in row: #for each pixel
+            thispixel = [] #initialize the pixel
+            for value in pixel: #for each value R, G and B
+                if(value/255 <= 0.04045): #check it is smaller than the treshold
+                    thispixel.append(value/(255*12.92)) #do the conversoni
+                else: 
+                    thispixel.append((((value/255) + 0.055) / 1.055)**2.4) #do the conversion
+            thisrow.append(thispixel) #reconstruct the pixel
+        newimg.append(thisrow) #recontruct the row
     return(newimg)
     
 def relativeLuminance_BT709(img):
@@ -94,5 +102,3 @@ if(__name__=='__main__'):
     img = cv2.imread(img)
     print(relativeLuminance_BT709(img))    
     print(relativeLuminance_BT601(img))
-
-    

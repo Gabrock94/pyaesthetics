@@ -1,0 +1,172 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Colorfulness analysis &#8212; PrettyWebsite 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="QuadTree Decomposition analysis" href="quadTree.html" />
+    <link rel="prev" title="Brightness analysis" href="brightness.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quadTree.html" title="QuadTree Decomposition analysis"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="brightness.html" title="Brightness analysis"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PrettyWebsite 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-colorfulness">
+<span id="colorfulness-analysis"></span><h1>Colorfulness analysis<a class="headerlink" href="#module-colorfulness" title="Permalink to this headline">¶</a></h1>
+<p>Created on Mon Apr 16 11:49:45 2018</p>
+<p>&#64;author: giulio</p>
+<dl class="function">
+<dt id="colorfulness.colorfulnessHSV">
+<code class="descclassname">colorfulness.</code><code class="descname">colorfulnessHSV</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="headerlink" href="#colorfulness.colorfulnessHSV" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function evaluates the colorfulness of a picture using the formula described in Yendrikhovskij et al., 1998.
+Input image is first converted to the HSV color space, then the S values are selected.
+Ci is evaluated with a sum of the mean S and its std, as in:</p>
+<p>Ci = mean(Si)+ std(Si)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img</strong> (<em>numpy.ndarray</em>) – image to analyze, in RGB</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">colorfulness index</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colorfulness.colorfulnessRGB">
+<code class="descclassname">colorfulness.</code><code class="descname">colorfulnessRGB</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="headerlink" href="#colorfulness.colorfulnessRGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function evaluates the colorfulness of a picture using Metric 3 described in Hasler &amp; Suesstrunk, 2003.
+Ci is evaluated with as:</p>
+<p>Ci =std(rgyb) + 0.3 mean(rgyb)   [Equation Y] 
+std(rgyb) = sqrt(std(rg)^2+std(yb)^2)
+mean(rgyb) = sqrt(mean(rg)^2+mean(yb)^2)
+rg = R - G
+yb = 0.5(R+G) - B</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img</strong> (<em>numpy.ndarray</em>) – image to analyze, in RGB</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">colorfulness index</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="colorfulness.sRGB2RGB">
+<code class="descclassname">colorfulness.</code><code class="descname">sRGB2RGB</code><span class="sig-paren">(</span><em>img</em><span class="sig-paren">)</span><a class="headerlink" href="#colorfulness.sRGB2RGB" title="Permalink to this definition">¶</a></dt>
+<dd><p>this function converts a sRGB img to  linear RGB values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>img</strong> (<em>numpy.ndarray</em>) – image to analyze, in sRGB</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">image to analyze, in RGB</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Rtyipe:</th><td class="field-body">numpy.ndarray</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="brightness.html"
+                        title="previous chapter">Brightness analysis</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="quadTree.html"
+                        title="next chapter">QuadTree Decomposition analysis</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/colorfulness.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="quadTree.html" title="QuadTree Decomposition analysis"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="brightness.html" title="Brightness analysis"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PrettyWebsite 0.0.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Giulio Gabrieli.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+  </body>
+</html>
