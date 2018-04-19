@@ -16,7 +16,7 @@ setup(name='prettywebsite',
     packages=['prettywebsite'],      
     install_requires=[
         'numpy',
-        'cv2',
+        'opencv-python',
         'scipy',
         'matplotlib'
     ],
