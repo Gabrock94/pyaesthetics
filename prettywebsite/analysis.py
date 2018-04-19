@@ -41,7 +41,7 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     resultdict = {}
     imageColor = cv2.imread(pathToImg)
     imageBW = cv2.imread(pathToImg,0)
-    
+    imageGREY = cv2.cvtColor(imageColor, cv2.COLOR_BGR2GRAY)
     resultdict["Text"] = textDetection(imageColor) #this has to be done before preprocessing
     if(resize):
         imageBW = cv2.resize(imageBW,newSize,interpolation=cv2.INTER_CUBIC)
@@ -55,7 +55,7 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     resultdict["Colorfulness_HSV"] = colorfulness.colorfulnessHSV(imageColor)
     resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
     resultdict["Faces"] = faceDetection.getFaces(imageColor)
-    resultdict["Number_of_Faces"] = resultdict["Faces"]
+    resultdict["Number_of_Faces"] = len(resultdict["Faces"])
     return(resultdict)
 
 if(__name__=='__main__'):
