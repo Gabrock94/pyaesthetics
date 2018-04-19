@@ -141,7 +141,7 @@ def getSymmetry(img,minStd,minSize,plot=False):
 
 if(__name__=='__main__'):
     basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = "/".join(basepath.split("/")[:-1])+"/data/"
+    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
     img = datafolder + "sample.png"
     minStd = 5 #min STD of each block
     minSize = 20 #min size of each block    

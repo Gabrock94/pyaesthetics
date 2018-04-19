@@ -39,9 +39,9 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     """ This functions act as entrypoint for dummy analysis of a website aesthetic features """
     
     resultdict = {}
-    imageColor = cv2.imread(pathToImg)
+    img = cv2.imread(pathToImg)
+    imageColor = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     imageBW = cv2.imread(pathToImg,0)
-    imageGREY = cv2.cvtColor(imageColor, cv2.COLOR_BGR2GRAY)
     resultdict["Text"] = textDetection(imageColor) #this has to be done before preprocessing
     if(resize):
         imageBW = cv2.resize(imageBW,newSize,interpolation=cv2.INTER_CUBIC)
@@ -56,6 +56,7 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
     resultdict["Faces"] = faceDetection.getFaces(imageColor)
     resultdict["Number_of_Faces"] = len(resultdict["Faces"])
+    resultdict["Colors"] = colorDetection.getColorsW3C(imageColor)
     return(resultdict)
 
 if(__name__=='__main__'):
@@ -64,10 +65,12 @@ if(__name__=='__main__'):
     import brightness
     import symmetry
     import faceDetection
+    import colorDetection
     
     basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = "/".join(basepath.split("/")[:-1])+"/data/" #set the data path in order to use sample images
+    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
     sampleImg = datafolder + "sample.png" #path to a sample image
+    
     
     results = analyzeWebsite(sampleImg)
     print(results)
@@ -77,3 +80,4 @@ else:
     from . import brightness
     from . import symmetry
     from . import faceDetection
+    from . import colorDetection

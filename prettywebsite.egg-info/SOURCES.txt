@@ -1,13 +1,11 @@
 MANIFEST.in
 README.md
+setup.cfg
 setup.py
-data/2.png
-data/haarcascade_frontalface_default.xml
-data/mirrored.png
-data/sample.png
 prettywebsite/__init__.py
 prettywebsite/analysis.py
 prettywebsite/brightness.py
+prettywebsite/colorDetection.py
 prettywebsite/colorfulness.py
 prettywebsite/faceDetection.py
 prettywebsite/quadTreeDecomposition.py
@@ -20,3 +18,5 @@ prettywebsite.egg-info/requires.txt
 prettywebsite.egg-info/top_level.txt
 share/data/haarcascade_frontalface_default.xml
 share/data/sample.png
+share/data/sample2.png
+share/data/sample3.png

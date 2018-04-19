@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Website Aesthetic Analyzer's documentation!
+Welcome to PrettyWebsite's documentation! - V. 0.0.3
 ======================================================
 
 .. toctree::
@@ -12,12 +12,11 @@ Welcome to Website Aesthetic Analyzer's documentation!
    
    brightness
    colorfulness
+   colorDetection
    faceDetection
    quadTree
    symmetry
-
-
-
+   
 Indices and tables
 ==================
 

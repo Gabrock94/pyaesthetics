@@ -105,9 +105,10 @@ def colorfulnessRGB(img):
 if(__name__=='__main__'):
     
     basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = "/".join(basepath.split("/")[:-1])+"/data/"
+    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
     img = datafolder + "sample.png"
     img = cv2.imread(img)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     print(colorfulnessHSV(img))    
     print(colorfulnessRGB(img))
 
