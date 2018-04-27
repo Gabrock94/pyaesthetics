@@ -44,11 +44,13 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     imageBW = cv2.imread(pathToImg,0)
     resultdict["Text"] = textDetection(imageColor) #this has to be done before preprocessing
     if(resize):
+        imageColor_O = imageColor
+        imageB_O = imageBW
         imageBW = cv2.resize(imageBW,newSize,interpolation=cv2.INTER_CUBIC)
         imageColor = cv2.resize(imageColor,newSize,interpolation=cv2.INTER_CUBIC)
     
-    #resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imageColor)
-    #resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imageColor)
+    resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imageColor)
+    resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imageColor)
     resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
     resultdict["VC_weight"] = os.stat(pathToImg).st_size
     resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
@@ -57,10 +59,18 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     resultdict["Faces"] = faceDetection.getFaces(imageColor)
     resultdict["Number_of_Faces"] = len(resultdict["Faces"])
     resultdict["Colors"] = colorDetection.getColorsW3C(imageColor)
+    A = spaceBasedDecomposition.getAreas(imageColor_O)
+    Adict = spaceBasedDecomposition.textImageRatio(A)
+    resultdict["Number_of_Images"] = Adict["nImages"]
+    resultdict["TextImageRatio"] = Adict["textImageRatio"]
+    resultdict["textArea"] = Adict["textArea"]
+    resultdict["imageArea"] = Adict["imageArea"]
+    
     return(resultdict)
 
 if(__name__=='__main__'):
     import quadTreeDecomposition
+    import spaceBasedDecomposition
     import colorfulness
     import brightness
     import symmetry
@@ -70,8 +80,9 @@ if(__name__=='__main__'):
     basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
     datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
     sampleImg = datafolder + "sample.png" #path to a sample image
+    sampleImg = "/media/giulio/HOME/giulio/Documenti/ABP_Lab/Experiments/website_aesthetic/AVI14/block_1/19.png" #path to a sample image
     
-    
+
     results = analyzeWebsite(sampleImg)
     print(results)
 else:
@@ -81,3 +92,4 @@ else:
     from . import symmetry
     from . import faceDetection
     from . import colorDetection
+    from . import spaceBasedDecomposition

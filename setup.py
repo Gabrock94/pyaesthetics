@@ -5,11 +5,10 @@ datadir = os.path.join("share","data")
 datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.walk(datadir)]
 
 setup(name='prettywebsite',
-    version='0.0.3',
+    version='0.0.4',
     description='Website aesthetic analysis in Python',
     long_description="A simple python package for aesthetic analysis of web pages.",
     url='https://github.com/Gabrock94/PrettyWebsite',
-    download_url='',
     author='Giulio Gabrieli',
     author_email='gack94@gmail.com',
     packages=['prettywebsite'],      
@@ -17,7 +16,8 @@ setup(name='prettywebsite',
         'numpy',
         'opencv-python',
         'scipy',
-        'matplotlib'
+        'matplotlib',
+        'imutils'
     ],
     keywords = ["Website","Analysis","Aesthetic"],
     classifiers = [ 

@@ -9,6 +9,7 @@ prettywebsite/colorDetection.py
 prettywebsite/colorfulness.py
 prettywebsite/faceDetection.py
 prettywebsite/quadTreeDecomposition.py
+prettywebsite/spaceBasedDecomposition.py
 prettywebsite/symmetry.py
 prettywebsite.egg-info/PKG-INFO
 prettywebsite.egg-info/SOURCES.txt
