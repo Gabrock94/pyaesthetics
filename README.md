@@ -1,5 +1,5 @@
 # PrettyWebsites
-A python package for aesthetic analysis of web pages.
+A python package for the Aesthetic Analysis of Web Pages (or just any image, we are not racists).
 
 ![GitHub release](https://img.shields.io/github/release/Gabrock94/prettywebsite.svg)
 [![PyPI](https://img.shields.io/pypi/v/prettywebsite.svg)](https://badge.fury.io/py/prettywebsite)
