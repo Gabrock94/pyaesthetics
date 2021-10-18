@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: prettywebsite
-Version: 0.0.4
+Version: 0.0.5
 Summary: Website aesthetic analysis in Python
 Home-page: https://github.com/Gabrock94/PrettyWebsite
 Author: Giulio Gabrieli
@@ -14,3 +14,7 @@ Classifier: Programming Language :: Python :: 3
 Classifier: Programming Language :: Python :: 3.2
 Classifier: Programming Language :: Python :: 3.3
 Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8

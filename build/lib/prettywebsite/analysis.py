@@ -35,22 +35,24 @@ def textDetection(img):
     os.remove(filename)
     return(len(text))
     
-def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize = 20):
+def analyzeWebsite(pathToImg,resize=True, newSize=(600,400), minStd = 10, minSize = 20):
     """ This functions act as entrypoint for dummy analysis of a website aesthetic features """
-    
+
     resultdict = {}
     img = cv2.imread(pathToImg)
+    # plt.imshow(img)
+    # plt.show()
+    
     imageColor = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     imageBW = cv2.imread(pathToImg,0)
     resultdict["Text"] = textDetection(imageColor) #this has to be done before preprocessing
+    imageColor_O = imageColor #keep a copy at original size
     if(resize):
-        imageColor_O = imageColor
-        imageB_O = imageBW
         imageBW = cv2.resize(imageBW,newSize,interpolation=cv2.INTER_CUBIC)
         imageColor = cv2.resize(imageColor,newSize,interpolation=cv2.INTER_CUBIC)
-    
-    resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imageColor)
-    resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imageColor)
+    imgsRGB2RGB = brightness.sRGB2RGB(img)
+    resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
+    resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imgsRGB2RGB)
     resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
     resultdict["VC_weight"] = os.stat(pathToImg).st_size
     resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
@@ -65,7 +67,6 @@ def analyzeWebsite(pathToImg,resize=True, newSize=(600,400),minStd = 10, minSize
     resultdict["TextImageRatio"] = Adict["textImageRatio"]
     resultdict["textArea"] = Adict["textArea"]
     resultdict["imageArea"] = Adict["imageArea"]
-    
     return(resultdict)
 
 if(__name__=='__main__'):
@@ -76,13 +77,8 @@ if(__name__=='__main__'):
     import symmetry
     import faceDetection
     import colorDetection
-    
-    basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
-    sampleImg = datafolder + "sample.png" #path to a sample image
-    sampleImg = "/media/giulio/HOME/giulio/Documenti/ABP_Lab/Experiments/website_aesthetic/AVI14/block_1/19.png" #path to a sample image
-    
 
+    sampleImg = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
     results = analyzeWebsite(sampleImg)
     print(results)
 else:

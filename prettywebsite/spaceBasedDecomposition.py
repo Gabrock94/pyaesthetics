@@ -65,7 +65,7 @@ def textImageRatio(areas):
     ratio = sum(text) / (sum(image) + sum(text))
     return({"textImageRatio":ratio,"textArea":sum(text),"imageArea":sum(image),"nImages":len(image)})
         
-def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False):
+def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordinates=False, areatype=True):
     
     """ Adapted from https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/"""
     
@@ -75,53 +75,64 @@ def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False):
     if(resize):
         img = cv2.resize(img,(newSize[0],newSize[1]),interpolation=cv2.INTER_CUBIC) #resizing
     img = cv2.GaussianBlur(img, (3,3), 0)#apply a Gaussina filter
-
-    edged = cv2.Canny(img, 100,100) 
+    edged = cv2.Canny(img, 10,100) 
     edged = cv2.dilate(edged, None, iterations=1)
     edged = cv2.erode(edged, None, iterations=1) #improved edge detection
     
     cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) #get the contours
-    cnts = cnts[0] if imutils.is_cv2() else cnts[1] 
-    (cnts, _) = contours.sort_contours(cnts) 
-    
-    boxes = []
-    for c in cnts: #for each contour 
-        box = cv2.minAreaRect(c)
-        box = cv2.cv.BoxPoints(box) if imutils.is_cv2() else cv2.boxPoints(box)
-        box = np.array(box, dtype="int")
-        box = perspective.order_points(box)
-        box = box.astype('int')
-        if(resize):
-            box = np.array([[int(corner[0]*ow / newSize[0]),int(corner[1]*oh / newSize[1])] for corner in box]) #convert the box to the size of the original image
-        else:
-            box = np.array([[int(corner[0]),int(corner[1])] for corner in box]) #convert the box to the size of the original image
+    cnts = cnts[0] 
+
+    if(len(cnts) > 0):
+        (cnts, _) = contours.sort_contours(cnts) 
+        
+        boxes = []
+        for c in cnts: #for each contour 
+            box = cv2.minAreaRect(c)
+            box = cv2.cv.BoxPoints(box) if imutils.is_cv2() else cv2.boxPoints(box)
+            box = np.array(box, dtype="int")
+            box = perspective.order_points(box)
+            box = box.astype('int')
+            if(resize):
+                box = np.array([[int(corner[0]*ow / newSize[0]),int(corner[1]*oh / newSize[1])] for corner in box]) #convert the box to the size of the original image
+            else:
+                box = np.array([[int(corner[0]),int(corner[1])] for corner in box]) #convert the box to the size of the original image
+            if(plot):
+                cv2.drawContours(img_original, [box], -1, (0, 255, 0), 2)
+            boxes.append(box)
+
         if(plot):
-            cv2.drawContours(img_original, [box], -1, (0, 255, 0), 2)
-        boxes.append(box)
-    if(plot):
-        plt.figure("Space based Decomposition")
-        plt.imshow(img_original)
-        plt.title("Space based decomposition")
-        plt.xticks([],[])
-        plt.yticks([],[])
-        plt.show()
-    """ Now, we can calculate the area of each box, and we can detect if some text is present"""
-    areas = {}
-    for box in range(0,len(boxes)): #to avoid errors due to two or more rectangles of the same Area
-        minX = min(np.transpose(boxes[box])[0])
-        maxX = max(np.transpose(boxes[box])[0])
-        minY = min(np.transpose(boxes[box])[1])
-        maxY = max(np.transpose(boxes[box])[1])
-        area = (maxX - minX) * (maxY - minY)
-        if(area > minArea):
-            imgportion = img_original[minY:maxY,minX:maxX]
-            try:
-                if(textDetection(imgportion) > 0):
-                    areas[box] = {"area":area,"type":"Text"}
-                else:
-                    areas[box] = {"area":area,"type":"Image"}
-            except:
-                pass
+            plt.figure("Space based Decomposition")
+            plt.imshow(img_original)
+            plt.title("Space based decomposition")
+            plt.xticks([],[])
+            plt.yticks([],[])
+            plt.show()
+        """ Now, we can calculate the area of each box, and we can detect if some text is present"""
+        areas = {}
+
+        areasize = []
+        for box in range(0,len(boxes)): #to avoid errors due to two or more rectangles of the same Area
+            t = np.transpose(boxes[box])
+            minX = min(t[0])
+            maxX = max(t[0])
+            minY = min(t[1])
+            maxY = max(t[1])
+            area = (maxX - minX) * (maxY - minY)
+            if(area > minArea):
+                areasize.append(area)
+                imgportion = img_original[minY:maxY,minX:maxX]
+                if(len(imgportion) > 0):
+                    if(areatype):
+                        if(textDetection(imgportion) > 0):
+                            areas[box] = {"area":area,"type":"Text"}
+                        else:
+                            areas[box] = {"area":area,"type":"Image"}
+
+                    else:
+                        areas[box] = {"area":area}
+                    if(coordinates):
+                        areas[box]['coordinates'] = {"xmin": minX,"xmax": maxX,"ymin": minY,"ymax": maxY}
+
     return(areas)
             
 ###############################################################################
@@ -133,11 +144,13 @@ def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False):
 """ For debug purposes."""
 
 if(__name__=='__main__'):
-    basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
-    img = datafolder + "sample.png" 
-    img = cv2.imread("/media/giulio/HOME/giulio/Documenti/ABP_Lab/Experiments/website_aesthetic/AVI14/block_2/132.png")
+
+    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
+    
+    img = cv2.imread(img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    areas = getAreas(img,plot=True)
-    print(textImageRatio(areas))
+    areas = getAreas(img,plot=True, coordinates=True, areatype=False)
+
+    print(areas)
+    # print(textImageRatio(areas))
     

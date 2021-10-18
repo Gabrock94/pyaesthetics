@@ -26,7 +26,7 @@ def getFaces(img,plot=False):
         :type plot: boolean
     """
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    frontalface_cascade = cv2.CascadeClassifier(os.path.join(os.path.dirname(__file__), '../share/data/haarcascade_frontalface_default.xml'))
+    frontalface_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
     faces = frontalface_cascade.detectMultiScale(img, 1.3, 5)
     if(plot):
         for (x,y,w,h) in faces:

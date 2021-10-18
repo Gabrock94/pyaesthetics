@@ -14,7 +14,7 @@ Created on Mon Apr 16 16:01:04 2018
 import os #to handle filesystem files
 import cv2 #for image manipulation
 import numpy as np #numerical computation
-
+import pandas as pd
 ###############################################################################
 #                                                                             #
 #                              Brightness                                     #
@@ -33,18 +33,15 @@ def sRGB2RGB(img):
         :return: image to analyze, in RGB
         :rtyipe: numpy.ndarray
     """
-    newimg = [] #initialize the new img
-    for row in img: #for each row
-        thisrow = [] #initialize the row
-        for pixel in row: #for each pixel
-            thispixel = [] #initialize the pixel
-            for value in pixel: #for each value R, G and B
-                if(value/255 <= 0.04045): #check it is smaller than the treshold
-                    thispixel.append(value/(255*12.92)) #do the conversoni
-                else: 
-                    thispixel.append((((value/255) + 0.055) / 1.055)**2.4) #do the conversion
-            thisrow.append(thispixel) #reconstruct the pixel
-        newimg.append(thisrow) #recontruct the row
+
+    img = img.flatten()
+    def converter(p):
+        if(p < 0.04045):
+            return(p/3294.6)
+        else:
+            return((((p/255) + 0.055) / 1.055)**2.4)
+
+    newimg = pd.Series(img).apply(converter).to_numpy()
     return(newimg)
     
 def relativeLuminance_BT709(img):
@@ -59,12 +56,10 @@ def relativeLuminance_BT709(img):
         :rtype: float
     """
     
-    Y = [] #initialize a list
-    img = sRGB2RGB(img) #conversion from sRGB to linear RGB
-    for row in img: #for each row
-        for pixel in row: #for each pixel
-            Y.append(0.2126 * pixel[0] + 0.7152 *pixel[1] + 0.0722*pixel[2]) #evaluate Y
-    B = np.mean(Y)
+    img = np.array(img).flatten()
+    img = img.reshape(int(len(img)/3),3)
+    img = np.transpose(img)
+    B = np.mean(img[0]) * 0.2126 + np.mean(img[1]) * 0.7152 + np.mean(img[2]) * 0.0722
     return(B) #return the brigthness index
 
 def relativeLuminance_BT601(img):
@@ -79,12 +74,12 @@ def relativeLuminance_BT601(img):
         :rtype: float
     """
     
-    Y = [] #initialize a list
-    img = sRGB2RGB(img) #conversion from sRGB to linear RGB
-    for row in img: #for each row
-        for pixel in row: #for each pixel
-            Y.append(0.299 * pixel[0] + 0.587 *pixel[1] + 0.114*pixel[2]) #evaluate Y
-    B = np.mean(Y)
+    
+    img = np.array(img).flatten()
+    img = img.reshape(int(len(img)/3),3)
+    img = np.transpose(img)
+    B = np.mean(img[0]) * 0.299 + np.mean(img[1]) * 0.587 + np.mean(img[2]) * 0.114
+
     return(B) #return the brigthness index
 ###############################################################################
 #                                                                             #
@@ -95,11 +90,11 @@ def relativeLuminance_BT601(img):
 """ For debug purposes."""
 
 if(__name__=='__main__'):
-    
-    basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
-    img = datafolder + "sample.png"
+
+    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
+
     img = cv2.imread(img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    print(relativeLuminance_BT709(img))    
+    img = sRGB2RGB(img)
+    print(relativeLuminance_BT709(img))  
     print(relativeLuminance_BT601(img))
