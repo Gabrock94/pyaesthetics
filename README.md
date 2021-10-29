@@ -20,6 +20,19 @@ The module can estimate the following features:
 -  Surface of visual and textual areas within the image
 -  Ratio between visual and textual areas
 
+## Installation
+pyaesthetics can be installed using pip:
+```bash
+pip install pyaesthetics
+```
+or downloading / cloning the repository and, from the root folder of the project, running:
+```bash
+python setup.py pyaesthetics
+```
+
+## Documentation
+You can check the full documentation here: https://pyaesthetics.rtfd.io (not available yet)
+
 
 
 
