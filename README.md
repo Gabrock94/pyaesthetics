@@ -30,6 +30,24 @@ or manually by downloading or cloning the repository and, from the root folder o
 python setup.py pyaesthetics
 ```
 
+## Example
+pyaeshtetics modules can be used one at the time to estimate one specific feature, or they can be automatically called using an automated entrypoint that calls all the available modules at once. 
+
+### Example 1: one single feature (e.g. Brigthness BT601)
+
+```python
+#load only the neede functions from the specific module
+from pyaesthetics.brightness import relativeLuminance_BT601, sRGB2RGB
+import cv2 #to open and handle images
+
+img = "/path/to/image/image.jpg" #path to a sample image
+
+img = cv2.imread(img) #load the image
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) #convert to the RGB colorscheme
+img = sRGB2RGB(img) #convert pixels to their linear RGB values
+print(relativeLuminance_BT601(img)) #evaluate luminance on the BT601 standard
+```
+
 ## Documentation
 You can check the full documentation here: https://pyaesthetics.rtfd.io (not available yet)
 
