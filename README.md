@@ -25,7 +25,7 @@ pyaesthetics can be installed using pip:
 ```bash
 pip install pyaesthetics
 ```
-or downloading / cloning the repository and, from the root folder of the project, running:
+or manually by downloading or cloning the repository and, from the root folder of the project, running:
 ```bash
 python setup.py pyaesthetics
 ```
