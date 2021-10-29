@@ -5,6 +5,7 @@
 [![PyPI status](https://img.shields.io/pypi/status/prettywebsite.svg)](https://pypi.python.org/pypi/prettywebsite/)
 [![Documentation Status](https://readthedocs.org/projects/prettywebsite/badge/?version=latest)](http://prettywebsite.readthedocs.io/en/latest/?badge=latest)
 [![DOI](https://zenodo.org/badge/129248933.svg)](https://zenodo.org/badge/latestdoi/129248933)
+
 Pyaesthetics (formlerly known as PrettyWebsite) is a python package designed to estimate visual features concerning the aesthetic appearance of a still image.
 
 ## Features
