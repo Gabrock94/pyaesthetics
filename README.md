@@ -1,9 +1,9 @@
 # pyaesthetic
 ![GitHub release](https://img.shields.io/github/release/Gabrock94/prettywebsite.svg)
-[![PyPI](https://img.shields.io/pypi/v/prettywebsite.svg)](https://badge.fury.io/py/prettywebsite)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/prettywebsite.svg)](https://pypi.python.org/pypi/prettywebsite/)
-[![PyPI status](https://img.shields.io/pypi/status/prettywebsite.svg)](https://pypi.python.org/pypi/prettywebsite/)
-[![Documentation Status](https://readthedocs.org/projects/prettywebsite/badge/?version=latest)](http://prettywebsite.readthedocs.io/en/latest/?badge=latest)
+[![PyPI](https://img.shields.io/pypi/v/pyaesthetics.svg)](https://badge.fury.io/py/pyaesthetics)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/pyaesthetics.svg)](https://pypi.python.org/pypi/pyaesthetics/)
+[![PyPI status](https://img.shields.io/pypi/status/pyaesthetics.svg)](https://pypi.python.org/pypi/pyaesthetics/)
+[![Documentation Status](https://readthedocs.org/projects/pyaesthetics/badge/?version=latest)](http://pyaesthetics.readthedocs.io/en/latest/?badge=latest)
 [![DOI](https://zenodo.org/badge/129248933.svg)](https://zenodo.org/badge/latestdoi/129248933)
 
 Pyaesthetics (formlerly known as PrettyWebsite) is a python package designed to estimate visual features concerning the aesthetic appearance of a still image.
