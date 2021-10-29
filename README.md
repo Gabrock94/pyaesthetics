@@ -47,6 +47,14 @@ img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) #convert to the RGB colorscheme
 img = sRGB2RGB(img) #convert pixels to their linear RGB values
 print(relativeLuminance_BT601(img)) #evaluate luminance on the BT601 standard
 ```
+### Example 2: Complete analysis
+
+```python
+import pyaesthetics
+img = "/path/to/image/image.jpg" #path to a sample image
+results = analyzeImage(img) #perform all the availabe analysis using standard parameters
+print(results)
+```
 
 ## Documentation
 You can check the full documentation here: https://pyaesthetics.rtfd.io (not available yet)
@@ -61,7 +69,3 @@ Feel free to contact me for questions, suggestions or to give me advice as well 
 
 ## Coffee?
 <a href='https://ko-fi.com/B0B3K45F' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
-
-
-
-
