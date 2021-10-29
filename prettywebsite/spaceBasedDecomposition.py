@@ -145,12 +145,12 @@ def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordin
 
 if(__name__=='__main__'):
 
-    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
+    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample2.jpg" #path to a sample image
     
     img = cv2.imread(img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    areas = getAreas(img,plot=True, coordinates=True, areatype=False)
+    areas = getAreas(img,plot=False, coordinates=True, areatype=False)
 
-    print(areas)
+    # print(areas)
     # print(textImageRatio(areas))
     

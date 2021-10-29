@@ -107,14 +107,11 @@ class quadTree:
 """ For debug purposes."""
 
 if(__name__=='__main__'):
-    basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
-    img = datafolder + "sample.png"
+    
+    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
     minStd = 15 #min STD of each block
     minSize = 40 #min size of each block    
     imgcolor = cv2.imread(img) #read the image in color for plotting purposes
     img = cv2.imread(img,0) #read the image in B/W
-    
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     mydecomposition = quadTree(img,minStd,minSize) #start the decomposition
     mydecomposition.plot() #visual inspection of the results
