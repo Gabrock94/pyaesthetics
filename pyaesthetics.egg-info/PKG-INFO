@@ -1,0 +1,21 @@
+Metadata-Version: 1.1
+Name: pyaesthetics
+Version: 0.0.6
+Summary: Images aesthetic analysis
+Home-page: https://github.com/Gabrock94/pyaesthetics
+Author: Giulio Gabrieli
+Author-email: gack94@gmail.com
+License: UNKNOWN
+Description: A python package to estimate aesthetics visual features from still images.
+Keywords: Image,Analysis,Aesthetic,Visual,Features
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.2
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9

@@ -4,14 +4,14 @@ import os
 datadir = os.path.join("share","data")
 datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.walk(datadir)]
 
-setup(name='prettywebsite',
-    version='0.0.5',
-    description='Website aesthetic analysis in Python',
-    long_description="A simple python package for aesthetic analysis of web pages.",
-    url='https://github.com/Gabrock94/PrettyWebsite',
+setup(name='pyaesthetics',
+    version='0.0.6',
+    description='Images aesthetic analysis',
+    long_description="A python package to estimate aesthetics visual features from still images.",
+    url='https://github.com/Gabrock94/pyaesthetics',
     author='Giulio Gabrieli',
     author_email='gack94@gmail.com',
-    packages=['prettywebsite'],      
+    packages=['pyaesthetics'],      
     install_requires=[
         'numpy',
         'opencv-python',
@@ -20,7 +20,7 @@ setup(name='prettywebsite',
         'imutils',
         'pytesseract'
     ],
-    keywords = ["Website","Analysis","Aesthetic"],
+    keywords = ["Image","Analysis","Aesthetic",'Visual','Features'],
     classifiers = [ 
         # How mature is this project? Common values are
         #   3 - Alpha
@@ -38,7 +38,7 @@ setup(name='prettywebsite',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
-        
+        'Programming Language :: Python :: 3.9',
     ],
     zip_safe=False,
     include_package_data=True,
