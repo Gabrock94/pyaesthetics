@@ -63,7 +63,7 @@ print(results)
 ## Documentation
 You can check the full documentation here: https://pyaesthetics.rtfd.io (not available yet)
 
-### Requirements
+## Requirements
 - Numpy
 - Scipy
 - Matplotlib
@@ -71,7 +71,7 @@ You can check the full documentation here: https://pyaesthetics.rtfd.io (not ava
 ## Contacts
 Feel free to contact me for questions, suggestions or to give me advice as well at: giulio001@e.ntu.edu.sg or giulio@duck.com
 
-### Scientific Publications using pyaesthetic
+## Scientific Publications using pyaesthetic
 - Gabrieli, G., Bornstein, M. H., Setoh, P., & Esposito, G. (2022). *Machine learning estimation of users’ implicit and explicit aesthetic judgments of web-pages*. Behaviour & Information Technology, 1-11.
 
 ## Coffee?
