@@ -2,7 +2,7 @@
     <img width="200" src="https://github.com/Gabrock94/pyaesthetics/blob/master/docs/pyaesthetics_small.png" alt="Logo">
 </p>
 
-# pyaesthetic
+# pyaesthetics
 ![GitHub release](https://img.shields.io/github/release/Gabrock94/prettywebsite.svg)
 [![PyPI](https://img.shields.io/pypi/v/pyaesthetics.svg)](https://badge.fury.io/py/pyaesthetics)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pyaesthetics.svg)](https://pypi.python.org/pypi/pyaesthetics/)
