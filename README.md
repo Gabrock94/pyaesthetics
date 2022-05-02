@@ -71,5 +71,8 @@ You can check the full documentation here: https://pyaesthetics.rtfd.io (not ava
 ## Contacts
 Feel free to contact me for questions, suggestions or to give me advice as well at: giulio001@e.ntu.edu.sg or giulio@duck.com
 
+### Scientific Publications using pyaesthetic
+- Gabrieli, G., Bornstein, M. H., Setoh, P., & Esposito, G. (2022). *Machine learning estimation of users’ implicit and explicit aesthetic judgments of web-pages*. Behaviour & Information Technology, 1-11.
+
 ## Coffee?
 <a href='https://ko-fi.com/B0B3K45F' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
