@@ -1,4 +1,8 @@
-# pyaesthetic
+<p align="center">
+    <img width="200" src="https://github.com/Gabrock94/pyaesthetics/blob/master/docs/pyaesthetics_small.png" alt="Logo">
+</p>
+
+# pyaesthetics
 ![GitHub release](https://img.shields.io/github/release/Gabrock94/prettywebsite.svg)
 [![PyPI](https://img.shields.io/pypi/v/pyaesthetics.svg)](https://badge.fury.io/py/pyaesthetics)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pyaesthetics.svg)](https://pypi.python.org/pypi/pyaesthetics/)
@@ -59,13 +63,16 @@ print(results)
 ## Documentation
 You can check the full documentation here: https://pyaesthetics.rtfd.io (not available yet)
 
-### Requirements
+## Requirements
 - Numpy
 - Scipy
 - Matplotlib
 
 ## Contacts
 Feel free to contact me for questions, suggestions or to give me advice as well at: giulio001@e.ntu.edu.sg or giulio@duck.com
+
+## Scientific Publications using pyaesthetic
+- Gabrieli, G., Bornstein, M. H., Setoh, P., & Esposito, G. (2022). *Machine learning estimation of users’ implicit and explicit aesthetic judgments of web-pages*. Behaviour & Information Technology, 1-11.
 
 ## Sponsors
 The project has been sponsored by Gitkraken. 
