@@ -40,10 +40,12 @@ def textDetection(img):
     os.remove(filename)
     return(len(text))
     
-def analyzeImage(pathToImg,resize=True, newSize=(600,400), minStd = 10, minSize = 20):
+def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd = 10, minSize = 20):
     """ This functions act as entrypoint for the automatic analysis of an image aesthetic features. 
     
         :param pathToImg: path to the image to analyze
+        :type pathToImg: str
+        :param method: set to analysis to use. Valid methods are 'fast','complete'. Default is 'fast'.
         :type pathToImg: str
         :param resize: indicate wether to resize the image (reduce computational workload, increase requested time)
         :type resize: boolean
@@ -71,22 +73,30 @@ def analyzeImage(pathToImg,resize=True, newSize=(600,400), minStd = 10, minSize 
         imageBW = cv2.resize(imageBW,newSize,interpolation=cv2.INTER_CUBIC)
         imageColor = cv2.resize(imageColor,newSize,interpolation=cv2.INTER_CUBIC)
     imgsRGB2RGB = brightness.sRGB2RGB(img)
-    resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
-    resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imgsRGB2RGB)
-    resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
-    resultdict["VC_weight"] = os.stat(pathToImg).st_size
-    resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
-    resultdict["Colorfulness_HSV"] = colorfulness.colorfulnessHSV(imageColor)
-    resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
-    resultdict["Faces"] = faceDetection.getFaces(imageColor)
-    resultdict["Number_of_Faces"] = len(resultdict["Faces"])
-    resultdict["Colors"] = colorDetection.getColorsW3C(imageColor)
-    A = spaceBasedDecomposition.getAreas(imageColor_O)
-    Adict = spaceBasedDecomposition.textImageRatio(A)
-    resultdict["Number_of_Images"] = Adict["nImages"]
-    resultdict["TextImageRatio"] = Adict["textImageRatio"]
-    resultdict["textArea"] = Adict["textArea"]
-    resultdict["imageArea"] = Adict["imageArea"]
+
+    if(method == 'fast'):
+        resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
+        resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
+        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
+        resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
+
+    elif(method == 'complete'):
+        resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
+        resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imgsRGB2RGB)
+        resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
+        resultdict["VC_weight"] = os.stat(pathToImg).st_size
+        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
+        resultdict["Colorfulness_HSV"] = colorfulness.colorfulnessHSV(imageColor)
+        resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
+        resultdict["Faces"] = faceDetection.getFaces(imageColor)
+        resultdict["Number_of_Faces"] = len(resultdict["Faces"])
+        resultdict["Colors"] = colorDetection.getColorsW3C(imageColor)
+        A = spaceBasedDecomposition.getAreas(imageColor_O)
+        Adict = spaceBasedDecomposition.textImageRatio(A)
+        resultdict["Number_of_Images"] = Adict["nImages"]
+        resultdict["TextImageRatio"] = Adict["textImageRatio"]
+        resultdict["textArea"] = Adict["textArea"]
+        resultdict["imageArea"] = Adict["imageArea"]
 
     return(resultdict)
 
