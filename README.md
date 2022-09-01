@@ -73,15 +73,23 @@ print(results)
 You can check the full documentation here: https://prettywebsite.readthedocs.io/en/latest/
 
 ## Requirements
-- Numpy
-- Scipy
-- Matplotlib
+- numpy
+- scipy
+- matplotlib
+- pandas
+- opencv-python
+- imutils
+- pytesseract
 
 ## Contacts
-Feel free to contact me for questions, suggestions or to give me advice as well at: giulio001@e.ntu.edu.sg or giulio@duck.com
+Feel free to contact me for questions, suggestions or to give me advice as well at: giulio.gabrieli@iit.it or giulio@duck.com
 
-## Scientific Publications using pyaesthetic
+## Scientific Publications that used pyaesthetic
 - Gabrieli, G., Bornstein, M. H., Setoh, P., & Esposito, G. (2022). *Machine learning estimation of users’ implicit and explicit aesthetic judgments of web-pages*. Behaviour & Information Technology, 1-11.
+
+## Presentation
+- Gabrieli, G., Scapin, G., & Esposito, G. (2022). Pyaesthetic, a python package for empirical aesthetic analysis. XXVII
+Conference of the International Association of Empirical Aesthetics, Philadelphia, United States. https://giuliogabrieli.it/posters/iaea2022/
 
 ## Sponsors
 The project has been sponsored by Gitkraken. 
