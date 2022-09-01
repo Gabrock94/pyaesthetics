@@ -70,7 +70,7 @@ print(results)
 ```
 
 ## Documentation
-You can check the full documentation here: https://pyaesthetics.rtfd.io (in development)
+You can check the full documentation here: https://prettywebsite.readthedocs.io/en/latest/
 
 ## Requirements
 - Numpy
