@@ -18,7 +18,8 @@ setup(name='pyaesthetics',
         'scipy',
         'matplotlib',
         'imutils',
-        'pytesseract'
+        'pytesseract',
+        'pandas',
     ],
     keywords = ["Image","Analysis","Aesthetic",'Visual','Features'],
     classifiers = [ 
