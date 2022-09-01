@@ -5,7 +5,7 @@ datadir = os.path.join("share","data")
 datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.walk(datadir)]
 
 setup(name='pyaesthetics',
-    version='0.0.6',
+    version='0.0.7',
     description='Images aesthetic analysis',
     long_description="A python package to estimate aesthetics visual features from still images.",
     url='https://github.com/Gabrock94/pyaesthetics',
@@ -19,7 +19,7 @@ setup(name='pyaesthetics',
         'matplotlib',
         'imutils',
         'pytesseract',
-        'pandas',
+        'pandas'
     ],
     keywords = ["Image","Analysis","Aesthetic",'Visual','Features'],
     classifiers = [ 

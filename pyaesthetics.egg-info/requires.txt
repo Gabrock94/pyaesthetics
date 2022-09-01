@@ -1,6 +1,0 @@
-imutils
-matplotlib
-numpy
-opencv-python
-pytesseract
-scipy

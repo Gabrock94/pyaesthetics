@@ -108,25 +108,25 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
 ###############################################################################
 
 
-if(__name__=='__main__'):
-
-    import quadTreeDecomposition
-    import spaceBasedDecomposition
-    import colorfulness
-    import brightness
-    import symmetry
-    import faceDetection
-    import colorDetection
-
-    sampleImg = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
-    results = analyzeImage(sampleImg)
-    print(results)
-
-else:
-    from . import quadTreeDecomposition
-    from . import colorfulness
-    from . import brightness
-    from . import symmetry
-    from . import faceDetection
-    from . import colorDetection
-    from . import spaceBasedDecomposition
+#if(__name__=='__main__'):
+#
+#    import quadTreeDecomposition
+#    import spaceBasedDecomposition
+#    import colorfulness
+#    import brightness
+#    import symmetry
+#    import faceDetection
+#    import colorDetection
+#
+#    sampleImg = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
+#    results = analyzeImage(sampleImg)
+#    print(results)
+#
+#else:
+#    from . import quadTreeDecomposition
+#    from . import colorfulness
+#    from . import brightness
+#    from . import symmetry
+#    from . import faceDetection
+#    from . import colorDetection
+#    from . import spaceBasedDecomposition

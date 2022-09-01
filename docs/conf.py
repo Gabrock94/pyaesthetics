@@ -14,19 +14,19 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../prettywebsite/'))
+sys.path.insert(0, os.path.abspath('../pyaesthetics/'))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'PrettyWebsite'
-copyright = '2018, Giulio Gabrieli'
+project = 'pyaesthetics'
+copyright = '2022, Giulio Gabrieli'
 author = 'Giulio Gabrieli'
 
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '0.0.7'
 
 
 # -- General configuration ---------------------------------------------------
@@ -106,7 +106,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'WebsiteAestheticAnalyzerdoc'
+htmlhelp_basename = 'pyaestheticsdoc'
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -133,7 +133,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'WebsiteAestheticAnalyzer.tex', 'Website Aesthetic Analyzer Documentation',
+    (master_doc, 'pyaesthetics.tex', 'pyaesthetics Documentation',
      'Giulio Gabrieli', 'manual'),
 ]
 
@@ -143,7 +143,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'websiteaestheticanalyzer', 'Website Aesthetic Analyzer Documentation',
+    (master_doc, 'pyaesthetics', 'pyaesthetics Documentation',
      [author], 1)
 ]
 
@@ -154,8 +154,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'WebsiteAestheticAnalyzer', 'Website Aesthetic Analyzer Documentation',
-     author, 'WebsiteAestheticAnalyzer', 'One line description of project.',
+    (master_doc, 'pyaesthetics', 'pyaesthetics Documentation',
+     author, 'pyaesthetics', 'One line description of project.',
      'Miscellaneous'),
 ]
 
