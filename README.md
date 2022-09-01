@@ -57,7 +57,15 @@ print(relativeLuminance_BT601(img)) #evaluate luminance on the BT601 standard
 ```python
 import pyaesthetics
 img = "/path/to/image/image.jpg" #path to a sample image
-results = pyaesthetics.analysis.analyzeImage(img) #perform all the availabe analysis using standard parameters
+results = pyaesthetics.analysis.analyzeImage(img, method="complete") #perform all the availabe analysis using standard parameters
+print(results)
+```
+Or for a faster analysis:
+
+```python
+import pyaesthetics
+img = "/path/to/image/image.jpg" #path to a sample image
+results = pyaesthetics.analysis.analyzeImage(img, method="fast") #perform a subset of the analysis using standard parameters.
 print(results)
 ```
 
