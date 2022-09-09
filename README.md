@@ -35,9 +35,15 @@ or manually by downloading or cloning the repository and, from the root folder o
 python setup.py pyaesthetics
 ```
 
+### Tesseract and pytesseract
 Tesseract and pytesseract are also required. 
 To install tesseract please visit: https://tesseract-ocr.github.io/tessdoc/Installation.html
 
+### Updating the package
+To update the package via pip, you can use:
+```bash
+pip install --user --upgrade pyaesthetics
+```
 
 ## Example
 pyaeshtetics modules can be used one at the time to estimate one specific feature, or they can be automatically called using an automated entrypoint that calls all the available modules at once. 
