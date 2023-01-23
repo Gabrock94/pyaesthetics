@@ -8,6 +8,7 @@
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pyaesthetics.svg)](https://pypi.python.org/pypi/pyaesthetics/)
 [![PyPI status](https://img.shields.io/pypi/status/pyaesthetics.svg)](https://pypi.python.org/pypi/pyaesthetics/)
 [![PyPI downloads](https://img.shields.io/pypi/dm/pyaesthetics.svg?label=PyPI%20downloads)](https://pypi.python.org/pypi/pyaesthetics/)
+[![Downloads](https://static.pepy.tech/badge/pyaesthetics)](https://pepy.tech/project/pyaesthetics)
 [![Documentation Status](https://readthedocs.org/projects/prettywebsite/badge/?version=latest)](https://prettywebsite.readthedocs.io/en/latest/?badge=latest)
 [![DOI](https://zenodo.org/badge/129248933.svg)](https://zenodo.org/badge/latestdoi/129248933)
 
