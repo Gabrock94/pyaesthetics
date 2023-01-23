@@ -97,6 +97,7 @@ Feel free to contact me for questions, suggestions or to give me advice as well 
 
 ## Scientific Publications that used pyaesthetic
 - Gabrieli, G., Bornstein, M. H., Setoh, P., & Esposito, G. (2022). *Machine learning estimation of users’ implicit and explicit aesthetic judgments of web-pages*. Behaviour & Information Technology, 1-11.
+- Bizzego, A., Gabrieli, G., Azhari, A., Lim, M., & Esposito, G. (2022). Dataset of parent-child hyperscanning functional near-infrared spectroscopy recordings. Scientific Data, 9(1), 625.
 
 ## Presentation
 - Gabrieli, G., Scapin, G., & Esposito, G. (2022). Pyaesthetic, a python package for empirical aesthetic analysis. XXVII
