@@ -79,6 +79,7 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
         resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
+        resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
 
     elif(method == 'complete'):
         resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
@@ -97,6 +98,8 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["TextImageRatio"] = Adict["textImageRatio"]
         resultdict["textArea"] = Adict["textArea"]
         resultdict["imageArea"] = Adict["imageArea"]
+        resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
+        resultdict["contrast_Michelson"] = contrast.contrast_Michelson(imageColor)
 
     return(resultdict)
 
@@ -117,9 +120,10 @@ if(__name__=='__main__'):
    import symmetry
    import faceDetection
    import colorDetection
+   import contrast
 
-   sampleImg = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
-   results = analyzeImage(sampleImg)
+   sampleImg = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg" #path to a sample image
+   results = analyzeImage(sampleImg, method='complete')
    print(results)
 
 else:
@@ -130,3 +134,4 @@ else:
    from . import faceDetection
    from . import colorDetection
    from . import spaceBasedDecomposition
+   from . import contrast
