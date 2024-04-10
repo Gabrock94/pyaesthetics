@@ -80,6 +80,7 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
         resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
+        resultdict["saturation"] = saturation.saturation(imageColor)
 
     elif(method == 'complete'):
         resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
@@ -100,6 +101,8 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["imageArea"] = Adict["imageArea"]
         resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
         resultdict["contrast_Michelson"] = contrast.contrast_Michelson(imageColor)
+        resultdict["saturation"] = saturation.saturation(imageColor)
+        
 
     return(resultdict)
 
@@ -121,9 +124,10 @@ if(__name__=='__main__'):
    import faceDetection
    import colorDetection
    import contrast
+   import saturation
 
    sampleImg = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg" #path to a sample image
-   results = analyzeImage(sampleImg, method='complete')
+   results = analyzeImage(sampleImg, method='fast')
    print(results)
 
 else:
@@ -135,3 +139,4 @@ else:
    from . import colorDetection
    from . import spaceBasedDecomposition
    from . import contrast
+   from . import saturation
