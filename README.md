@@ -17,6 +17,8 @@ Pyaesthetics (formlerly known as PrettyWebsite) is a python package designed to 
 ## Features
 The module can estimate the following features:
 -  Brightness (in both the BT709 and BT601 standards)
+-  Contrast (RMS or Michelson contrast)
+-  Saturation
 -  Visual Complexity (either by using the weight of the image or by Quadratic Tree Decomposition)
 -  Simmetry (using Quadratic Tree Decomposition)
 -  Colorfulness (in both the HSV and RGB color spaces)
