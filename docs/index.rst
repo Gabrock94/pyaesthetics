@@ -15,8 +15,10 @@ Welcome to pyaesthetics's documentation! - V. 0.0.7
    brightness
    colorfulness
    colorDetection
+   contrast
    faceDetection
    quadTree
+   saturation
    symmetry
    
 Indices and tables

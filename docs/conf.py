@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.abspath('../pyaesthetics/'))
 # -- Project information -----------------------------------------------------
 
 project = 'pyaesthetics'
-copyright = '2022, Giulio Gabrieli'
+copyright = '2024, Giulio Gabrieli'
 author = 'Giulio Gabrieli'
 
 # The short X.Y version

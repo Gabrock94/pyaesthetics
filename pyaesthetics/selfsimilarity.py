@@ -80,6 +80,6 @@ class selfsimilarity:
 """ For debug purposes."""
 
 if(__name__=='__main__'):   
-    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
+    img = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg" #path to a sample image
     img = cv2.imread(img) #read the image in color for plotting purposes
     selfsimilarity(img)

@@ -18,6 +18,27 @@ import matplotlib.pyplot as plt
 import pytesseract 
 from PIL import Image
 
+try:
+    from . import quadTreeDecomposition
+    from . import colorfulness
+    from . import brightness
+    from . import symmetry
+    from . import faceDetection
+    from . import colorDetection
+    from . import spaceBasedDecomposition
+    from . import contrast
+    from . import saturation
+except:
+    import quadTreeDecomposition
+    import spaceBasedDecomposition
+    import colorfulness
+    import brightness
+    import symmetry
+    import faceDetection
+    import colorDetection
+    import contrast
+    import saturation
+
 ###############################################################################
 #                                                                             #
 #                      Quadratic Tree Decomposition                           #
@@ -92,7 +113,7 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
         resultdict["Faces"] = faceDetection.getFaces(imageColor)
         resultdict["Number_of_Faces"] = len(resultdict["Faces"])
-        resultdict["Colors"] = colorDetection.getColorsW3C(imageColor)
+        resultdict["Colors"] = colorDetection.getColorsW3C(imageColor, ncolors=140)
         A = spaceBasedDecomposition.getAreas(imageColor_O)
         Adict = spaceBasedDecomposition.textImageRatio(A)
         resultdict["Number_of_Images"] = Adict["nImages"]
@@ -116,27 +137,7 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
 
 if(__name__=='__main__'):
 
-   import quadTreeDecomposition
-   import spaceBasedDecomposition
-   import colorfulness
-   import brightness
-   import symmetry
-   import faceDetection
-   import colorDetection
-   import contrast
-   import saturation
+    sampleImg = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg" #path to a sample image
+    results = analyzeImage(sampleImg, method='complete')
+    print(results)
 
-   sampleImg = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg" #path to a sample image
-   results = analyzeImage(sampleImg, method='fast')
-   print(results)
-
-else:
-   from . import quadTreeDecomposition
-   from . import colorfulness
-   from . import brightness
-   from . import symmetry
-   from . import faceDetection
-   from . import colorDetection
-   from . import spaceBasedDecomposition
-   from . import contrast
-   from . import saturation

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Brightness analysis &#8212; pyaesthetics 0.0.7 documentation</title>
+    <title>Contrast &#8212; pyaesthetics 0.0.7 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css?v=e433229c" />
     
@@ -15,8 +15,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Colorfulness analysis" href="colorfulness.html" />
-    <link rel="prev" title="Analysis" href="analysis.html" /> 
+    <link rel="next" title="Face Detection" href="faceDetection.html" />
+    <link rel="prev" title="Color Detection" href="colorDetection.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,13 +28,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="colorfulness.html" title="Colorfulness analysis"
+          <a href="faceDetection.html" title="Face Detection"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="analysis.html" title="Analysis"
+          <a href="colorDetection.html" title="Color Detection"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">pyaesthetics 0.0.7 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Brightness analysis</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Contrast</a></li> 
       </ul>
     </div>  
 
@@ -43,24 +43,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-brightness">
-<span id="brightness-analysis"></span><h1>Brightness analysis<a class="headerlink" href="#module-brightness" title="Link to this heading">¶</a></h1>
-<p>This module contains function to evaluate the brightness of an image.
-It includes a converter for sRGB to RGB, evaluation of relative luminance according to
-BT.709 and BT.601</p>
+  <section id="module-contrast">
+<span id="contrast"></span><h1>Contrast<a class="headerlink" href="#module-contrast" title="Link to this heading">¶</a></h1>
+<p>This module contains function to evaluate the contrast of an image using either 
+RMS contrast or Michelson contrast.</p>
 <p>&#64;author: Giulio Gabrieli</p>
 <dl class="py function">
-<dt class="sig sig-object py" id="brightness.relativeLuminance_BT601">
-<span class="sig-prename descclassname"><span class="pre">brightness.</span></span><span class="sig-name descname"><span class="pre">relativeLuminance_BT601</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brightness.relativeLuminance_BT601" title="Link to this definition">¶</a></dt>
-<dd><p>This function evaluates the brightness of an image by mean of Y, where Y is evaluated as:</p>
-<p>Y = 0.587G + 0.114B + 0.299R
-B = mean(Y)</p>
+<dt class="sig sig-object py" id="contrast.contrast_Michelson">
+<span class="sig-prename descclassname"><span class="pre">contrast.</span></span><span class="sig-name descname"><span class="pre">contrast_Michelson</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contrast.contrast_Michelson" title="Link to this definition">¶</a></dt>
+<dd><p>This function evaluates the Michelson contrast of an image:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>img</strong> (<em>numpy.ndarray</em>) – image to analyze, in RGB</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>mean brightness</p>
+<dd class="field-even"><p>Michelson contrast</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -69,17 +66,15 @@ B = mean(Y)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="brightness.relativeLuminance_BT709">
-<span class="sig-prename descclassname"><span class="pre">brightness.</span></span><span class="sig-name descname"><span class="pre">relativeLuminance_BT709</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brightness.relativeLuminance_BT709" title="Link to this definition">¶</a></dt>
-<dd><p>This function evaluates the brightness of an image by mean of Y, where Y is evaluated as:</p>
-<p>Y = 0.7152G + 0.0722B + 0.2126R
-B = mean(Y)</p>
+<dt class="sig sig-object py" id="contrast.contrast_RMS">
+<span class="sig-prename descclassname"><span class="pre">contrast.</span></span><span class="sig-name descname"><span class="pre">contrast_RMS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contrast.contrast_RMS" title="Link to this definition">¶</a></dt>
+<dd><p>This function evaluates the RMS contrast of an image:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>img</strong> (<em>numpy.ndarray</em>) – image to analyze, in RGB</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>mean brightness</p>
+<dd class="field-even"><p>RMS contrast</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -88,8 +83,8 @@ B = mean(Y)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="brightness.sRGB2RGB">
-<span class="sig-prename descclassname"><span class="pre">brightness.</span></span><span class="sig-name descname"><span class="pre">sRGB2RGB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#brightness.sRGB2RGB" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="contrast.sRGB2RGB">
+<span class="sig-prename descclassname"><span class="pre">contrast.</span></span><span class="sig-name descname"><span class="pre">sRGB2RGB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contrast.sRGB2RGB" title="Link to this definition">¶</a></dt>
 <dd><p>this function converts a sRGB img to  linear RGB values.</p>
 <p>It loops through each pixel, and apply a conversion to pass from sRGB to linear RGB value.</p>
 <dl class="field-list simple">
@@ -117,10 +112,10 @@ B = mean(Y)</p>
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
-<li><a class="reference internal" href="#">Brightness analysis</a><ul>
-<li><a class="reference internal" href="#brightness.relativeLuminance_BT601"><code class="docutils literal notranslate"><span class="pre">relativeLuminance_BT601()</span></code></a></li>
-<li><a class="reference internal" href="#brightness.relativeLuminance_BT709"><code class="docutils literal notranslate"><span class="pre">relativeLuminance_BT709()</span></code></a></li>
-<li><a class="reference internal" href="#brightness.sRGB2RGB"><code class="docutils literal notranslate"><span class="pre">sRGB2RGB()</span></code></a></li>
+<li><a class="reference internal" href="#">Contrast</a><ul>
+<li><a class="reference internal" href="#contrast.contrast_Michelson"><code class="docutils literal notranslate"><span class="pre">contrast_Michelson()</span></code></a></li>
+<li><a class="reference internal" href="#contrast.contrast_RMS"><code class="docutils literal notranslate"><span class="pre">contrast_RMS()</span></code></a></li>
+<li><a class="reference internal" href="#contrast.sRGB2RGB"><code class="docutils literal notranslate"><span class="pre">sRGB2RGB()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -128,18 +123,18 @@ B = mean(Y)</p>
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="analysis.html"
-                          title="previous chapter">Analysis</a></p>
+    <p class="topless"><a href="colorDetection.html"
+                          title="previous chapter">Color Detection</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="colorfulness.html"
-                          title="next chapter">Colorfulness analysis</a></p>
+    <p class="topless"><a href="faceDetection.html"
+                          title="next chapter">Face Detection</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/brightness.rst.txt"
+      <li><a href="_sources/contrast.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -167,13 +162,13 @@ B = mean(Y)</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="colorfulness.html" title="Colorfulness analysis"
+          <a href="faceDetection.html" title="Face Detection"
              >next</a> |</li>
         <li class="right" >
-          <a href="analysis.html" title="Analysis"
+          <a href="colorDetection.html" title="Color Detection"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">pyaesthetics 0.0.7 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Brightness analysis</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Contrast</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

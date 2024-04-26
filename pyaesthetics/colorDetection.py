@@ -207,7 +207,7 @@ def getColorsW3C(img, ncolors=16, plot=False, plotncolors=5):
                  
     
     colors_array = np.array(list(colors.values()))
-    dists = np.sum(np.abs(img[:, :, np.newaxis, :] - colors_array), axis=3)
+    dists = np.sum(np.abs(img[:, :, np.newaxis, :3] - colors_array), axis=3)
     closest_color_indices = np.argmin(dists, axis=2)
     
     colorscheme = []
@@ -217,16 +217,27 @@ def getColorsW3C(img, ncolors=16, plot=False, plotncolors=5):
         row_colors = [list(colors.keys())[index] for index in row_indices]
         colorscheme.extend(row_colors)
         
-    unique_colors, counts = np.unique(colorscheme, return_counts=True)
+    
+    
+    
+    if(img.shape[2] == 4):
+        alpha = img[:, :, 3]
+        # Exclude completely transparent pixels (alpha == 0) from distance calculation
+        mask = alpha > 100 
+        mask = mask.ravel()
+        colorscheme = np.array(colorscheme)[mask]
+        
+     
+    unique_colors, counts = np.unique(colorscheme, return_counts=True)   
     colorscheme = sorted([[c, count / len(colorscheme) * 100] for c, count in zip(unique_colors, counts)])
     
     missingcolors = list(set(colors) - set(unique_colors))
     for color in missingcolors:
         colorscheme.append([color, 0.0])
     
+        
     colorscheme = sorted(colorscheme)
     
-
     
     if(plot):
         sorted_data = sorted(colorscheme, key=lambda x: x[1], reverse=True)
@@ -249,13 +260,14 @@ if(__name__=='__main__'):
     basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
     datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
     sampleImg = datafolder + "sample.jpg" #path to a sample image
-    img = cv2.imread(sampleImg)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    # sampleImg = "/home/giulio/Repositories/nba_uniforms/processed/images/CHA_CE.png"
+    img = cv2.imread(sampleImg, cv2.IMREAD_UNCHANGED)
+    img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
     # plt.figure()
-    # plt.imshow(img)
+    plt.imshow(img)
     # plt.show()
     # histogram = [int(x) for x in cv2.calcHist([img],[0],None,[256],[0,256])]
     # plt.plot(histogram)
     # colors = getColorsW3C(img, ncolors=140, plot=False)
-    results = getColorsW3C(img, ncolors=140, plot=True)
+    results = getColorsW3C(img, ncolors=16, plot=True)
     print("Color scheme of the image is:", results)
