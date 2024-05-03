@@ -17,6 +17,7 @@ import cv2
 import matplotlib.pyplot as plt
 import pytesseract 
 from PIL import Image
+from tempfile import NamedTemporaryFile
 
 try:
     from . import quadTreeDecomposition
@@ -55,12 +56,12 @@ def textDetection(img):
     
     """
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    filename = "{}.png".format(os.getpid())
-    cv2.imwrite(filename, img)
-    text = pytesseract.image_to_string(Image.open(filename))
-    os.remove(filename)
-    return(len(text))
-    
+    with NamedTemporaryFile() as temp_file:
+        cv2.imwrite(temp_file.name, img)
+        text = pytesseract.image_to_string(Image.open(temp_file.name))
+    return len(text)
+
+
 def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd = 10, minSize = 20):
     """ This functions act as entrypoint for the automatic analysis of an image aesthetic features. 
     
