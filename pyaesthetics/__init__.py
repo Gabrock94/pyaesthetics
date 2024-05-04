@@ -1,9 +1,9 @@
-from . import quadTreeDecomposition  # NOQA
-from . import spaceBasedDecomposition  # NOQA
+from . import quad_tree_decomposition  # NOQA
+from . import space_based_decomposition  # NOQA
 from . import colorfulness  # NOQA
 from . import brightness  # NOQA
 from . import symmetry  # NOQA
-from . import faceDetection  # NOQA
+from . import face_detection  # NOQA
 from . import analysis  # NOQA
 from . import contrast  # NOQA
 from . import saturation  # NOQA

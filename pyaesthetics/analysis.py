@@ -13,31 +13,35 @@ This is an entrypoint for the automatic analysis of images using pyaeshtetics.
 ###############################################################################
 
 import os
+from tempfile import NamedTemporaryFile
+
 import cv2
 import pytesseract
 from PIL import Image
-from tempfile import NamedTemporaryFile
 
 try:
-    from . import quadTreeDecomposition
-    from . import colorfulness
-    from . import brightness
-    from . import symmetry
-    from . import faceDetection
-    from . import colorDetection
-    from . import spaceBasedDecomposition
-    from . import contrast
-    from . import saturation
+    from . import (
+        brightness,
+        color_detection,
+        colorfulness,
+        contrast,
+        face_detection,
+        quad_tree_decomposition,
+        saturation,
+        space_based_decomposition,
+        symmetry,
+    )
 except:
-    import quadTreeDecomposition
-    import spaceBasedDecomposition
-    import colorfulness
     import brightness
-    import symmetry
-    import faceDetection
-    import colorDetection
+    import colorfulness
     import contrast
     import saturation
+    import symmetry
+
+    import pyaesthetics.color_detection as color_detection
+    import pyaesthetics.face_detection as face_detection
+    import pyaesthetics.quad_tree_decomposition as quad_tree_decomposition
+    import pyaesthetics.space_based_decomposition as space_based_decomposition
 
 ###############################################################################
 #                                                                             #
@@ -103,7 +107,7 @@ def analyzeImage(
     if method == "fast":
         resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
         resultdict["VC_quadTree"] = len(
-            quadTreeDecomposition.quadTree(imageBW, minStd, minSize).blocks
+            quad_tree_decomposition.quadTree(imageBW, minStd, minSize).blocks
         )
         resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW, minStd, minSize)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
@@ -114,17 +118,17 @@ def analyzeImage(
         resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
         resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imgsRGB2RGB)
         resultdict["VC_quadTree"] = len(
-            quadTreeDecomposition.quadTree(imageBW, minStd, minSize).blocks
+            quad_tree_decomposition.quadTree(imageBW, minStd, minSize).blocks
         )
         resultdict["VC_weight"] = os.stat(pathToImg).st_size
         resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW, minStd, minSize)
         resultdict["Colorfulness_HSV"] = colorfulness.colorfulnessHSV(imageColor)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
-        resultdict["Faces"] = faceDetection.getFaces(imageColor)
+        resultdict["Faces"] = face_detection.getFaces(imageColor)
         resultdict["Number_of_Faces"] = len(resultdict["Faces"])
-        resultdict["Colors"] = colorDetection.getColorsW3C(imageColor, ncolors=140)
-        A = spaceBasedDecomposition.getAreas(imageColor_O)
-        Adict = spaceBasedDecomposition.textImageRatio(A)
+        resultdict["Colors"] = color_detection.getColorsW3C(imageColor, ncolors=140)
+        A = space_based_decomposition.getAreas(imageColor_O)
+        Adict = space_based_decomposition.textImageRatio(A)
         resultdict["Number_of_Images"] = Adict["nImages"]
         resultdict["TextImageRatio"] = Adict["textImageRatio"]
         resultdict["textArea"] = Adict["textArea"]
