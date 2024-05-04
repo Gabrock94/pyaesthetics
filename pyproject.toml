@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "pyaesthetics"
+version = "0.1.0"
+description = "A python package to estimate aesthetics visual features from still images."
+authors = [
+    "Giulio Gabrieli <gack94@gmail.com>",
+    "Shunsuke KITADA <shunsuke.kitada.0831@gmail.com>",
+]
+readme = "README.md"
+keywords = ["Image", "Analysis", "Aesthetic", 'Visual', 'Features']
+classifiers = [
+    # How mature is this project? Common values are
+    #   3 - Alpha
+    #   4 - Beta
+    #   5 - Production/Stable
+    'Development Status :: 3 - Alpha',
+
+    # Specify the Python versions you support here. In particular, ensure
+    # that you indicate whether you support Python 2, Python 3 or both.
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pillow = "^10.3.0"
+opencv-python = "^4.9.0.80"
+matplotlib = { version = "^3.8.4", optional = true }
+imutils = "^0.5.4"
+
+[tool.poetry.extras]
+visualization = ["matplotlib"]
+
+[tool.poetry.group.dev.dependencies]
+ruff = ">=0.1.5"
+pytest = ">=6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
