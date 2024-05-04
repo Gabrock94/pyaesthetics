@@ -14,8 +14,7 @@ This is an entrypoint for the automatic analysis of images using pyaeshtetics.
 
 import os
 import cv2
-import matplotlib.pyplot as plt
-import pytesseract 
+import pytesseract
 from PIL import Image
 from tempfile import NamedTemporaryFile
 
@@ -46,14 +45,15 @@ except:
 #                                                                             #
 ###############################################################################
 
+
 def textDetection(img):
-    """ This function uses pytesseract to get information about the presence of text in an image.
-        
-        :param img: image to analyze, in RGB
-        :type img: numpy.ndarray
-        :return: number of character in the text
-        :rtype: int
-    
+    """This function uses pytesseract to get information about the presence of text in an image.
+
+    :param img: image to analyze, in RGB
+    :type img: numpy.ndarray
+    :return: number of character in the text
+    :rtype: int
+
     """
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     with NamedTemporaryFile() as temp_file:
@@ -62,54 +62,62 @@ def textDetection(img):
     return len(text)
 
 
-def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd = 10, minSize = 20):
-    """ This functions act as entrypoint for the automatic analysis of an image aesthetic features. 
-    
-        :param pathToImg: path to the image to analyze
-        :type pathToImg: str
-        :param method: set to analysis to use. Valid methods are 'fast','complete'. Default is 'fast'.
-        :type pathToImg: str
-        :param resize: indicate wether to resize the image (reduce computational workload, increase requested time)
-        :type resize: boolean
-        :param newSize: if the image has to be resized, this tuple indicates the new size of the image
-        :type newSize: tuple
-        :param minStd: minimum standard deviation for the Quadratic Tree Decomposition
-        :type minStd: int
-        :param minSize: minimum size for the Quadratic Tree Decomposition
-        :type minSize: int
-        :return: number of character in the text
-        :rtype: dict
-        
+def analyzeImage(
+    pathToImg, method="fast", resize=True, newSize=(600, 400), minStd=10, minSize=20
+):
+    """This functions act as entrypoint for the automatic analysis of an image aesthetic features.
+
+    :param pathToImg: path to the image to analyze
+    :type pathToImg: str
+    :param method: set to analysis to use. Valid methods are 'fast','complete'. Default is 'fast'.
+    :type pathToImg: str
+    :param resize: indicate wether to resize the image (reduce computational workload, increase requested time)
+    :type resize: boolean
+    :param newSize: if the image has to be resized, this tuple indicates the new size of the image
+    :type newSize: tuple
+    :param minStd: minimum standard deviation for the Quadratic Tree Decomposition
+    :type minStd: int
+    :param minSize: minimum size for the Quadratic Tree Decomposition
+    :type minSize: int
+    :return: number of character in the text
+    :rtype: dict
+
     """
 
     resultdict = {}
     img = cv2.imread(pathToImg)
     # plt.imshow(img)
     # plt.show()
-    
+
     imageColor = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    imageBW = cv2.imread(pathToImg,0)
-    resultdict["Text"] = textDetection(imageColor) #this has to be done before preprocessing
-    imageColor_O = imageColor #keep a copy at original size
-    if(resize):
-        imageBW = cv2.resize(imageBW,newSize,interpolation=cv2.INTER_CUBIC)
-        imageColor = cv2.resize(imageColor,newSize,interpolation=cv2.INTER_CUBIC)
+    imageBW = cv2.imread(pathToImg, 0)
+    resultdict["Text"] = textDetection(
+        imageColor
+    )  # this has to be done before preprocessing
+    imageColor_O = imageColor  # keep a copy at original size
+    if resize:
+        imageBW = cv2.resize(imageBW, newSize, interpolation=cv2.INTER_CUBIC)
+        imageColor = cv2.resize(imageColor, newSize, interpolation=cv2.INTER_CUBIC)
     imgsRGB2RGB = brightness.sRGB2RGB(img)
 
-    if(method == 'fast'):
+    if method == "fast":
         resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
-        resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
-        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
+        resultdict["VC_quadTree"] = len(
+            quadTreeDecomposition.quadTree(imageBW, minStd, minSize).blocks
+        )
+        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW, minStd, minSize)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
         resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
         resultdict["saturation"] = saturation.saturation(imageColor)
 
-    elif(method == 'complete'):
+    elif method == "complete":
         resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
         resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imgsRGB2RGB)
-        resultdict["VC_quadTree"] = len(quadTreeDecomposition.quadTree(imageBW,minStd,minSize).blocks)
+        resultdict["VC_quadTree"] = len(
+            quadTreeDecomposition.quadTree(imageBW, minStd, minSize).blocks
+        )
         resultdict["VC_weight"] = os.stat(pathToImg).st_size
-        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW,minStd,minSize)
+        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW, minStd, minSize)
         resultdict["Colorfulness_HSV"] = colorfulness.colorfulnessHSV(imageColor)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
         resultdict["Faces"] = faceDetection.getFaces(imageColor)
@@ -124,9 +132,8 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
         resultdict["contrast_Michelson"] = contrast.contrast_Michelson(imageColor)
         resultdict["saturation"] = saturation.saturation(imageColor)
-        
 
-    return(resultdict)
+    return resultdict
 
 
 ###############################################################################
@@ -136,9 +143,7 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
 ###############################################################################
 
 
-if(__name__=='__main__'):
-
-    sampleImg = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg" #path to a sample image
-    results = analyzeImage(sampleImg, method='complete')
+if __name__ == "__main__":
+    sampleImg = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg"  # path to a sample image
+    results = analyzeImage(sampleImg, method="complete")
     print(results)
-
