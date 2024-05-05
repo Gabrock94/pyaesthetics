@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 This is an entrypoint for the automatic analysis of images using pyaeshtetics.
 
@@ -12,32 +10,25 @@ This is an entrypoint for the automatic analysis of images using pyaeshtetics.
 #                                                                             #
 ###############################################################################
 
-import os
-import cv2
-import pytesseract
-from PIL import Image
-from tempfile import NamedTemporaryFile
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+from dataclasses import dataclass
+from typing import Literal, Optional, Tuple, get_args
 
-try:
-    from . import quadTreeDecomposition
-    from . import colorfulness
-    from . import brightness
-    from . import symmetry
-    from . import faceDetection
-    from . import colorDetection
-    from . import spaceBasedDecomposition
-    from . import contrast
-    from . import saturation
-except:
-    import quadTreeDecomposition
-    import spaceBasedDecomposition
-    import colorfulness
-    import brightness
-    import symmetry
-    import faceDetection
-    import colorDetection
-    import contrast
-    import saturation
+from PIL.Image import Image as PilImage
+
+from pyaesthetics.brightness import relative_luminance_bt601, relative_luminance_bt709
+from pyaesthetics.color_detection import ColorDetectionOutput, get_colors_w3c
+from pyaesthetics.colorfulness import colorfulness_hsv, colorfulness_rgb
+from pyaesthetics.contrast import contrast_michelson, contrast_rms
+from pyaesthetics.face_detection import GetFacesOutput, get_faces
+from pyaesthetics.saturation import get_saturation
+from pyaesthetics.space_based_decomposition import (
+    TextImageRatioOutput,
+    get_areas,
+    get_text_image_ratio,
+)
+from pyaesthetics.symmetry import SymmetryOutput, get_symmetry
+from pyaesthetics.visual_complexity import VisualComplexityOutput, get_visual_complexity
 
 ###############################################################################
 #                                                                             #
@@ -45,25 +36,192 @@ except:
 #                                                                             #
 ###############################################################################
 
-
-def textDetection(img):
-    """This function uses pytesseract to get information about the presence of text in an image.
-
-    :param img: image to analyze, in RGB
-    :type img: numpy.ndarray
-    :return: number of character in the text
-    :rtype: int
-
-    """
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    with NamedTemporaryFile() as temp_file:
-        cv2.imwrite(temp_file.name, img)
-        text = pytesseract.image_to_string(Image.open(temp_file.name))
-    return len(text)
+AnalyzeMethod = Literal["fast", "complete"]
 
 
-def analyzeImage(
-    pathToImg, method="fast", resize=True, newSize=(600, 400), minStd=10, minSize=20
+@dataclass
+class Brightness(object):
+    bt709: float
+    bt601: Optional[float] = None
+
+
+@dataclass
+class Colorfulness(object):
+    rgb: float
+    hsv: Optional[float] = None
+
+
+@dataclass
+class Contrast(object):
+    rms: float
+    michelson: Optional[float] = None
+
+
+@dataclass
+class ImageAnalysisOutput(object):
+    brightness: Brightness
+    visual_complexity: VisualComplexityOutput
+    symmetry: SymmetryOutput
+    colorfulness: Colorfulness
+    contrast: Contrast
+    saturation: float
+
+    faces: Optional[GetFacesOutput] = None
+    colors: Optional[ColorDetectionOutput] = None
+    text_image_ratio: Optional[TextImageRatioOutput] = None
+
+
+def analyze_image_fast(
+    img: PilImage,
+    min_std: int,
+    min_size: int,
+) -> ImageAnalysisOutput:
+    brightness = Brightness(
+        bt709=relative_luminance_bt709(img),
+    )
+    visual_complexity = get_visual_complexity(
+        img=img,
+        min_std=min_std,
+        min_size=min_size,
+        is_weight=False,
+    )
+    symmetry = get_symmetry(
+        img=img,
+        min_std=min_std,
+        min_size=min_size,
+    )
+    colorfulness = Colorfulness(
+        rgb=colorfulness_rgb(img),
+    )
+    contrast = Contrast(
+        rms=contrast_rms(img),
+    )
+    saturation = get_saturation(img)
+
+    return ImageAnalysisOutput(
+        brightness=brightness,
+        visual_complexity=visual_complexity,
+        symmetry=symmetry,
+        colorfulness=colorfulness,
+        contrast=contrast,
+        saturation=saturation,
+    )
+
+
+def analyze_image_complete(
+    img: PilImage,
+    min_std: int,
+    min_size: int,
+    is_resize: bool,
+    new_size: Tuple[int, int],
+) -> ImageAnalysisOutput:
+    with ProcessPoolExecutor(max_workers=8) as executor:
+        bt709 = executor.submit(relative_luminance_bt709, img)
+        bt601 = executor.submit(relative_luminance_bt601, img)
+
+        visual_complexity = executor.submit(
+            get_visual_complexity,
+            img=img,
+            min_std=min_std,
+            min_size=min_size,
+            is_weight=True,
+        )
+
+        symmetry = executor.submit(
+            get_symmetry,
+            img=img,
+            min_std=min_std,
+            min_size=min_size,
+        )
+
+        rgb = executor.submit(colorfulness_rgb, img)
+        hsv = executor.submit(colorfulness_hsv, img)
+
+        rms = executor.submit(contrast_rms, img)
+        michelson = executor.submit(contrast_michelson, img)
+
+        saturation = executor.submit(get_saturation, img)
+
+        faces = executor.submit(get_faces, img=img)
+        colors = executor.submit(get_colors_w3c, img=img, n_colors=140)
+
+        areas = executor.submit(
+            get_areas, img, is_areatype=True, is_resize=is_resize, new_size=new_size
+        )
+        text_image_ratio = executor.submit(get_text_image_ratio, areas.result())
+
+    brightness = Brightness(bt709=bt709.result(), bt601=bt601.result())
+    colorfulness = Colorfulness(rgb=rgb.result(), hsv=hsv.result())
+    contrast = Contrast(rms=rms.result(), michelson=michelson.result())
+
+    return ImageAnalysisOutput(
+        brightness=brightness,
+        visual_complexity=visual_complexity.result(),
+        symmetry=symmetry.result(),
+        colorfulness=colorfulness,
+        contrast=contrast,
+        saturation=saturation.result(),
+        faces=faces.result(),
+        colors=colors.result(),
+        text_image_ratio=text_image_ratio.result(),
+    )
+
+    # brightness = Brightness(
+    #     bt709=relative_luminance_bt709(img),
+    #     bt601=relative_luminance_bt601(img),
+    # )
+    # visual_complexity = get_visual_complexity(
+    #     img=img,
+    #     min_std=min_std,
+    #     min_size=min_size,
+    #     is_weight=True,
+    # )
+    # symmetry = get_symmetry(
+    #     img=img,
+    #     min_std=min_std,
+    #     min_size=min_size,
+    # )
+    # colorfulness = Colorfulness(
+    #     rgb=colorfulness_rgb(img),
+    #     hsv=colorfulness_hsv(img),
+    # )
+    # contrast = Contrast(
+    #     rms=contrast_rms(img),
+    #     michelson=contrast_michelson(img),
+    # )
+    # saturation = get_saturation(img)
+
+    # faces = get_faces(img=img)
+    # colors = get_colors_w3c(img=img, n_colors=140)
+
+    # areas = get_areas(
+    #     img,
+    #     is_resize=is_resize,
+    #     new_size=new_size,
+    #     is_areatype=True,
+    # )
+    # text_image_ratio = get_text_image_ratio(areas)
+
+    # return ImageAnalysisOutput(
+    #     brightness=brightness,
+    #     visual_complexity=visual_complexity,
+    #     symmetry=symmetry,
+    #     colorfulness=colorfulness,
+    #     contrast=contrast,
+    #     saturation=saturation,
+    #     faces=faces,
+    #     colors=colors,
+    #     text_image_ratio=text_image_ratio,
+    # )
+
+
+def analyze_image(
+    img: PilImage,
+    method: AnalyzeMethod = "fast",
+    is_resize: bool = True,
+    new_size: Tuple[int, int] = (600, 400),
+    min_std: int = 10,
+    min_size: int = 20,
 ):
     """This functions act as entrypoint for the automatic analysis of an image aesthetic features.
 
@@ -83,67 +241,21 @@ def analyzeImage(
     :rtype: dict
 
     """
-
-    resultdict = {}
-    img = cv2.imread(pathToImg)
-    # plt.imshow(img)
-    # plt.show()
-
-    imageColor = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    imageBW = cv2.imread(pathToImg, 0)
-    resultdict["Text"] = textDetection(
-        imageColor
-    )  # this has to be done before preprocessing
-    imageColor_O = imageColor  # keep a copy at original size
-    if resize:
-        imageBW = cv2.resize(imageBW, newSize, interpolation=cv2.INTER_CUBIC)
-        imageColor = cv2.resize(imageColor, newSize, interpolation=cv2.INTER_CUBIC)
-    imgsRGB2RGB = brightness.sRGB2RGB(img)
-
     if method == "fast":
-        resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
-        resultdict["VC_quadTree"] = len(
-            quadTreeDecomposition.quadTree(imageBW, minStd, minSize).blocks
+        return analyze_image_fast(
+            img=img,
+            min_std=min_std,
+            min_size=min_size,
         )
-        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW, minStd, minSize)
-        resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
-        resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
-        resultdict["saturation"] = saturation.saturation(imageColor)
-
     elif method == "complete":
-        resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
-        resultdict["brightness_BT601"] = brightness.relativeLuminance_BT601(imgsRGB2RGB)
-        resultdict["VC_quadTree"] = len(
-            quadTreeDecomposition.quadTree(imageBW, minStd, minSize).blocks
+        return analyze_image_complete(
+            img=img,
+            min_std=min_std,
+            min_size=min_size,
+            is_resize=is_resize,
+            new_size=new_size,
         )
-        resultdict["VC_weight"] = os.stat(pathToImg).st_size
-        resultdict["Symmetry_QTD"] = symmetry.getSymmetry(imageBW, minStd, minSize)
-        resultdict["Colorfulness_HSV"] = colorfulness.colorfulnessHSV(imageColor)
-        resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
-        resultdict["Faces"] = faceDetection.getFaces(imageColor)
-        resultdict["Number_of_Faces"] = len(resultdict["Faces"])
-        resultdict["Colors"] = colorDetection.getColorsW3C(imageColor, ncolors=140)
-        A = spaceBasedDecomposition.getAreas(imageColor_O)
-        Adict = spaceBasedDecomposition.textImageRatio(A)
-        resultdict["Number_of_Images"] = Adict["nImages"]
-        resultdict["TextImageRatio"] = Adict["textImageRatio"]
-        resultdict["textArea"] = Adict["textArea"]
-        resultdict["imageArea"] = Adict["imageArea"]
-        resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
-        resultdict["contrast_Michelson"] = contrast.contrast_Michelson(imageColor)
-        resultdict["saturation"] = saturation.saturation(imageColor)
-
-    return resultdict
-
-
-###############################################################################
-#                                                                             #
-#                                   DEBUG                                     #
-#                                                                             #
-###############################################################################
-
-
-if __name__ == "__main__":
-    sampleImg = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg"  # path to a sample image
-    results = analyzeImage(sampleImg, method="complete")
-    print(results)
+    else:
+        raise ValueError(
+            f"Invalid method {method}. Valid methods are {get_args(AnalyzeMethod)}"
+        )

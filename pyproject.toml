@@ -27,6 +27,9 @@ pillow = "^10.3.0"
 opencv-python = "^4.9.0.80"
 matplotlib = { version = "^3.8.4", optional = true }
 imutils = "^0.5.4"
+pytesseract = "^0.3.10"
+scipy = "^1.13.0"
+scikit-image = "^0.23.2"
 
 [tool.poetry.extras]
 visualization = ["matplotlib"]
@@ -34,6 +37,9 @@ visualization = ["matplotlib"]
 [tool.poetry.group.dev.dependencies]
 ruff = ">=0.1.5"
 pytest = ">=6.0.0"
+
+[tool.ruff.lint]
+select = ["N"]
 
 [tool.mypy]
 python_version = "3.10"

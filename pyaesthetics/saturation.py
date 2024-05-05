@@ -13,6 +13,8 @@ This module contains function to evaluate the saturation of an image.
 ###############################################################################
 
 import cv2  # for image manipulation
+import numpy as np
+from PIL.Image import Image as PilImage
 
 ###############################################################################
 #                                                                             #
@@ -23,7 +25,7 @@ import cv2  # for image manipulation
 """ Thìs sections handles the computation of the saturation of an image. """
 
 
-def saturation(img):
+def get_saturation(img: PilImage) -> float:
     """This function evaluates the saturationof an image:
 
 
@@ -32,24 +34,9 @@ def saturation(img):
     :return: saturation
     :rtype: float
     """
-
-    img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV) / 255
+    assert img.mode == "RGB", "Image must be in RGB mode"
+    img_arr = np.array(img)
+    img_hsv = cv2.cvtColor(img_arr, cv2.COLOR_RGB2HSV) / 255
     saturation = img_hsv[:, :, 1].mean()
 
     return saturation
-
-
-###############################################################################
-#                                                                             #
-#                                  DEBUG                                      #
-#                                                                             #
-###############################################################################
-
-if __name__ == "__main__":
-    for source in [
-        "/home/giulio/Repositories/pyaesthetics/share/data/800px-Multi-color_leaf_without_saturation.jpg",
-        "/home/giulio/Repositories/pyaesthetics/share/data/800px-Multi-color_leaf_with_saturation.jpg",
-    ]:
-        img = source
-        img = cv2.imread(img)
-        print(source, saturation(img))
