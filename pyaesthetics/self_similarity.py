@@ -20,7 +20,7 @@ from skimage.feature import hog
 ###############################################################################
 
 
-class selfsimilarity:
+class SelfSimilarity:
     """This function returns the degree of self similarity (0-1) of an image
 
     :param img: img to analyze
@@ -31,8 +31,20 @@ class selfsimilarity:
     :rtype: float
     """
 
-    def getHogs(self, img):
+    def __init__(self, img, max_level=4):
+        self.image_LAB = cv2.cvtColor(
+            img, cv2.COLOR_BGR2LAB
+        )  # convert image to LAB Colorspace
+        self.maxlevel = max_level
+        hogs = self.get_hogs(self.image_LAB)
+
+        self.get_similarity(self.image_LAB, hogs, hogs, 1)
+
+    def get_hogs(self, img):
         h, w, _ = img.shape
+
+        print(img.shape, "\n")
+
         Il, Ia, Ib = cv2.split(img)
         gIl, gIa, gIb = (
             np.gradient(Il, edge_order=2, axis=0),
@@ -50,7 +62,7 @@ class selfsimilarity:
         )  # normalize so that sum is 1, this is ground
         return hogs
 
-    def getSimilarity(self, img, groundhogs, parenthogs, level):
+    def get_similarity(self, img, groundhogs, parenthogs, level):
         # divide the image in four
         h, w, _ = img.shape
         w2 = int(w / 2)
@@ -61,11 +73,12 @@ class selfsimilarity:
             img[:, h2:h, 0:w2],
             img[:, h2:h, w2:w],
         )
+
         hogs1, hogs2, hogs3, hogs4 = (
-            self.getHogs(img1),
-            self.getHogs(img2),
-            self.getHogs(img3),
-            self.getHogs(img4),
+            self.get_hogs(img1),
+            self.get_hogs(img2),
+            self.get_hogs(img3),
+            self.get_hogs(img4),
         )
 
         print(sum(np.amin(np.transpose([hogs1, parenthogs]), 1)))
@@ -76,25 +89,16 @@ class selfsimilarity:
         if level <= self.maxlevel:
             pass
 
-    def __init__(self, img, maxlevel=4):
-        self.image_LAB = cv2.cvtColor(
-            img, cv2.COLOR_BGR2LAB
-        )  # convert image to LAB Colorspace
-        self.maxlevel = maxlevel
-        hogs = self.getHogs(self.image_LAB)
 
-        self.getSimilarity(self.image_LAB, hogs, hogs, 1)
+# ###############################################################################
+# #                                                                             #
+# #                                  DEBUG                                      #
+# #                                                                             #
+# ###############################################################################
 
+# """ For debug purposes."""
 
-###############################################################################
-#                                                                             #
-#                                  DEBUG                                      #
-#                                                                             #
-###############################################################################
-
-""" For debug purposes."""
-
-if __name__ == "__main__":
-    img = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg"  # path to a sample image
-    img = cv2.imread(img)  # read the image in color for plotting purposes
-    selfsimilarity(img)
+# if __name__ == "__main__":
+#     img = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample2.jpg"  # path to a sample image
+#     img = cv2.imread(img)  # read the image in color for plotting purposes
+#     SelfSimilarity(img)
