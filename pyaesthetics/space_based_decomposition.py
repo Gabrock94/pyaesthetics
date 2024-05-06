@@ -189,7 +189,7 @@ def get_areas(
             continue
 
         imgportion = img_original_arr[ymin:ymax, xmin:xmax]
-        if len(imgportion) < 1:
+        if imgportion.size == 0:
             continue
 
         area_type = get_area_type(is_areatype, imgportion)
