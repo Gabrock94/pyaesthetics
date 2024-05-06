@@ -13,8 +13,7 @@ Created on Sat Apr 21 09:40:45 2018
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import cv2  # for image manipulation
-import matplotlib.pyplot as plt  # for data visualization
+import cv2
 import numpy as np
 from imutils import contours, perspective
 from PIL import Image
