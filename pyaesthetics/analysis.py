@@ -10,15 +10,17 @@ This is an entrypoint for the automatic analysis of images using pyaeshtetics.
 #                                                                             #
 ###############################################################################
 
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 from dataclasses import dataclass
 from typing import Literal, Optional, Tuple, get_args
 
 from PIL.Image import Image as PilImage
 
-from pyaesthetics.brightness import relative_luminance_bt601, relative_luminance_bt709
+from pyaesthetics.brightness import (
+    get_relative_luminance_bt601,
+    get_relative_luminance_bt709,
+)
 from pyaesthetics.color_detection import ColorDetectionOutput, get_colors_w3c
-from pyaesthetics.colorfulness import colorfulness_hsv, colorfulness_rgb
+from pyaesthetics.colorfulness import get_colorfulness_hsv, get_colorfulness_rgb
 from pyaesthetics.contrast import contrast_michelson, contrast_rms
 from pyaesthetics.face_detection import GetFacesOutput, get_faces
 from pyaesthetics.saturation import get_saturation
@@ -77,7 +79,7 @@ def analyze_image_fast(
     min_size: int,
 ) -> ImageAnalysisOutput:
     brightness = Brightness(
-        bt709=relative_luminance_bt709(img),
+        bt709=get_relative_luminance_bt709(img),
     )
     visual_complexity = get_visual_complexity(
         img=img,
@@ -91,7 +93,7 @@ def analyze_image_fast(
         min_size=min_size,
     )
     colorfulness = Colorfulness(
-        rgb=colorfulness_rgb(img),
+        rgb=get_colorfulness_rgb(img),
     )
     contrast = Contrast(
         rms=contrast_rms(img),
@@ -115,104 +117,104 @@ def analyze_image_complete(
     is_resize: bool,
     new_size: Tuple[int, int],
 ) -> ImageAnalysisOutput:
-    with ProcessPoolExecutor(max_workers=8) as executor:
-        bt709 = executor.submit(relative_luminance_bt709, img)
-        bt601 = executor.submit(relative_luminance_bt601, img)
+    # with ProcessPoolExecutor(max_workers=8) as executor:
+    #     bt709 = executor.submit(relative_luminance_bt709, img)
+    #     bt601 = executor.submit(relative_luminance_bt601, img)
 
-        visual_complexity = executor.submit(
-            get_visual_complexity,
-            img=img,
-            min_std=min_std,
-            min_size=min_size,
-            is_weight=True,
-        )
+    #     visual_complexity = executor.submit(
+    #         get_visual_complexity,
+    #         img=img,
+    #         min_std=min_std,
+    #         min_size=min_size,
+    #         is_weight=True,
+    #     )
 
-        symmetry = executor.submit(
-            get_symmetry,
-            img=img,
-            min_std=min_std,
-            min_size=min_size,
-        )
+    #     symmetry = executor.submit(
+    #         get_symmetry,
+    #         img=img,
+    #         min_std=min_std,
+    #         min_size=min_size,
+    #     )
 
-        rgb = executor.submit(colorfulness_rgb, img)
-        hsv = executor.submit(colorfulness_hsv, img)
+    #     rgb = executor.submit(colorfulness_rgb, img)
+    #     hsv = executor.submit(colorfulness_hsv, img)
 
-        rms = executor.submit(contrast_rms, img)
-        michelson = executor.submit(contrast_michelson, img)
+    #     rms = executor.submit(contrast_rms, img)
+    #     michelson = executor.submit(contrast_michelson, img)
 
-        saturation = executor.submit(get_saturation, img)
+    #     saturation = executor.submit(get_saturation, img)
 
-        faces = executor.submit(get_faces, img=img)
-        colors = executor.submit(get_colors_w3c, img=img, n_colors=140)
+    #     faces = executor.submit(get_faces, img=img)
+    #     colors = executor.submit(get_colors_w3c, img=img, n_colors=140)
 
-        areas = executor.submit(
-            get_areas, img, is_areatype=True, is_resize=is_resize, new_size=new_size
-        )
-        text_image_ratio = executor.submit(get_text_image_ratio, areas.result())
+    #     areas = executor.submit(
+    #         get_areas, img, is_areatype=True, is_resize=is_resize, new_size=new_size
+    #     )
+    #     text_image_ratio = executor.submit(get_text_image_ratio, areas.result())
 
-    brightness = Brightness(bt709=bt709.result(), bt601=bt601.result())
-    colorfulness = Colorfulness(rgb=rgb.result(), hsv=hsv.result())
-    contrast = Contrast(rms=rms.result(), michelson=michelson.result())
-
-    return ImageAnalysisOutput(
-        brightness=brightness,
-        visual_complexity=visual_complexity.result(),
-        symmetry=symmetry.result(),
-        colorfulness=colorfulness,
-        contrast=contrast,
-        saturation=saturation.result(),
-        faces=faces.result(),
-        colors=colors.result(),
-        text_image_ratio=text_image_ratio.result(),
-    )
-
-    # brightness = Brightness(
-    #     bt709=relative_luminance_bt709(img),
-    #     bt601=relative_luminance_bt601(img),
-    # )
-    # visual_complexity = get_visual_complexity(
-    #     img=img,
-    #     min_std=min_std,
-    #     min_size=min_size,
-    #     is_weight=True,
-    # )
-    # symmetry = get_symmetry(
-    #     img=img,
-    #     min_std=min_std,
-    #     min_size=min_size,
-    # )
-    # colorfulness = Colorfulness(
-    #     rgb=colorfulness_rgb(img),
-    #     hsv=colorfulness_hsv(img),
-    # )
-    # contrast = Contrast(
-    #     rms=contrast_rms(img),
-    #     michelson=contrast_michelson(img),
-    # )
-    # saturation = get_saturation(img)
-
-    # faces = get_faces(img=img)
-    # colors = get_colors_w3c(img=img, n_colors=140)
-
-    # areas = get_areas(
-    #     img,
-    #     is_resize=is_resize,
-    #     new_size=new_size,
-    #     is_areatype=True,
-    # )
-    # text_image_ratio = get_text_image_ratio(areas)
+    # brightness = Brightness(bt709=bt709.result(), bt601=bt601.result())
+    # colorfulness = Colorfulness(rgb=rgb.result(), hsv=hsv.result())
+    # contrast = Contrast(rms=rms.result(), michelson=michelson.result())
 
     # return ImageAnalysisOutput(
     #     brightness=brightness,
-    #     visual_complexity=visual_complexity,
-    #     symmetry=symmetry,
+    #     visual_complexity=visual_complexity.result(),
+    #     symmetry=symmetry.result(),
     #     colorfulness=colorfulness,
     #     contrast=contrast,
-    #     saturation=saturation,
-    #     faces=faces,
-    #     colors=colors,
-    #     text_image_ratio=text_image_ratio,
+    #     saturation=saturation.result(),
+    #     faces=faces.result(),
+    #     colors=colors.result(),
+    #     text_image_ratio=text_image_ratio.result(),
     # )
+
+    brightness = Brightness(
+        bt709=get_relative_luminance_bt709(img),
+        bt601=get_relative_luminance_bt601(img),
+    )
+    visual_complexity = get_visual_complexity(
+        img=img,
+        min_std=min_std,
+        min_size=min_size,
+        is_weight=True,
+    )
+    symmetry = get_symmetry(
+        img=img,
+        min_std=min_std,
+        min_size=min_size,
+    )
+    colorfulness = Colorfulness(
+        rgb=get_colorfulness_rgb(img),
+        hsv=get_colorfulness_hsv(img),
+    )
+    contrast = Contrast(
+        rms=contrast_rms(img),
+        michelson=contrast_michelson(img),
+    )
+    saturation = get_saturation(img)
+
+    faces = get_faces(img=img)
+    colors = get_colors_w3c(img=img, n_colors=140)
+
+    areas = get_areas(
+        img,
+        is_resize=is_resize,
+        new_size=new_size,
+        is_areatype=True,
+    )
+    text_image_ratio = get_text_image_ratio(areas)
+
+    return ImageAnalysisOutput(
+        brightness=brightness,
+        visual_complexity=visual_complexity,
+        symmetry=symmetry,
+        colorfulness=colorfulness,
+        contrast=contrast,
+        saturation=saturation,
+        faces=faces,
+        colors=colors,
+        text_image_ratio=text_image_ratio,
+    )
 
 
 def analyze_image(

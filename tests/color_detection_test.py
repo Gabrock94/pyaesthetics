@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 from PIL import Image
 from PIL.Image import Image as PilImage
@@ -185,6 +186,8 @@ class TestColorDetection(PyaestheticsTestCase):
     )
     def test_get_colors_w3c(self, image, expected_results, n_colors):
         output = get_colors_w3c(image, n_colors=n_colors)
+        assert all(not isinstance(v, np.floating) for v in output.color_scheme.values())
+
         actual_results = output.color_scheme
         assert actual_results == expected_results
 

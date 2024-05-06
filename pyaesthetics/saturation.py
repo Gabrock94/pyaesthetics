@@ -39,4 +39,4 @@ def get_saturation(img: PilImage) -> float:
     img_hsv = cv2.cvtColor(img_arr, cv2.COLOR_RGB2HSV) / 255
     saturation = img_hsv[:, :, 1].mean()
 
-    return saturation
+    return saturation.item()

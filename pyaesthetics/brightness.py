@@ -26,7 +26,7 @@ from pyaesthetics.utils import sRGB2RGB
 """ Thìs sections handles brigthness estimation. """
 
 
-def relative_luminance_bt709(img: PilImage) -> float:
+def get_relative_luminance_bt709(img: PilImage) -> float:
     """This function evaluates the brightness of an image by mean of Y, where Y is evaluated as:
 
     Y = 0.7152G + 0.0722B + 0.2126R
@@ -45,14 +45,16 @@ def relative_luminance_bt709(img: PilImage) -> float:
     img_arr = img_arr.flatten()
     img_arr = img_arr.reshape(int(len(img_arr) / 3), 3)
     img_arr = np.transpose(img_arr)
-    return (
+
+    brigthness = (
         np.mean(img_arr[0]) * 0.2126
         + np.mean(img_arr[1]) * 0.7152
         + np.mean(img_arr[2]) * 0.0722
     )
+    return brigthness.item()
 
 
-def relative_luminance_bt601(img: PilImage) -> float:
+def get_relative_luminance_bt601(img: PilImage) -> float:
     """This function evaluates the brightness of an image by mean of Y, where Y is evaluated as:
 
     Y = 0.587G + 0.114B + 0.299R
@@ -71,8 +73,10 @@ def relative_luminance_bt601(img: PilImage) -> float:
     img_arr = img_arr.flatten()
     img_arr = img_arr.reshape(int(len(img_arr) / 3), 3)
     img_arr = np.transpose(img_arr)
-    return (
+
+    brightness = (
         np.mean(img_arr[0]) * 0.299
         + np.mean(img_arr[1]) * 0.587
         + np.mean(img_arr[2]) * 0.114
     )
+    return brightness.item()

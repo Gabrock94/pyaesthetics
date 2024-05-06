@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 from PIL import Image
 from PIL.Image import Image as PilImage
@@ -21,6 +22,8 @@ class TestSymmetry(PyaestheticsTestCase):
         sample_image_path = str(self.FIXTURES_ROOT / "sample.jpg")
         img = Image.open(sample_image_path)
         output = get_symmetry(img, min_std=min_std, min_size=min_size)
+        assert not isinstance(output.degree, np.floating)
+
         actual_result = output.degree
         assert actual_result == expected_result
         assert output.images is None

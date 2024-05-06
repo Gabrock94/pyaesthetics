@@ -264,9 +264,9 @@ def get_colors_w3c(
     for color in missingcolors:
         colorscheme[color] = 0.0
 
-    colorscheme = {k: v for k, v in sorted(colorscheme.items())}
+    colorscheme = {k: float(v) for k, v in sorted(colorscheme.items())}
 
-    if is_plot:
+    def plot_image(colorscheme: Dict[str, float], plotncolors: int, n_colors: int):
         import matplotlib.patches as patches
         import matplotlib.pyplot as plt
 
@@ -285,9 +285,19 @@ def get_colors_w3c(
         fig.savefig(buf, format="png")
         plt.close(fig)
         buf.seek(0)
-        plot_img = Image.open(buf).convert("RGB")
+        return Image.open(buf).convert("RGB")
 
-        return ColorDetectionOutput(color_scheme=colorscheme, image=plot_img)
+    image = (
+        plot_image(
+            colorscheme=colorscheme,
+            plotncolors=plotncolors,
+            n_colors=n_colors,
+        )
+        if is_plot
+        else None
+    )
 
-    else:
-        return ColorDetectionOutput(color_scheme=colorscheme)
+    return ColorDetectionOutput(
+        color_scheme=colorscheme,
+        image=image,
+    )

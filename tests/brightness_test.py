@@ -1,10 +1,11 @@
+import numpy as np
 import pytest
 from PIL import Image
 from PIL.Image import Image as PilImage
 
 from pyaesthetics.brightness import (
-    relative_luminance_bt601,
-    relative_luminance_bt709,
+    get_relative_luminance_bt601,
+    get_relative_luminance_bt709,
 )
 from pyaesthetics.utils import PyaestheticsTestCase
 
@@ -17,9 +18,11 @@ class TestBrightness(PyaestheticsTestCase):
         return img
 
     def test_relative_luminance_bt601(self, image):
-        brigtness = relative_luminance_bt601(image)
+        brigtness = get_relative_luminance_bt601(image)
+        assert not isinstance(brigtness, np.floating)
         assert pytest.approx(brigtness, 0.0001) == 0.6024
 
     def test_relative_luminance_bt709(self, image):
-        brigtness = relative_luminance_bt709(image)
+        brigtness = get_relative_luminance_bt709(image)
+        assert not isinstance(brigtness, np.floating)
         assert pytest.approx(brigtness, 0.0001) == 0.5918

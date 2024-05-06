@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 from PIL import Image
 
@@ -14,6 +15,7 @@ class TestFaceDetection(PyaestheticsTestCase):
         img = Image.open(sample_image_path)
         output = get_faces(img, is_plot=is_plot)
         assert len(output.bboxes) == 3
+        assert not isinstance(output.bboxes, np.ndarray)
 
         if is_plot:
             assert output.images is not None

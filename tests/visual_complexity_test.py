@@ -14,6 +14,8 @@ class TestVisualComplexity(PyaestheticsTestCase):
         return img
 
     def test_get_visual_complexity(self, image):
-        output = get_visual_complexity(img=image, min_std=15, min_size=40)
+        output = get_visual_complexity(
+            img=image, min_std=15, min_size=40, is_weight=True
+        )
         assert output.num_blocks == 781
         assert output.weight == 271547

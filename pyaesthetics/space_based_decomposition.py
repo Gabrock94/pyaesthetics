@@ -101,7 +101,9 @@ def get_areas(
     img_arr = np.array(img)
 
     img_original_arr = img_arr.copy()  # source of the image
-    ow, oh, _ = img_original_arr.shape  # shape of the orignal image
+    oh, ow, _ = img_original_arr.shape  # shape of the orignal image
+    assert img.size == (ow, oh)
+
     img_arr = cv2.cvtColor(img_arr, cv2.COLOR_RGB2GRAY)  # conversion to greyscale
 
     if is_resize:
@@ -191,11 +193,17 @@ def get_areas(
             continue
 
         area_type = get_area_type(is_areatype, imgportion)
-        area_coordinates = get_area_coordinates(is_coordinates, xmin, xmax, ymin, ymax)
+        area_coordinates = get_area_coordinates(
+            is_coordinates=is_coordinates,
+            xmin=xmin.item(),
+            xmax=xmax.item(),
+            ymin=ymin.item(),
+            ymax=ymax.item(),
+        )
 
         areas.append(
             AreaOutput(
-                area=area,
+                area=area.item(),
                 coordinates=area_coordinates,
                 area_type=area_type,
             )

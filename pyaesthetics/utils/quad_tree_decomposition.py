@@ -94,20 +94,21 @@ class QuadTreeDecomposer(object):
         :type Y: int
         """
 
-        w, h = img.shape
+        h, w = img.shape
         std = int(img.std())
 
-        if std >= self.min_std and max(w, h) >= self.min_size:
+        if std >= self.min_std and max(h, w) >= self.min_size:
             if w >= h:
-                w2 = int(w / 2)
-                img1 = img[0:w2, 0:h]
-                img2 = img[w2:, 0:h]
+                w2 = int(w / 2)  # get the new width
+                img1 = img[0:h, 0:w2]  # create a subimage
+                img2 = img[0:h, w2:]  # create the second subimage
                 yield from self._decompose(img1, x, y)
                 yield from self._decompose(img2, x + w2, y)
+
             else:
                 h2 = int(h / 2)
-                img1 = img[0:, 0:h2]
-                img2 = img[0:, h2:]
+                img1 = img[0:h2, 0:]
+                img2 = img[h2:, 0:]
                 yield from self._decompose(img1, x, y)
                 yield from self._decompose(img2, x, y + h2)
 

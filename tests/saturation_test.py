@@ -1,4 +1,4 @@
-import cv2
+import numpy as np
 import pytest
 from PIL import Image
 
@@ -18,4 +18,5 @@ class TestSaturation(PyaestheticsTestCase):
         sample_image_path = str(self.FIXTURES_ROOT / image_filename)
         img = Image.open(sample_image_path)
         actual_result = get_saturation(img)
+        assert not isinstance(actual_result, np.floating)
         assert expected_result == actual_result

@@ -9,6 +9,7 @@ Created on Mon Apr 16 11:49:45 2018
 @author: giulio
 """
 
+import os
 from dataclasses import dataclass
 from typing import Optional
 
@@ -30,6 +31,10 @@ from pyaesthetics.utils import QuadTreeDecomposer
 class SymmetryImage(object):
     left: PilImage
     right: PilImage
+
+    def save_images(self, save_dir_path: str = "."):
+        self.left.save(os.path.join(save_dir_path, "left.png"))
+        self.right.save(os.path.join(save_dir_path, "right.png"))
 
 
 @dataclass
@@ -53,14 +58,16 @@ def get_symmetry(img: PilImage, min_std: int, min_size: int, is_plot: bool = Fal
     assert img.mode == "RGB", f"Image must be in RGB mode but is in {img.mode}"
     img_arr = np.array(img)
 
-    w, h, _ = img_arr.shape
-    if w % 2 != 0:
-        img_arr = img_arr[:-1, :, :]
-    if h % 2 != 0:
-        img_arr = img_arr[:, :-1, :]
+    h, w, _ = img_arr.shape
+    assert img.size == (w, h)
 
-    img_arr_l = img_arr[0:, 0 : int(w / 2), :]
-    img_arr_r = np.flip(img_arr[0:, int(w / 2) :, :], 1)
+    if h % 2 != 0:
+        img_arr = img_arr[:-1, :]
+    if w % 2 != 0:
+        img_arr = img_arr[:, :-1]
+
+    img_arr_l = img_arr[0:, 0 : int(w / 2)]
+    img_arr_r = np.flip(img_arr[0:, int(w / 2) :], 1)
 
     img_l = Image.fromarray(img_arr_l)
     img_r = Image.fromarray(img_arr_r)
@@ -84,4 +91,5 @@ def get_symmetry(img: PilImage, min_std: int, min_size: int, is_plot: bool = Fal
         if is_plot
         else None
     )
+
     return SymmetryOutput(degree=degree, images=images)

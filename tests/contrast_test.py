@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 from PIL import Image
 
@@ -15,9 +16,9 @@ class TestContrast(PyaestheticsTestCase):
     )
     def test_contrast_rms(self, image_filename: str, expected_result: float):
         sample_image_path = str(self.FIXTURES_ROOT / image_filename)
-        # img = cv2.imread(sample_image_path)
         img = Image.open(sample_image_path)
         actual_result = contrast_rms(img)
+        assert not isinstance(actual_result, np.floating)
         assert actual_result == expected_result
 
     @pytest.mark.parametrize(
@@ -29,7 +30,7 @@ class TestContrast(PyaestheticsTestCase):
     )
     def test_contrast_michelson(self, image_filename: str, expected_result: float):
         sample_image_path = str(self.FIXTURES_ROOT / image_filename)
-        # img = cv2.imread(sample_image_path)
         img = Image.open(sample_image_path)
         actual_result = contrast_michelson(img)
+        assert not isinstance(actual_result, np.floating)
         assert actual_result == expected_result

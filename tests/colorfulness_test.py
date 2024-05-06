@@ -1,8 +1,8 @@
-import cv2
+import numpy as np
 import pytest
 from PIL import Image
 
-from pyaesthetics.colorfulness import colorfulness_hsv, colorfulness_rgb
+from pyaesthetics.colorfulness import get_colorfulness_hsv, get_colorfulness_rgb
 from pyaesthetics.utils import PyaestheticsTestCase
 
 
@@ -13,9 +13,11 @@ class TestColorfulness(PyaestheticsTestCase):
         return Image.open(sample_image_path)
 
     def test_colorfulness_hsv(self, image):
-        c = colorfulness_hsv(image)
+        c = get_colorfulness_hsv(image)
+        assert not isinstance(c, np.floating)
         assert pytest.approx(c, 0.0001) == 140.2441
 
     def test_colorfulness_rgb(self, image):
-        c = colorfulness_rgb(image)
+        c = get_colorfulness_rgb(image)
+        assert not isinstance(c, np.floating)
         assert pytest.approx(c, 0.0001) == 73.8137

@@ -24,7 +24,7 @@ from PIL.Image import Image as PilImage
 """ Thìs sections handles brigthness estimation. """
 
 
-def contrast_rms(img: PilImage):
+def contrast_rms(img: PilImage) -> float:
     """This function evaluates the RMS contrast of an image:
 
 
@@ -46,7 +46,7 @@ def contrast_rms(img: PilImage):
     # contrast2 = np.sqrt(img_s.sum() / (img_s.shape[0] * img_s.shape[1]))
     # print(contrast, contrast2)
 
-    return contrast
+    return contrast.item()
 
 
 def contrast_michelson(img: PilImage):
@@ -64,9 +64,9 @@ def contrast_michelson(img: PilImage):
     Y = cv2.cvtColor(img_arr, cv2.COLOR_RGB2YUV)[:, :, 0]
 
     # compute min and max of Y
-    minY = float(np.min(Y))
-    maxY = float(np.max(Y))
+    ymin = float(np.min(Y))
+    ymax = float(np.max(Y))
     # compute contrast
-    contrast = (maxY - minY) / (maxY + minY)
+    contrast = (ymax - ymin) / (ymax + ymin)
 
     return contrast
