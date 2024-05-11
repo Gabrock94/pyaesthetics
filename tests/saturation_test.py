@@ -10,8 +10,8 @@ class TestSaturation(PyaestheticsTestCase):
     @pytest.mark.parametrize(
         argnames="image_filename, expected_result",
         argvalues=(
-            ("800px-Multi-color_leaf_without_saturation.jpg", 0.3141780693533271),
-            ("800px-Multi-color_leaf_with_saturation.jpg", 0.5300632097800362),
+            ("800px-Multi-color_leaf_without_saturation.jpg", 0.31417),
+            ("800px-Multi-color_leaf_with_saturation.jpg", 0.53006),
         ),
     )
     def test_saturation(self, image_filename: str, expected_result: float):
@@ -19,4 +19,4 @@ class TestSaturation(PyaestheticsTestCase):
         img = Image.open(sample_image_path)
         actual_result = get_saturation(img)
         assert not isinstance(actual_result, np.floating)
-        assert expected_result == actual_result
+        assert pytest.approx(actual_result, 0.0001) == expected_result

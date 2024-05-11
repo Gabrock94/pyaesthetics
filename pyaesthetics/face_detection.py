@@ -42,7 +42,7 @@ def get_faces(img: PilImage, is_plot: bool = False) -> GetFacesOutput:
     img_arr = np.array(img)
     img_arr = cv2.cvtColor(img_arr, cv2.COLOR_RGB2GRAY)
     frontalface_cascade = cv2.CascadeClassifier(
-        cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
+        cv2.data.haarcascades + "haarcascade_frontalface_default.xml"  # type: ignore
     )
     faces_bboxes: np.ndarray = frontalface_cascade.detectMultiScale(img_arr, 1.3, 5)  # type: ignore
 

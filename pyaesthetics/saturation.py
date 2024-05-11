@@ -36,7 +36,8 @@ def get_saturation(img: PilImage) -> float:
     """
     assert img.mode == "RGB", "Image must be in RGB mode"
     img_arr = np.array(img)
-    img_hsv = cv2.cvtColor(img_arr, cv2.COLOR_RGB2HSV) / 255
+    img_hsv = cv2.cvtColor(img_arr, cv2.COLOR_RGB2HSV)
+    img_hsv = np.divide(img_hsv, 255)
     saturation = img_hsv[:, :, 1].mean()
 
     return saturation.item()

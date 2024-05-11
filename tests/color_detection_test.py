@@ -195,7 +195,7 @@ class TestColorDetection(PyaestheticsTestCase):
 
     def test_exception(self, image, invalid_n_colors: int = 1):
         with pytest.raises(ValueError):
-            get_colors_w3c(image, n_colors=invalid_n_colors)
+            get_colors_w3c(image, n_colors=invalid_n_colors)  # type: ignore
 
     @pytest.mark.parametrize(argnames="is_plot", argvalues=(True, False))
     def test_plot(self, image, is_plot: bool):

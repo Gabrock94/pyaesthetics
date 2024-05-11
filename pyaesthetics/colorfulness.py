@@ -36,12 +36,14 @@ def get_colorfulness_hsv(img: PilImage) -> float:
     img_arr = np.array(img)
     img_arr = cv2.cvtColor(img_arr, cv2.COLOR_RGB2HSV)
 
-    S = []  # initialize a list
+    saturations = []  # initialize a list
     for row in img_arr:  # for each row
         for pixel in row:  # for each pixel
-            S.append(pixel[1])  # take only the Saturation value
-    C = np.mean(S) + np.std(S)  # evaluate the colorfulness
-    return C.item()  # return the colorfulness index
+            saturations.append(pixel[1])  # take only the Saturation value
+    colorfulness = np.mean(saturations) + np.std(
+        saturations
+    )  # evaluate the colorfulness
+    return colorfulness.item()  # return the colorfulness index
 
 
 def get_colorfulness_rgb(img: PilImage) -> float:
@@ -64,24 +66,21 @@ def get_colorfulness_rgb(img: PilImage) -> float:
     img_arr = np.array(img)
 
     # First we initialize 3 arrays
-    R = []
-    G = []
-    B = []
+    rs, gs, bs = [], [], []
     for row in img_arr:  # for each
         for pixel in row:  # for each pixelò
             # we append the RGB value to the corrisponding list
-            R.append(int(pixel[0]))
-            G.append(int(pixel[1]))
-            B.append(int(pixel[2]))
+            rs.append(int(pixel[0]))
+            gs.append(int(pixel[1]))
+            bs.append(int(pixel[2]))
 
-    rg = [R[x] - G[x] for x in range(0, len(R))]  # evaluate rg
-    yb = [0.5 * (R[x] + G[x]) - B[x] for x in range(0, len(R))]  # evaluate yb
+    rg = [rs[x] - gs[x] for x in range(0, len(rs))]  # evaluate rg
+    yb = [0.5 * (rs[x] + gs[x]) - bs[x] for x in range(0, len(rs))]  # evaluate yb
 
-    stdRGYB = np.sqrt(
-        (float(np.std(rg)) ** 2) + (float(np.std(yb)) ** 2)
-    )  # evaluate the std of RGYB
-    meanRGYB = np.sqrt(
-        (float(np.mean(rg)) ** 2) + (float(np.mean(yb)) ** 2)
-    )  # evaluate the mean of RGYB
-    C = stdRGYB + 0.3 * meanRGYB  # compute the colorfulness index
-    return C.item()
+    # evaluate the std of RGYB
+    std_rgyb = np.sqrt((float(np.std(rg)) ** 2) + (float(np.std(yb)) ** 2))
+    # evaluate the mean of RGYB
+    mean_rgyb = np.sqrt((float(np.mean(rg)) ** 2) + (float(np.mean(yb)) ** 2))
+
+    colorfulness = std_rgyb + 0.3 * mean_rgyb  # compute the colorfulness index
+    return colorfulness.item()

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def sRGB2RGB(img: np.ndarray) -> np.ndarray:
+def s_rgb_to_rgb(img: np.ndarray) -> np.ndarray:
     """this function converts a sRGB img to  linear RGB values.
 
     :param img: image to analyze, in sRGB

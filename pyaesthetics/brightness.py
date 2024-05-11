@@ -15,7 +15,7 @@ BT.709 and BT.601
 import numpy as np
 from PIL.Image import Image as PilImage
 
-from pyaesthetics.utils import sRGB2RGB
+from pyaesthetics.utils import s_rgb_to_rgb
 
 ###############################################################################
 #                                                                             #
@@ -40,7 +40,7 @@ def get_relative_luminance_bt709(img: PilImage) -> float:
     assert img.mode == "RGB", "Image must be in RGB mode"
 
     img_arr = np.array(img)
-    img_arr = sRGB2RGB(img_arr)
+    img_arr = s_rgb_to_rgb(img_arr)
 
     img_arr = img_arr.flatten()
     img_arr = img_arr.reshape(int(len(img_arr) / 3), 3)
@@ -68,7 +68,7 @@ def get_relative_luminance_bt601(img: PilImage) -> float:
     assert img.mode == "RGB", "Image must be in RGB mode"
 
     img_arr = np.array(img)
-    img_arr = sRGB2RGB(img_arr)
+    img_arr = s_rgb_to_rgb(img_arr)
 
     img_arr = img_arr.flatten()
     img_arr = img_arr.reshape(int(len(img_arr) / 3), 3)
