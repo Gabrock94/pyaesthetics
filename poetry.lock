@@ -676,7 +676,7 @@ diagrams = ["jinja2", "railroad-diagrams"]
 name = "pytesseract"
 version = "0.3.10"
 description = "Python-tesseract is a python wrapper for Google's Tesseract-OCR"
-optional = false
+optional = true
 python-versions = ">=3.7"
 files = [
     {file = "pytesseract-0.3.10-py3-none-any.whl", hash = "sha256:8f22cc98f765bf13517ead0c70effedb46c153540d25783e04014f28b55a5fc6"},
@@ -885,9 +885,11 @@ files = [
 ]
 
 [extras]
+all = ["matplotlib", "pytesseract"]
+tesseract = ["pytesseract"]
 visualization = ["matplotlib"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "e21a555fb4ddf5522eb173b2910814969e58f1a4d35f4c5631f05678a18e28d6"
+content-hash = "91e5dd5b26b82aa6251e1b2c01fcb006c1e04d56b828234f3e52a717b805351e"

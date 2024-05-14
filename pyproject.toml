@@ -27,12 +27,14 @@ pillow = "^10.3.0"
 opencv-python = "^4.9.0.80"
 matplotlib = { version = "^3.8.4", optional = true }
 imutils = "^0.5.4"
-pytesseract = "^0.3.10"
+pytesseract = { version = "^0.3.10", optional = true }
 scipy = "^1.13.0"
 scikit-image = "^0.23.2"
 
 [tool.poetry.extras]
 visualization = ["matplotlib"]
+tesseract = ["pytesseract"]
+all = ["pytesseract", "matplotlib"]
 
 [tool.poetry.group.dev.dependencies]
 ruff = ">=0.1.5"

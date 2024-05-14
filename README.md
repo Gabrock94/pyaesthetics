@@ -5,6 +5,12 @@
 # pyaesthetics
 [![CI](https://github.com/creative-graphic-design/pyaesthetics/actions/workflows/ci.yml/badge.svg)](https://github.com/creative-graphic-design/pyaesthetics/actions/workflows/ci.yml)
 
+```shell
+pip install "pyaesthetics[tesseract, visualization] @ git+https://github.com/creative-graphic-design/pyaesthetics"
+```
+
+---
+
 ![GitHub release](https://img.shields.io/github/release/Gabrock94/prettywebsite.svg)
 [![PyPI](https://img.shields.io/pypi/v/pyaesthetics.svg)](https://badge.fury.io/py/pyaesthetics)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/pyaesthetics.svg)](https://pypi.python.org/pypi/pyaesthetics/)

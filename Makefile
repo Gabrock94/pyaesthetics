@@ -16,7 +16,7 @@ setup:
 
 .PHONY: install
 install:
-	poetry install --extras visualization
+	poetry install --extras tesseract --extras visualization
 
 #
 # linter/formatter/typecheck/testing
