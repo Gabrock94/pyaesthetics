@@ -115,59 +115,9 @@ def analyze_image_complete(
     min_std: int,
     min_size: int,
     is_resize: bool,
-    new_size: Tuple[int, int],
+    resized_w: int,
+    resized_h: int,
 ) -> ImageAnalysisOutput:
-    # with ProcessPoolExecutor(max_workers=8) as executor:
-    #     bt709 = executor.submit(relative_luminance_bt709, img)
-    #     bt601 = executor.submit(relative_luminance_bt601, img)
-
-    #     visual_complexity = executor.submit(
-    #         get_visual_complexity,
-    #         img=img,
-    #         min_std=min_std,
-    #         min_size=min_size,
-    #         is_weight=True,
-    #     )
-
-    #     symmetry = executor.submit(
-    #         get_symmetry,
-    #         img=img,
-    #         min_std=min_std,
-    #         min_size=min_size,
-    #     )
-
-    #     rgb = executor.submit(colorfulness_rgb, img)
-    #     hsv = executor.submit(colorfulness_hsv, img)
-
-    #     rms = executor.submit(contrast_rms, img)
-    #     michelson = executor.submit(contrast_michelson, img)
-
-    #     saturation = executor.submit(get_saturation, img)
-
-    #     faces = executor.submit(get_faces, img=img)
-    #     colors = executor.submit(get_colors_w3c, img=img, n_colors=140)
-
-    #     areas = executor.submit(
-    #         get_areas, img, is_areatype=True, is_resize=is_resize, new_size=new_size
-    #     )
-    #     text_image_ratio = executor.submit(get_text_image_ratio, areas.result())
-
-    # brightness = Brightness(bt709=bt709.result(), bt601=bt601.result())
-    # colorfulness = Colorfulness(rgb=rgb.result(), hsv=hsv.result())
-    # contrast = Contrast(rms=rms.result(), michelson=michelson.result())
-
-    # return ImageAnalysisOutput(
-    #     brightness=brightness,
-    #     visual_complexity=visual_complexity.result(),
-    #     symmetry=symmetry.result(),
-    #     colorfulness=colorfulness,
-    #     contrast=contrast,
-    #     saturation=saturation.result(),
-    #     faces=faces.result(),
-    #     colors=colors.result(),
-    #     text_image_ratio=text_image_ratio.result(),
-    # )
-
     brightness = Brightness(
         bt709=get_relative_luminance_bt709(img),
         bt601=get_relative_luminance_bt601(img),
@@ -199,7 +149,8 @@ def analyze_image_complete(
     areas = get_areas(
         img,
         is_resize=is_resize,
-        new_size=new_size,
+        resized_w=resized_w,
+        resized_h=resized_h,
         is_areatype=True,
     )
     text_image_ratio = get_text_image_ratio(areas)
@@ -221,7 +172,8 @@ def analyze_image(
     img: PilImage,
     method: AnalyzeMethod = "fast",
     is_resize: bool = True,
-    new_size: Tuple[int, int] = (600, 400),
+    resized_w: int = 600,
+    resized_h: int = 400,
     min_std: int = 10,
     min_size: int = 20,
 ):
@@ -255,7 +207,8 @@ def analyze_image(
             min_std=min_std,
             min_size=min_size,
             is_resize=is_resize,
-            new_size=new_size,
+            resized_w=resized_w,
+            resized_h=resized_h,
         )
     else:
         raise ValueError(
