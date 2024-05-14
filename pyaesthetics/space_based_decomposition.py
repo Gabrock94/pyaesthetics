@@ -111,10 +111,10 @@ def get_areas(
             img_arr, new_size, interpolation=cv2.INTER_CUBIC
         )  # resizing
 
-    img_arr = cv2.GaussianBlur(img_arr, (3, 3), 0)  # apply a Gaussina filter
-    edged = cv2.Canny(img_arr, 10, 100)
+    # apply a Gaussina filter
+    img_arr = cv2.GaussianBlur(img_arr, ksize=(3, 3), sigmaX=0)
+    edged = cv2.Canny(img_arr, threshold1=10, threshold2=100)
     edged = cv2.dilate(edged, kernel=None, iterations=1)  # type: ignore
-
     edged = cv2.erode(edged, kernel=None, iterations=1)  # type: ignore
 
     # get the contours
@@ -188,17 +188,17 @@ def get_areas(
         if area <= min_area:
             continue
 
+        # make sure the coordinates are within the image
+        xmin, ymin = max(0, xmin), max(0, ymin)
+        xmax, ymax = min(ow, xmax), min(oh, ymax)
+
         imgportion = img_original_arr[ymin:ymax, xmin:xmax]
         if imgportion.size == 0:
             continue
 
         area_type = get_area_type(is_areatype, imgportion)
         area_coordinates = get_area_coordinates(
-            is_coordinates=is_coordinates,
-            xmin=xmin.item(),
-            xmax=xmax.item(),
-            ymin=ymin.item(),
-            ymax=ymax.item(),
+            is_coordinates=is_coordinates, xmin=xmin, xmax=xmax, ymin=ymin, ymax=ymax
         )
 
         areas.append(
