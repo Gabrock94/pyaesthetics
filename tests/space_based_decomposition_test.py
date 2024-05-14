@@ -1,4 +1,6 @@
+import pytest
 from PIL import Image
+from PIL.Image import Image as PilImage
 
 from pyaesthetics.space_based_decomposition import (
     AreaCoordinates,
@@ -12,12 +14,18 @@ from pyaesthetics.utils import PyaestheticsTestCase
 
 
 class TestSpaceBasedDecomposition(PyaestheticsTestCase):
-    def test_get_areas(self):
-        sample_image_path = str(self.FIXTURES_ROOT / "sample2.jpg")
-        img = Image.open(sample_image_path)
+    @pytest.fixture
+    def image_filename(self) -> str:
+        return "sample2.jpg"
 
+    @pytest.fixture
+    def image(self, image_filename: str) -> PilImage:
+        sample_image_path = str(self.FIXTURES_ROOT / image_filename)
+        return Image.open(sample_image_path)
+
+    def test_get_areas(self, image: PilImage):
         actual = get_areas(
-            img,
+            image,
             is_plot=True,
             is_coordinates=True,
             is_areatype=True,
@@ -47,15 +55,15 @@ class TestSpaceBasedDecomposition(PyaestheticsTestCase):
                     area_type="Image",
                 ),
             ],
-            image=Image.new("RGB", size=(img.width, img.height), color="white"),
+            image=Image.new("RGB", size=(image.width, image.height), color="white"),
         )
+        assert len(actual.areas) == len(expected.areas)
+
         for actual_area, expected_area in zip(actual.areas, expected.areas):
             assert actual_area.area == expected_area.area
 
-    def test_get_text_image_ratio(self):
-        sample_image_path = str(self.FIXTURES_ROOT / "sample2.jpg")
-        img = Image.open(sample_image_path)
-        areas = get_areas(img, is_plot=True, is_coordinates=True, is_areatype=True)
+    def test_get_text_image_ratio(self, image: PilImage):
+        areas = get_areas(image, is_plot=True, is_coordinates=True, is_areatype=True)
 
         actual = get_text_image_ratio(areas)
         expected = TextImageRatioOutput(

@@ -12,8 +12,12 @@ from pyaesthetics.utils import PyaestheticsTestCase
 
 class TestBrightness(PyaestheticsTestCase):
     @pytest.fixture
-    def image(self) -> PilImage:
-        img_path = self.FIXTURES_ROOT / "sample.jpg"
+    def image_filename(self) -> str:
+        return "sample.jpg"
+
+    @pytest.fixture
+    def image(self, image_filename: str) -> PilImage:
+        img_path = self.FIXTURES_ROOT / image_filename
         img = Image.open(img_path)
         return img
 

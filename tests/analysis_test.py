@@ -8,11 +8,15 @@ from pyaesthetics.utils import PyaestheticsTestCase
 
 
 class TestAnalysis(PyaestheticsTestCase):
+    @pytest.fixture
+    def image_filename(self) -> str:
+        return "sample2.jpg"
+
     @pytest.mark.parametrize(
         argnames="method",
         argvalues=get_args(AnalyzeMethod),
     )
-    def test_analyze_image(self, method: AnalyzeMethod):
-        sample_image_path = str(self.FIXTURES_ROOT / "sample2.jpg")
+    def test_analyze_image(self, method: AnalyzeMethod, image_filename: str):
+        sample_image_path = str(self.FIXTURES_ROOT / image_filename)
         image = Image.open(sample_image_path)
         analyze_image(image, method=method)

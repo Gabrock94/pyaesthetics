@@ -9,8 +9,12 @@ from pyaesthetics.utils import PyaestheticsTestCase
 
 class TestColorDetection(PyaestheticsTestCase):
     @pytest.fixture
-    def image(self) -> PilImage:
-        sample_image_path = str(self.FIXTURES_ROOT / "sample.jpg")
+    def image_filename(self) -> str:
+        return "sample.jpg"
+
+    @pytest.fixture
+    def image(self, image_filename) -> PilImage:
+        sample_image_path = str(self.FIXTURES_ROOT / image_filename)
         return Image.open(sample_image_path)
 
     @pytest.mark.parametrize(

@@ -8,8 +8,12 @@ from pyaesthetics.utils import PyaestheticsTestCase
 
 class TestColorfulness(PyaestheticsTestCase):
     @pytest.fixture
-    def image(self):
-        sample_image_path = str(self.FIXTURES_ROOT / "sample.jpg")
+    def image_filename(self) -> str:
+        return "sample.jpg"
+
+    @pytest.fixture
+    def image(self, image_filename: str):
+        sample_image_path = str(self.FIXTURES_ROOT / image_filename)
         return Image.open(sample_image_path)
 
     def test_colorfulness_hsv(self, image):
