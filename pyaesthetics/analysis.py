@@ -28,6 +28,7 @@ try:
     from . import spaceBasedDecomposition
     from . import contrast
     from . import saturation
+    from . import linesDetection
 except:
     import quadTreeDecomposition
     import spaceBasedDecomposition
@@ -38,6 +39,7 @@ except:
     import colorDetection
     import contrast
     import saturation
+    import linesDetection
 
 ###############################################################################
 #                                                                             #
@@ -102,6 +104,7 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulnessRGB(imageColor)
         resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
         resultdict["saturation"] = saturation.saturation(imageColor)
+        resultdict["linesRatio"] = linesDetection.analyseLines(imageColor)
 
     elif(method == 'complete'):
         resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
@@ -123,7 +126,7 @@ def analyzeImage(pathToImg, method='fast',resize=True, newSize=(600,400), minStd
         resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
         resultdict["contrast_Michelson"] = contrast.contrast_Michelson(imageColor)
         resultdict["saturation"] = saturation.saturation(imageColor)
-        
+        resultdict["linesRatio"] = linesDetection.analyseLines(imageColor)
 
     return(resultdict)
 

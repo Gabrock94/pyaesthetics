@@ -22,6 +22,7 @@ import matplotlib.pyplot as plt #for data visualization
 import matplotlib.patches as patches #for legends and rectangle drawing in QTD
 import pytesseract
 from PIL import Image
+
 ###############################################################################
 #                                                                             #
 #                                  Symmetry                                   #
@@ -38,10 +39,13 @@ def textDetection(img):
         :rtype: int
     
     """
-    filename = "{}.png".format(os.getpid())
-    cv2.imwrite(filename, img)
-    text = pytesseract.image_to_string(Image.open(filename))
-    os.remove(filename)
+    try:
+        filename = "{}.png".format(os.getpid())
+        cv2.imwrite(filename, img)
+        text = pytesseract.image_to_string(Image.open(filename))
+        os.remove(filename)
+    except:
+        text = ''
     return(len(text))
 
 
@@ -53,6 +57,7 @@ def textImageRatio(areas):
         :return: a dict containing the text / (image+text) ratio , total area of text and total area of images and number of images
         :rtype: dict
     """
+    
     image = []
     text = []
     for area in areas:
@@ -62,10 +67,13 @@ def textImageRatio(areas):
             image.append(areas[area]["area"])
 
     """ ratio is 0.5 if picture and text occupy the same area, more in more text, less if more images. """
-    ratio = sum(text) / (sum(image) + sum(text))
+    if((sum(image) + sum(text)) > 0):
+        ratio = sum(text) / (sum(image) + sum(text))
+    else:
+        ratio = np.nan
     return({"textImageRatio":ratio,"textArea":sum(text),"imageArea":sum(image),"nImages":len(image)})
         
-def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordinates=False, areatype=True):
+def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordinates=False, areatype=True, returnbox=False):
     
     """ Adapted from https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/"""
     
@@ -82,6 +90,8 @@ def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordin
     cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) #get the contours
     cnts = cnts[0] 
 
+    areas = {}
+    
     if(len(cnts) > 0):
         (cnts, _) = contours.sort_contours(cnts) 
         
@@ -108,7 +118,7 @@ def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordin
             plt.yticks([],[])
             plt.show()
         """ Now, we can calculate the area of each box, and we can detect if some text is present"""
-        areas = {}
+        
 
         areasize = []
         for box in range(0,len(boxes)): #to avoid errors due to two or more rectangles of the same Area
@@ -132,7 +142,8 @@ def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordin
                         areas[box] = {"area":area}
                     if(coordinates):
                         areas[box]['coordinates'] = {"xmin": minX,"xmax": maxX,"ymin": minY,"ymax": maxY}
-
+                    if(returnbox):
+                        areas[box]['box'] = boxes[box]
     return(areas)
             
 ###############################################################################
@@ -143,14 +154,33 @@ def getAreas(img,minArea = 100,resize=True,newSize=[600,400],plot=False, coordin
         
 """ For debug purposes."""
 
+import math
+
 if(__name__=='__main__'):
 
-    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample2.jpg" #path to a sample image
+    img = "/home/giulio/Downloads/scraperpackagingoftheworld/Raw/warped/100_0.png" #path to a sample image
     
-    img = cv2.imread(img)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    areas = getAreas(img,plot=False, coordinates=True, areatype=False)
+    # img = cv2.imread(img, cv2.IMREAD_UNCHANGED)
 
-    # print(areas)
-    # print(textImageRatio(areas))
+    img = cv2.imread(img, cv2.IMREAD_UNCHANGED)
+    img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
+    img = cv2.copyMakeBorder(img ,10,10,10,10,cv2.BORDER_CONSTANT,value=[0,0,0,0])
+    areas = getAreas(img,plot=True, coordinates=True, areatype=False, resize=False, returnbox=True)
     
+    
+    
+    # from imutils.perspective import four_point_transform
+    
+    # for imagename in os.listdir('/home/giulio/Downloads/scraperpackagingoftheworld/Raw/processed/'):
+    #     img = '/home/giulio/Downloads/scraperpackagingoftheworld/Raw/processed/'+imagename
+    #     img = cv2.imread(img, cv2.IMREAD_UNCHANGED)
+    #     img2 = img.copy()
+    #     img2 = cv2.cvtColor(img2, cv2.COLOR_BGRA2RGBA)
+    #     img2 = cv2.copyMakeBorder(img2 ,10,10,10,10,cv2.BORDER_CONSTANT,value=[0,0,0,0])
+    #     areas = getAreas(img2,plot=True, coordinates=True, areatype=False, resize=False, returnbox=True)
+    
+    #     for area in areas:
+    #         xmin, xmax, ymin, ymax = areas[area]['coordinates'].values()
+    #         warped = four_point_transform(img, areas[area]['box'])
+    #         plt.imshow(warped)
+    #         cv2.imwrite('/home/giulio/Downloads/scraperpackagingoftheworld/Raw/warped/'+imagename[:-4]+'_'+str(area)+'.png',warped)
