@@ -98,11 +98,13 @@ You can check the full documentation here: https://prettywebsite.readthedocs.io/
 Feel free to contact me for questions, suggestions or to give me advice as well at: giulio.gabrieli@iit.it or giulio@duck.com
 
 ## Scientific Publications that used pyaesthetic
+- Gabrieli G. (2018), Using users' physiological response to predict aesthetic experience of websites, Master Degree in Human-Computer Interaction, University of Trento (Italy)
 - Gabrieli, G., Bornstein, M. H., Setoh, P., & Esposito, G. (2022). *Machine learning estimation of users’ implicit and explicit aesthetic judgments of web-pages*. Behaviour & Information Technology, 1-11.
 - Bizzego, A., Gabrieli, G., Azhari, A., Lim, M., & Esposito, G. (2022). *Dataset of parent-child hyperscanning functional near-infrared spectroscopy recordings*. Scientific Data, 9(1), 625.
 - Cianfanelli, B., Esposito, A., Spataro, P., Santirocchi, A., Cestari, V., Rossi-Arnaud, C., & Costanzi, M. (2023). *The binding of negative emotional stimuli with spatial information in working memory: A possible role for the episodic buffer*. Frontiers in Neuroscience, 17, 445.
 - Music A., Maerten A., Wagemans J. (2023).*Beautification of images by generative adversarial networks*. Journal of Vision 2023;23(10):14.
-
+- Veldhuizen M. (2024), Analyzing the Role of Aesthetic Features in Packaging Designs  on Consumer Responses: The Case of Specialty Coffee, Master Degree in Communication Science, Vrije Universiteit (Netherlands)
+- 
 ## Presentation
 - Gabrieli, G., Scapin, G., & Esposito, G. (2022). Pyaesthetic, a python package for empirical aesthetic analysis. XXVII
 Conference of the International Association of Empirical Aesthetics, Philadelphia, United States. https://giuliogabrieli.it/posters/iaea2022/
