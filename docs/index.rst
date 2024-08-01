@@ -3,23 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pyaesthetics's documentation! - V. 0.0.7
+Welcome to pyaesthetics's documentation! - V. 0.0.8
 ======================================================
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Contents:
-   
-   
-   analysis
-   brightness
-   colorfulness
-   colorDetection
-   contrast
-   faceDetection
-   quadTree
-   saturation
-   symmetry
+.. autosummary::
+    :toctree: _autosummary
+    :recursive:
+    
+    pyaesthetics
    
 Indices and tables
 ==================

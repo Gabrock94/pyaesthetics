@@ -40,8 +40,10 @@ release = '0.0.8'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',  # Create neat summary tables
 ]
 
+autosummary_generate = True  # Turn on sphinx.ext.autosummary
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
