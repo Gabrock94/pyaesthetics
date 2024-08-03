@@ -108,6 +108,9 @@ You can check the full documentation here: https://prettywebsite.readthedocs.io/
 - opencv-python
 - imutils
 - pytesseract
+- pillow
+- face-recognition
+- scikit-image
 
 ## Contacts
 Feel free to contact me for questions, suggestions or to give me advice as well at: giulio.gabrieli@iit.it or giulio@duck.com
