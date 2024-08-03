@@ -14,7 +14,6 @@
 #
 import os
 import sys
-!pip install sphinx_autosummary_accessors
 import sphinx_autosummary_accessors
 sys.path.insert(0, os.path.abspath('../'))
 
