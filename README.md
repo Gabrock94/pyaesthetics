@@ -1,8 +1,7 @@
-<!-- <p align="center">
-    <img width="200" src="https://github.com/Gabrock94/pyaesthetics/blob/master/docs/pyaesthetics_small.png" alt="Logo">
-</p> -->
+<p align="center">
+    ![Logo](https://raw.githubusercontent.com/gabrock94/pyaesthetics/master/docs/pyaesthetics_small.png)
+</p>
 
-![Logo](https://raw.githubusercontent.com/gabrock94/pyaesthetics/master/docs/pyaesthetics_small.png)
 
 
 # pyaesthetics
