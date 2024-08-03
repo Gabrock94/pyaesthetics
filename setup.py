@@ -9,6 +9,7 @@ datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.
 setup(name='pyaesthetics',
     version='0.0.8.1',
     description='Images aesthetic analysis',
+    long_description='A python package to estimate aesthetics visual features from still images.'
     author='Giulio Gabrieli',
     author_email='gack94@gmail.com',
     url='https://github.com/Gabrock94/pyaesthetics',
