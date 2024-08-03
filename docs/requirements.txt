@@ -6,3 +6,4 @@ pandas>=2.2
 opencv-python>=4.10 
 pytesseract>=0.3
 pillow>=10.4
+sphinx_autosummary_accessors
