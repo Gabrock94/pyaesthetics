@@ -10,6 +10,7 @@ setup(name='pyaesthetics',
     version='0.0.8.1',
     description='Images aesthetic analysis',
     long_description='A python package to estimate aesthetics visual features from still images.'
+    long_description_content_type='text/markdown',  # Make sure this matches the format of your README file
     author='Giulio Gabrieli',
     author_email='gack94@gmail.com',
     url='https://github.com/Gabrock94/pyaesthetics',
