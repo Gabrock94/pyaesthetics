@@ -1,8 +1,6 @@
 <p align="center">
-    ![Logo](https://raw.githubusercontent.com/gabrock94/pyaesthetics/master/docs/pyaesthetics_small.png)
+    <img width="200" src="https://github.com/Gabrock94/pyaesthetics/blob/master/docs/pyaesthetics_small.png?raw=True" alt="Logo">
 </p>
-
-
 
 # pyaesthetics
 ![GitHub release](https://img.shields.io/github/release/Gabrock94/prettywebsite.svg)
