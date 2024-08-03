@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyaesthetics.selfsimilarity.tqdm &#8212; pyaesthetics 0.0.8.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=a6cd5f1d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pyaesthetics-selfsimilarity-tqdm">
+<h1>pyaesthetics.selfsimilarity.tqdm<a class="headerlink" href="#pyaesthetics-selfsimilarity-tqdm" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyaesthetics.selfsimilarity.</span></span><span class="sig-name descname"><span class="pre">tqdm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">__</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Comparable</span></code></p>
+<p>Decorate an iterable object, returning an iterator which acts exactly
+like the original iterable, but prints a dynamically updating
+progressbar every time a value is requested.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h2>
+<dl>
+<dt>iterable<span class="classifier">iterable, optional</span></dt><dd><p>Iterable to decorate with a progressbar.
+Leave blank to manually manage the updates.</p>
+</dd>
+<dt>desc<span class="classifier">str, optional</span></dt><dd><p>Prefix for the progressbar.</p>
+</dd>
+<dt>total<span class="classifier">int or float, optional</span></dt><dd><p>The number of expected iterations. If unspecified,
+len(iterable) is used if possible. If float(“inf”) or as a last
+resort, only basic progress statistics are displayed
+(no ETA, no progressbar).
+If <cite>gui</cite> is True and this parameter needs subsequent updating,
+specify an initial arbitrary large positive number,
+e.g. 9e9.</p>
+</dd>
+<dt>leave<span class="classifier">bool, optional</span></dt><dd><p>If [default: True], keeps all traces of the progressbar
+upon termination of iteration.
+If <cite>None</cite>, will leave only if <cite>position</cite> is <cite>0</cite>.</p>
+</dd>
+<dt>file<span class="classifier"><cite>io.TextIOWrapper</cite> or <cite>io.StringIO</cite>, optional</span></dt><dd><p>Specifies where to output the progress messages
+(default: sys.stderr). Uses <cite>file.write(str)</cite> and <cite>file.flush()</cite>
+methods.  For encoding, see <cite>write_bytes</cite>.</p>
+</dd>
+<dt>ncols<span class="classifier">int, optional</span></dt><dd><p>The width of the entire output message. If specified,
+dynamically resizes the progressbar to stay within this bound.
+If unspecified, attempts to use environment width. The
+fallback is a meter width of 10 and no limit for the counter and
+statistics. If 0, will not print any meter (only stats).</p>
+</dd>
+<dt>mininterval<span class="classifier">float, optional</span></dt><dd><p>Minimum progress display update interval [default: 0.1] seconds.</p>
+</dd>
+<dt>maxinterval<span class="classifier">float, optional</span></dt><dd><p>Maximum progress display update interval [default: 10] seconds.
+Automatically adjusts <cite>miniters</cite> to correspond to <cite>mininterval</cite>
+after long display update lag. Only works if <cite>dynamic_miniters</cite>
+or monitor thread is enabled.</p>
+</dd>
+<dt>miniters<span class="classifier">int or float, optional</span></dt><dd><p>Minimum progress display update interval, in iterations.
+If 0 and <cite>dynamic_miniters</cite>, will automatically adjust to equal
+<cite>mininterval</cite> (more CPU efficient, good for tight loops).
+If &gt; 0, will skip display of specified number of iterations.
+Tweak this and <cite>mininterval</cite> to get very efficient loops.
+If your progress is erratic with both fast and slow iterations
+(network, skipping items, etc) you should set miniters=1.</p>
+</dd>
+<dt>ascii<span class="classifier">bool or str, optional</span></dt><dd><p>If unspecified or False, use unicode (smooth blocks) to fill
+the meter. The fallback is to use ASCII characters “ 123456789#”.</p>
+</dd>
+<dt>disable<span class="classifier">bool, optional</span></dt><dd><p>Whether to disable the entire progressbar wrapper
+[default: False]. If set to None, disable on non-TTY.</p>
+</dd>
+<dt>unit<span class="classifier">str, optional</span></dt><dd><p>String that will be used to define the unit of each iteration
+[default: it].</p>
+</dd>
+<dt>unit_scale<span class="classifier">bool or int or float, optional</span></dt><dd><p>If 1 or True, the number of iterations will be reduced/scaled
+automatically and a metric prefix following the
+International System of Units standard will be added
+(kilo, mega, etc.) [default: False]. If any other non-zero
+number, will scale <cite>total</cite> and <cite>n</cite>.</p>
+</dd>
+<dt>dynamic_ncols<span class="classifier">bool, optional</span></dt><dd><p>If set, constantly alters <cite>ncols</cite> and <cite>nrows</cite> to the
+environment (allowing for window resizes) [default: False].</p>
+</dd>
+<dt>smoothing<span class="classifier">float, optional</span></dt><dd><p>Exponential moving average smoothing factor for speed estimates
+(ignored in GUI mode). Ranges from 0 (average speed) to 1
+(current/instantaneous speed) [default: 0.3].</p>
+</dd>
+<dt>bar_format<span class="classifier">str, optional</span></dt><dd><p>Specify a custom bar string formatting. May impact performance.
+[default: ‘{l_bar}{bar}{r_bar}’], where
+l_bar=’{desc}: {percentage:3.0f}%|’ and
+r_bar=’| {n_fmt}/{total_fmt} [{elapsed}&lt;{remaining}, ‘</p>
+<blockquote>
+<div><p>‘{rate_fmt}{postfix}]’</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Possible vars: l_bar, bar, r_bar, n, n_fmt, total, total_fmt,</dt><dd><p>percentage, elapsed, elapsed_s, ncols, nrows, desc, unit,
+rate, rate_fmt, rate_noinv, rate_noinv_fmt,
+rate_inv, rate_inv_fmt, postfix, unit_divisor,
+remaining, remaining_s, eta.</p>
+</dd>
+</dl>
+<p>Note that a trailing “: “ is automatically removed after {desc}
+if the latter is empty.</p>
+</dd>
+<dt>initial<span class="classifier">int or float, optional</span></dt><dd><p>The initial counter value. Useful when restarting a progress
+bar [default: 0]. If using float, consider specifying <cite>{n:.3f}</cite>
+or similar in <cite>bar_format</cite>, or specifying <cite>unit_scale</cite>.</p>
+</dd>
+<dt>position<span class="classifier">int, optional</span></dt><dd><p>Specify the line offset to print this bar (starting from 0)
+Automatic if unspecified.
+Useful to manage multiple bars at once (eg, from threads).</p>
+</dd>
+<dt>postfix<span class="classifier">dict or <a href="#id1"><span class="problematic" id="id2">*</span></a>, optional</span></dt><dd><p>Specify additional stats to display at the end of the bar.
+Calls <cite>set_postfix(**postfix)</cite> if possible (dict).</p>
+</dd>
+<dt>unit_divisor<span class="classifier">float, optional</span></dt><dd><p>[default: 1000], ignored unless <cite>unit_scale</cite> is True.</p>
+</dd>
+<dt>write_bytes<span class="classifier">bool, optional</span></dt><dd><p>Whether to write bytes. If (default: False) will write unicode.</p>
+</dd>
+<dt>lock_args<span class="classifier">tuple, optional</span></dt><dd><p>Passed to <cite>refresh</cite> for intermediate output
+(initialisation, iterating, and updating).</p>
+</dd>
+<dt>nrows<span class="classifier">int, optional</span></dt><dd><p>The screen height. If specified, hides nested bars outside this
+bound. If unspecified, attempts to use environment height.
+The fallback is 20.</p>
+</dd>
+<dt>colour<span class="classifier">str, optional</span></dt><dd><p>Bar colour (e.g. ‘green’, ‘#00ff00’).</p>
+</dd>
+<dt>delay<span class="classifier">float, optional</span></dt><dd><p>Don’t display until [default: 0] seconds have elapsed.</p>
+</dd>
+<dt>gui<span class="classifier">bool, optional</span></dt><dd><p>WARNING: internal parameter - do not use.
+Use tqdm.gui.tqdm(…) instead. If set, will attempt to use
+matplotlib animations for a graphical output [default: False].</p>
+</dd>
+</dl>
+</section>
+<section id="returns">
+<h2>Returns<a class="headerlink" href="#returns" title="Link to this heading">¶</a></h2>
+<p>out  : decorated iterator.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.clear" title="pyaesthetics.selfsimilarity.tqdm.clear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clear</span></code></a></p></td>
+<td><p>Clear current bar display.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.close" title="pyaesthetics.selfsimilarity.tqdm.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a></p></td>
+<td><p>Cleanup and (if leave=False) close the progressbar.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.display" title="pyaesthetics.selfsimilarity.tqdm.display"><code class="xref py py-obj docutils literal notranslate"><span class="pre">display</span></code></a></p></td>
+<td><p>Use <cite>self.sp</cite> to display <cite>msg</cite> in the specified <cite>pos</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.external_write_mode" title="pyaesthetics.selfsimilarity.tqdm.external_write_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">external_write_mode</span></code></a></p></td>
+<td><p>Disable tqdm within context and refresh tqdm when exits.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.format_interval" title="pyaesthetics.selfsimilarity.tqdm.format_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_interval</span></code></a></p></td>
+<td><p>Formats a number of seconds as a clock time, [H:]MM:SS</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.format_meter" title="pyaesthetics.selfsimilarity.tqdm.format_meter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_meter</span></code></a></p></td>
+<td><p>Return a string-based progress bar given some parameters</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.format_num" title="pyaesthetics.selfsimilarity.tqdm.format_num"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_num</span></code></a></p></td>
+<td><p>Intelligent scientific notation (.3g).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.format_sizeof" title="pyaesthetics.selfsimilarity.tqdm.format_sizeof"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_sizeof</span></code></a></p></td>
+<td><p>Formats a number (greater than unity) with SI Order of Magnitude prefixes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.get_lock" title="pyaesthetics.selfsimilarity.tqdm.get_lock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_lock</span></code></a></p></td>
+<td><p>Get the global lock.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">moveto</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.pandas" title="pyaesthetics.selfsimilarity.tqdm.pandas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pandas</span></code></a></p></td>
+<td><p>Registers the current <cite>tqdm</cite> class with</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.refresh" title="pyaesthetics.selfsimilarity.tqdm.refresh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">refresh</span></code></a></p></td>
+<td><p>Force refresh the display of this bar.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.reset" title="pyaesthetics.selfsimilarity.tqdm.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a></p></td>
+<td><p>Resets to 0 iterations for repeated use.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.set_description" title="pyaesthetics.selfsimilarity.tqdm.set_description"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_description</span></code></a></p></td>
+<td><p>Set/modify description of the progress bar.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.set_description_str" title="pyaesthetics.selfsimilarity.tqdm.set_description_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_description_str</span></code></a></p></td>
+<td><p>Set/modify description without ': ' appended.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.set_lock" title="pyaesthetics.selfsimilarity.tqdm.set_lock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_lock</span></code></a></p></td>
+<td><p>Set the global lock.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.set_postfix" title="pyaesthetics.selfsimilarity.tqdm.set_postfix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_postfix</span></code></a></p></td>
+<td><p>Set/modify postfix (additional stats) with automatic formatting based on datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.set_postfix_str" title="pyaesthetics.selfsimilarity.tqdm.set_postfix_str"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_postfix_str</span></code></a></p></td>
+<td><p>Postfix without dictionary expansion, similar to prefix handling.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.status_printer" title="pyaesthetics.selfsimilarity.tqdm.status_printer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">status_printer</span></code></a></p></td>
+<td><p>Manage the printing and in-place updating of a line of characters.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.unpause" title="pyaesthetics.selfsimilarity.tqdm.unpause"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unpause</span></code></a></p></td>
+<td><p>Restart tqdm timer from last print time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.update" title="pyaesthetics.selfsimilarity.tqdm.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a></p></td>
+<td><p>Manually update the progress bar, useful for streams such as reading files.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.wrapattr" title="pyaesthetics.selfsimilarity.tqdm.wrapattr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wrapattr</span></code></a></p></td>
+<td><p>stream  : file-like object. method  : str, &quot;read&quot; or &quot;write&quot;. The result of <cite>read()</cite> and     the first argument of <cite>write()</cite> should have a <cite>len()</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.write" title="pyaesthetics.selfsimilarity.tqdm.write"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write</span></code></a></p></td>
+<td><p>Print a message via tqdm (without overlap with bars).</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.selfsimilarity.tqdm.format_dict" title="pyaesthetics.selfsimilarity.tqdm.format_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format_dict</span></code></a></p></td>
+<td><p>Public API for read-only member access.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">monitor</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">monitor_interval</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.clear">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nolock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.clear" title="Link to this definition">¶</a></dt>
+<dd><p>Clear current bar display.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.close" title="Link to this definition">¶</a></dt>
+<dd><p>Cleanup and (if leave=False) close the progressbar.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.display">
+<span class="sig-name descname"><span class="pre">display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.display" title="Link to this definition">¶</a></dt>
+<dd><p>Use <cite>self.sp</cite> to display <cite>msg</cite> in the specified <cite>pos</cite>.</p>
+<p>Consider overloading this function when inheriting to use e.g.:
+<cite>self.some_frontend(**self.format_dict)</cite> instead of <cite>self.sp</cite>.</p>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>msg  : str, optional. What to display (default: <cite>repr(self)</cite>).
+pos  : int, optional. Position to <cite>moveto</cite></p>
+<blockquote>
+<div><p>(default: <cite>abs(self.pos)</cite>).</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.external_write_mode">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">external_write_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nolock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.external_write_mode" title="Link to this definition">¶</a></dt>
+<dd><p>Disable tqdm within context and refresh tqdm when exits.
+Useful when writing to standard output stream</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.format_dict">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format_dict</span></span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.format_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Public API for read-only member access.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.format_interval">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.format_interval" title="Link to this definition">¶</a></dt>
+<dd><p>Formats a number of seconds as a clock time, [H:]MM:SS</p>
+<section id="id4">
+<h3>Parameters<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>t<span class="classifier">int</span></dt><dd><p>Number of seconds.</p>
+</dd>
+</dl>
+</section>
+<section id="id5">
+<h3>Returns<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>out<span class="classifier">str</span></dt><dd><p>[H:]MM:SS</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.format_meter">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format_meter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">elapsed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'it'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postfix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit_divisor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colour</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">extra_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.format_meter" title="Link to this definition">¶</a></dt>
+<dd><p>Return a string-based progress bar given some parameters</p>
+<section id="id6">
+<h3>Parameters<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<dl>
+<dt>n<span class="classifier">int or float</span></dt><dd><p>Number of finished iterations.</p>
+</dd>
+<dt>total<span class="classifier">int or float</span></dt><dd><p>The expected total number of iterations. If meaningless (None),
+only basic progress statistics are displayed (no ETA).</p>
+</dd>
+<dt>elapsed<span class="classifier">float</span></dt><dd><p>Number of seconds passed since start.</p>
+</dd>
+<dt>ncols<span class="classifier">int, optional</span></dt><dd><p>The width of the entire output message. If specified,
+dynamically resizes <cite>{bar}</cite> to stay within this bound
+[default: None]. If <cite>0</cite>, will not print any bar (only stats).
+The fallback is <cite>{bar:10}</cite>.</p>
+</dd>
+<dt>prefix<span class="classifier">str, optional</span></dt><dd><p>Prefix message (included in total width) [default: ‘’].
+Use as {desc} in bar_format string.</p>
+</dd>
+<dt>ascii<span class="classifier">bool, optional or str, optional</span></dt><dd><p>If not set, use unicode (smooth blocks) to fill the meter
+[default: False]. The fallback is to use ASCII characters
+“ 123456789#”.</p>
+</dd>
+<dt>unit<span class="classifier">str, optional</span></dt><dd><p>The iteration unit [default: ‘it’].</p>
+</dd>
+<dt>unit_scale<span class="classifier">bool or int or float, optional</span></dt><dd><p>If 1 or True, the number of iterations will be printed with an
+appropriate SI metric prefix (k = 10^3, M = 10^6, etc.)
+[default: False]. If any other non-zero number, will scale
+<cite>total</cite> and <cite>n</cite>.</p>
+</dd>
+<dt>rate<span class="classifier">float, optional</span></dt><dd><p>Manual override for iteration rate.
+If [default: None], uses n/elapsed.</p>
+</dd>
+<dt>bar_format<span class="classifier">str, optional</span></dt><dd><p>Specify a custom bar string formatting. May impact performance.
+[default: ‘{l_bar}{bar}{r_bar}’], where
+l_bar=’{desc}: {percentage:3.0f}%|’ and
+r_bar=’| {n_fmt}/{total_fmt} [{elapsed}&lt;{remaining}, ‘</p>
+<blockquote>
+<div><p>‘{rate_fmt}{postfix}]’</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Possible vars: l_bar, bar, r_bar, n, n_fmt, total, total_fmt,</dt><dd><p>percentage, elapsed, elapsed_s, ncols, nrows, desc, unit,
+rate, rate_fmt, rate_noinv, rate_noinv_fmt,
+rate_inv, rate_inv_fmt, postfix, unit_divisor,
+remaining, remaining_s, eta.</p>
+</dd>
+</dl>
+<p>Note that a trailing “: “ is automatically removed after {desc}
+if the latter is empty.</p>
+</dd>
+<dt>postfix<span class="classifier"><a href="#id7"><span class="problematic" id="id8">*</span></a>, optional</span></dt><dd><p>Similar to <cite>prefix</cite>, but placed at the end
+(e.g. for additional stats).
+Note: postfix is usually a string (not a dict) for this method,
+and will if possible be set to postfix = ‘, ‘ + postfix.
+However other types are supported (#382).</p>
+</dd>
+<dt>unit_divisor<span class="classifier">float, optional</span></dt><dd><p>[default: 1000], ignored unless <cite>unit_scale</cite> is True.</p>
+</dd>
+<dt>initial<span class="classifier">int or float, optional</span></dt><dd><p>The initial counter value [default: 0].</p>
+</dd>
+<dt>colour<span class="classifier">str, optional</span></dt><dd><p>Bar colour (e.g. ‘green’, ‘#00ff00’).</p>
+</dd>
+</dl>
+</section>
+<section id="id9">
+<h3>Returns<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p>out  : Formatted meter and stats, ready to display.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.format_num">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.format_num" title="Link to this definition">¶</a></dt>
+<dd><p>Intelligent scientific notation (.3g).</p>
+<section id="id10">
+<h3>Parameters<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>n<span class="classifier">int or float or Numeric</span></dt><dd><p>A Number.</p>
+</dd>
+</dl>
+</section>
+<section id="id11">
+<h3>Returns<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>out<span class="classifier">str</span></dt><dd><p>Formatted number.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.format_sizeof">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">format_sizeof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">divisor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.format_sizeof" title="Link to this definition">¶</a></dt>
+<dd><p>Formats a number (greater than unity) with SI Order of Magnitude
+prefixes.</p>
+<section id="id12">
+<h3>Parameters<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>num<span class="classifier">float</span></dt><dd><p>Number ( &gt;= 1) to format.</p>
+</dd>
+<dt>suffix<span class="classifier">str, optional</span></dt><dd><p>Post-postfix [default: ‘’].</p>
+</dd>
+<dt>divisor<span class="classifier">float, optional</span></dt><dd><p>Divisor between prefixes [default: 1000].</p>
+</dd>
+</dl>
+</section>
+<section id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>out<span class="classifier">str</span></dt><dd><p>Number with Order of Magnitude SI unit postfix.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.get_lock">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_lock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.get_lock" title="Link to this definition">¶</a></dt>
+<dd><p>Get the global lock. Construct it if it does not exist.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.pandas">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pandas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">tqdm_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.pandas" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Registers the current <cite>tqdm</cite> class with</dt><dd><p>pandas.core.
+( frame.DataFrame
+| series.Series
+| groupby.(generic.)DataFrameGroupBy
+| groupby.(generic.)SeriesGroupBy
+).progress_apply</p>
+</dd>
+</dl>
+<p>A new instance will be created every time <cite>progress_apply</cite> is called,
+and each instance will automatically <cite>close()</cite> upon completion.</p>
+<section id="id14">
+<h3>Parameters<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<p>tqdm_kwargs  : arguments for the tqdm instance</p>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h3>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">tqdm.gui</span> <span class="kn">import</span> <span class="n">tqdm</span> <span class="k">as</span> <span class="n">tqdm_gui</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tqdm</span><span class="o">.</span><span class="n">pandas</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>  <span class="c1"># can use tqdm_gui, optional kwargs, etc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Now you can use `progress_apply` instead of `apply`</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">progress_apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h3>
+<p>&lt;<a class="reference external" href="https://stackoverflow.com/questions/18603270/">https://stackoverflow.com/questions/18603270/</a>        progress-indicator-during-pandas-operations-python&gt;</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.refresh">
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nolock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lock_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.refresh" title="Link to this definition">¶</a></dt>
+<dd><p>Force refresh the display of this bar.</p>
+<section id="id15">
+<h3>Parameters<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>nolock<span class="classifier">bool, optional</span></dt><dd><p>If <cite>True</cite>, does not lock.
+If [default: <cite>False</cite>]: calls <cite>acquire()</cite> on internal lock.</p>
+</dd>
+<dt>lock_args<span class="classifier">tuple, optional</span></dt><dd><p>Passed to internal lock’s <cite>acquire()</cite>.
+If specified, will only <cite>display()</cite> if <cite>acquire()</cite> returns <cite>True</cite>.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.reset" title="Link to this definition">¶</a></dt>
+<dd><p>Resets to 0 iterations for repeated use.</p>
+<p>Consider combining with <cite>leave=True</cite>.</p>
+<section id="id16">
+<h3>Parameters<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
+<p>total  : int or float, optional. Total to use for the new bar.</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.set_description">
+<span class="sig-name descname"><span class="pre">set_description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.set_description" title="Link to this definition">¶</a></dt>
+<dd><p>Set/modify description of the progress bar.</p>
+<section id="id17">
+<h3>Parameters<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
+<p>desc  : str, optional
+refresh  : bool, optional</p>
+<blockquote>
+<div><p>Forces refresh [default: True].</p>
+</div></blockquote>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.set_description_str">
+<span class="sig-name descname"><span class="pre">set_description_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">desc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.set_description_str" title="Link to this definition">¶</a></dt>
+<dd><p>Set/modify description without ‘: ‘ appended.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.set_lock">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lock</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.set_lock" title="Link to this definition">¶</a></dt>
+<dd><p>Set the global lock.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.set_postfix">
+<span class="sig-name descname"><span class="pre">set_postfix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ordered_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.set_postfix" title="Link to this definition">¶</a></dt>
+<dd><p>Set/modify postfix (additional stats)
+with automatic formatting based on datatype.</p>
+<section id="id18">
+<h3>Parameters<a class="headerlink" href="#id18" title="Link to this heading">¶</a></h3>
+<p>ordered_dict  : dict or OrderedDict, optional
+refresh  : bool, optional</p>
+<blockquote>
+<div><p>Forces refresh [default: True].</p>
+</div></blockquote>
+<p>kwargs  : dict, optional</p>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.set_postfix_str">
+<span class="sig-name descname"><span class="pre">set_postfix_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refresh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.set_postfix_str" title="Link to this definition">¶</a></dt>
+<dd><p>Postfix without dictionary expansion, similar to prefix handling.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.status_printer">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">status_printer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.status_printer" title="Link to this definition">¶</a></dt>
+<dd><p>Manage the printing and in-place updating of a line of characters.
+Note that if the string is longer than a line, then in-place
+updating may not work (it will print a new line at each refresh).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.unpause">
+<span class="sig-name descname"><span class="pre">unpause</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.unpause" title="Link to this definition">¶</a></dt>
+<dd><p>Restart tqdm timer from last print time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.update" title="Link to this definition">¶</a></dt>
+<dd><p>Manually update the progress bar, useful for streams
+such as reading files.
+E.g.:
+&gt;&gt;&gt; t = tqdm(total=filesize) # Initialise
+&gt;&gt;&gt; for current_buffer in stream:
+…    …
+…    t.update(len(current_buffer))
+&gt;&gt;&gt; t.close()
+The last line is highly recommended, but possibly not necessary if
+<cite>t.update()</cite> will be called in such a way that <cite>filesize</cite> will be
+exactly reached and printed.</p>
+<section id="id19">
+<h3>Parameters<a class="headerlink" href="#id19" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>n<span class="classifier">int or float, optional</span></dt><dd><p>Increment to add to the internal counter of iterations
+[default: 1]. If using float, consider specifying <cite>{n:.3f}</cite>
+or similar in <cite>bar_format</cite>, or specifying <cite>unit_scale</cite>.</p>
+</dd>
+</dl>
+</section>
+<section id="id20">
+<h3>Returns<a class="headerlink" href="#id20" title="Link to this heading">¶</a></h3>
+<dl class="simple">
+<dt>out<span class="classifier">bool or None</span></dt><dd><p>True if a <cite>display()</cite> was triggered.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.wrapattr">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wrapattr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bytes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">tqdm_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.wrapattr" title="Link to this definition">¶</a></dt>
+<dd><p>stream  : file-like object.
+method  : str, “read” or “write”. The result of <cite>read()</cite> and</p>
+<blockquote>
+<div><p>the first argument of <cite>write()</cite> should have a <cite>len()</cite>.</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">wrapattr</span><span class="p">(</span><span class="n">file_obj</span><span class="p">,</span> <span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">file_obj</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="k">as</span> <span class="n">fobj</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">chunk</span> <span class="o">=</span> <span class="n">fobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="k">if</span> <span class="ow">not</span> <span class="n">chunk</span><span class="p">:</span>
+<span class="gp">... </span>            <span class="k">break</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.selfsimilarity.tqdm.write">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nolock</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.selfsimilarity.tqdm.write" title="Link to this definition">¶</a></dt>
+<dd><p>Print a message via tqdm (without overlap with bars).</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pyaesthetics</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Giulio Gabrieli.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/_autosummary/pyaesthetics.selfsimilarity.tqdm.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
