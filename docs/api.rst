@@ -16,5 +16,5 @@ This is the reference for modules and functions (underscore camel case) of pyaes
     :template: custom-module-template.rst
     :recursive:
 
-   pyaesthetics
+   pyaesthetics.analysis
 
