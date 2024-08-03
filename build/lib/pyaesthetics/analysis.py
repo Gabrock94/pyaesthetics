@@ -24,33 +24,34 @@ from PIL import Image  # Python Imaging Library for image processing
 
 # Attempt to import internal modules of pyaesthetics, handling both relative and absolute imports
 try:
-    from . import quadtreedecomposition
-    from . import colorfulness
     from . import brightness
-    from . import symmetry
-    from . import facedetection
     from . import colordetection
-    from . import spacebaseddecomposition
+    from . import colorfulness
     from . import contrast
-    from . import saturation
+    from . import facedetection
     from . import linesdetection
+    from . import quadtreedecomposition
+    from . import saturation
+    from . import selfsimilarity
+    from . import spacebaseddecomposition
+    from . import symmetry
     from . import utils
     from . import visualcomplexity
-    from . import selfsimilarity
 except:
-    import quadtreedecomposition
-    import spacebaseddecomposition
-    import colorfulness
+    import analysis
     import brightness
-    import symmetry
-    import facedetection
     import colordetection
+    import colorfulness
     import contrast
-    import saturation
+    import facedetection
     import linesdetection
+    import quadtreedecomposition
+    import saturation
+    import selfsimilarity
+    import spacebaseddecomposition
+    import symmetry
     import utils
     import visualcomplexity
-    import selfsimilarity
 
 ###############################################################################
 #                                                                             #

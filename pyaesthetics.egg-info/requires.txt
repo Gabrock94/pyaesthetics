@@ -1,0 +1,8 @@
+numpy
+opencv-python
+scipy
+matplotlib
+imutils
+pytesseract
+pandaspillow
+face-recognition
