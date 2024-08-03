@@ -10,7 +10,7 @@ datadir = os.path.join("share","data")
 datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.walk(datadir)]
 
 setup(name='pyaesthetics',
-    version='0.0.8.1',
+    version='0.0.8.2',
     description='Images aesthetic analysis',
     long_description=long_description,
     long_description_content_type='text/markdown',  # Make sure this matches the format of your README file
