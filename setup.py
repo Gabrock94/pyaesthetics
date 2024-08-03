@@ -3,13 +3,16 @@
 from distutils.core import setup
 import os
 
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 datadir = os.path.join("share","data")
 datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.walk(datadir)]
 
 setup(name='pyaesthetics',
     version='0.0.8.1',
     description='Images aesthetic analysis',
-    long_description="A python package to estimate aesthetics visual features from still images.",
+    long_description=long_description,
     long_description_content_type='text/markdown',  # Make sure this matches the format of your README file
     author='Giulio Gabrieli',
     author_email='gack94@gmail.com',
