@@ -5,148 +5,158 @@ This module contains functions to compute the degree of symmetry of an image.
 - Symmetry by QuadTree Decomposition
 
 Created on Mon Apr 16 11:49:45 2018
+Last edited on Fri Aug 2 12:05:23 2024
 
-@author: giulio
+@author: Giulio Gabrieli (gack94@gmail.com)
 """
 
-import os #to handle filesystem files
-import cv2 #for image manipulation
-import numpy as np
-import matplotlib.pyplot as plt #for data visualization
-import matplotlib.patches as patches #for legends and rectangle drawing in QTD
+import os # to handle filesystem files
+import cv2 # for image manipulation
+import numpy as np # numerical computation
+import matplotlib.pyplot as plt # for data visualization
+import matplotlib.patches as patches # for legends and rectangle drawing in QTD
+
 ###############################################################################
 #                                                                             #
 #                                  Symmetry                                   #
 #                                                                             #
 ###############################################################################
-""" Thìs sections handles Quadratic Tree Decomposition. """
+""" This section handles Quadratic Tree Decomposition. """
 
 class quadTree:
-    """ This class is used to perfrom a QuadTree decomposition of an image. 
+    """ This class performs a QuadTree decomposition of an image. 
     
-        During initialization, QuadTree decomposition is done and result are store in self.blocks as a list containing [x,y,height, width,Std].
+        During initialization, QuadTree decomposition is done and results are stored in self.blocks
+        as a list containing [x, y, height, width, Std].
         
         To visualize the results, use plot().
     """
     
-    def plot(self,edgecolor="red", facecolor="none", linewidth = 1):
-        """ This function is used to generate a graphical representation of the QuadTree decomposition. 
+    def plot(self, edgecolor="red", facecolor="none", linewidth=1):
+        """ Generate a graphical representation of the QuadTree decomposition.
         
-            :param edgecolor: color of the rectangles, default is red
+            :param edgecolor: Color of the rectangles, default is red.
             :type edgecolor: string
-            :param facecolor: color used for rectangles fills. Default is none.
+            :param facecolor: Color used for rectangle fills, default is none.
             :type facecolor: string
-            :param linewidth: width in px of the rectangles' borders. Default is 1.
-            :type linewidth:
-            :return: plot with image and leaves of the quadTree Decomposition
+            :param linewidth: Width in px of the rectangles' borders, default is 1.
+            :type linewidth: int
+            :return: Plot with image and leaves of the QuadTree decomposition.
         """
-        plt.figure() #create a new figure
-        fig = plt.imshow(self.img) #plot the original image
-        for block in self.blocks: #for each block of results
-            rect = patches.Rectangle((block[0],block[1]),block[3],block[2],linewidth=linewidth,edgecolor=edgecolor,facecolor=facecolor) #create a red rectangle
-            fig.axes.add_patch(rect) #add it to the picture
-            plt.title("QuadTree Decomposition") #give it a title
-        plt.show() #show the results
+        plt.figure() # Create a new figure
+        fig = plt.imshow(self.img) # Plot the original image
+        for block in self.blocks: # For each block of results
+            rect = patches.Rectangle((block[0], block[1]), block[3], block[2],
+                                     linewidth=linewidth, edgecolor=edgecolor, facecolor=facecolor) # Create a rectangle
+            fig.axes.add_patch(rect) # Add it to the plot
+            plt.title("QuadTree Decomposition") # Add a title
+        plt.show() # Show the plot
         
-    def quadTreeDecomposition(self,img,x,y,minStd,minSize):
-        """ This function evaluate the mean and std of an image, and decides Whether to perform or not other 2 splits of the leave. 
+    def quadTreeDecomposition(self, img, x, y, minStd, minSize):
+        """ Perform QuadTree decomposition on an image.
         
-            :param img: img to analyze
+            :param img: Image to analyze.
             :type img: numpy.ndarray
-            :param x: x offset of the leaves to analyze
+            :param x: x-offset of the leaves to analyze.
             :type x: int
-            :param Y: Y offset of the leaves to analyze
-            :type Y: int
-            :minStd: Std threshold for subsequent splitting
+            :param y: y-offset of the leaves to analyze.
+            :type y: int
+            :param minStd: Std deviation threshold for splitting.
             :type minStd: int
-            :minSize: Size threshold for subsequent splitting, in pixel
-            :type minStd: int
+            :param minSize: Size threshold for splitting, in pixels.
+            :type minSize: int
         """
-        h,w = img.shape
+        h, w = img.shape
         mean, std = cv2.meanStdDev(img)
-        mean, std = [int(mean),int(std)]
-        if(std >= minStd and max(h,w) >= minSize):#if std is > then our threshold:
-            #Decide if slip along X or Y
-            if(w >= h): #split along the X axis
-                w2 = int(w/2) #get the new width
-                img1 = img[0:h,0:w2] #create a subimage
-                img2 = img[0:h,w2:] #create the second subimage
-                self.quadTreeDecomposition(img1,x,y,minStd,minSize) #do the quadtree on image 1
-                self.quadTreeDecomposition(img2,x+w2,y,minStd,minSize) #do it on the second
-            else: #split Y
-                h2 = int(h/2)
-                img1 = img[0:h2,0:]
-                img2 = img[h2:,0:]
-                self.quadTreeDecomposition(img1,x,y,minStd,minSize)
-                self.quadTreeDecomposition(img2,x,y+h2,minStd,minSize)
+        mean, std = [int(mean), int(std)]
+        if std >= minStd and max(h, w) >= minSize: # If std is above the threshold
+            # Decide whether to split along X or Y
+            if w >= h: # Split along the X-axis
+                w2 = int(w / 2) # Get new width
+                img1 = img[0:h, 0:w2] # Create the left subimage
+                img2 = img[0:h, w2:] # Create the right subimage
+                self.quadTreeDecomposition(img1, x, y, minStd, minSize) # Decompose left subimage
+                self.quadTreeDecomposition(img2, x + w2, y, minStd, minSize) # Decompose right subimage
+            else: # Split along the Y-axis
+                h2 = int(h / 2)
+                img1 = img[0:h2, :] # Create the top subimage
+                img2 = img[h2:, :] # Create the bottom subimage
+                self.quadTreeDecomposition(img1, x, y, minStd, minSize) # Decompose top subimage
+                self.quadTreeDecomposition(img2, x, y + h2, minStd, minSize) # Decompose bottom subimage
         else:
-            self.blocks.append([x,y,h,w,std])
+            self.blocks.append([x, y, h, w, std]) # Add block to results
             
-    def __init__(self,img,minStd,minSize):
-        """ Initialize the quadTree decomposition analysis. 
+    def __init__(self, img, minStd, minSize):
+        """ Initialize QuadTree decomposition analysis.
         
-            :param img: img to analyze
+            :param img: Image to analyze.
             :type img: numpy.ndarray
-            :minStd: Std threshold for subsequent splitting
+            :param minStd: Std deviation threshold for splitting.
             :type minStd: int
-            :minSize: Size threshold for subsequent splitting, in pixel
-            :type minStd: int
+            :param minSize: Size threshold for splitting, in pixels.
+            :type minSize: int
         """
-        self.blocks = [] #intialize th results
-        self.img = img #assign the image
-        self.params = [minStd,minSize] #set the parameters
-        self.quadTreeDecomposition(img,0,0,minStd,minSize) #start the decomposition
+        self.blocks = [] # Initialize results
+        self.img = img # Assign the image
+        self.params = [minStd, minSize] # Set the parameters
+        self.quadTreeDecomposition(img, 0, 0, minStd, minSize) # Start decomposition
         
-        
-def getSymmetry(img,minStd,minSize,plot=False):
-    """ This function returns the degree of symmetry (0-100) between the left and right side of an image 
+def getSymmetry(img, minStd, minSize, plot=False):
+    """ Returns the degree of symmetry (0-100) between the left and right side of an image.
     
-    :param img: img to analyze
+    :param img: Image to analyze.
     :type img: numpy.ndarray
-    :minStd: Std threshold for subsequent splitting
+    :param minStd: Std deviation threshold for splitting.
     :type minStd: int
-    :minSize: Size threshold for subsequent splitting, in pixel
-    :type minStd: int
-    :return: degree of vertical symmetry
+    :param minSize: Size threshold for splitting, in pixels.
+    :type minSize: int
+    :param plot: Whether to plot the QuadTree decomposition of each half.
+    :type plot: bool
+    :return: Degree of vertical symmetry.
     :rtype: float
     """
-    h,w = img.shape
-    if(h%2 != 0):
-        img = img[:-1,:]
-    if(w%2 != 0):
-        img = img[:,:-1]
+    h, w = img.shape
+    if h % 2 != 0:
+        img = img[:-1, :] # Crop image to even height
+    if w % 2 != 0:
+        img = img[:, :-1] # Crop image to even width
         
-    left = img[0:,0:int(w/2)]
-    right = np.flip(img[0:,int(w/2):],1)
-    left = quadTree(left,minStd,minSize)
-    right = quadTree(right,minStd,minSize)
-    if(plot):
-        left.plot()
-        right.plot()
+    left = img[:, :int(w / 2)] # Left half of the image
+    right = np.flip(img[:, int(w / 2):], 1) # Right half, flipped horizontally
+    left = quadTree(left, minStd, minSize) # Decompose left half
+    right = quadTree(right, minStd, minSize) # Decompose right half
+    
+    if plot:
+        left.plot() # Plot decomposition of left half
+        right.plot() # Plot decomposition of right half
+        
     counter = 0
-    tot =  (len(right.blocks) + len(left.blocks))
+    total = len(right.blocks) + len(left.blocks)
+    
+    # Count matching blocks between left and right halves
     for block in right.blocks:
         for block2 in left.blocks:
-            if(block[0:4] == block2[0:4]):
-                counter+=1
-    return(counter /tot * 200)
-    
+            if block[0:4] == block2[0:4]:
+                counter += 1
+                
+    return (counter / total * 200) # Return degree of symmetry
+
 ###############################################################################
 #                                                                             #
 #                                  DEBUG                                      #
 #                                                                             #
 ###############################################################################
         
-""" For debug purposes."""
+""" For debug purposes. """
 
-if(__name__=='__main__'):
-    basepath = os.path.dirname(os.path.realpath(__file__)) #This get the basepath of the script
-    datafolder = basepath+"/../share/data/" #set the data path in order to use sample images
-    img = datafolder + "sample.png"
-    minStd = 5 #min STD of each block
-    minSize = 20 #min size of each block    
-    imgcolor = cv2.imread(img) #read the image in color for plotting purposes
-    img = cv2.imread(img,0) #read the image in B/W
-    #Symmetry using QT
-    h,w = img.shape
-    print(getSymmetry(img,minSize,minStd,plot=True))
+if __name__ == '__main__':
+    basepath = os.path.dirname(os.path.realpath(__file__)) # Get the basepath of the script
+    datafolder = basepath + "/../share/data/" # Set the data path for sample images
+    img = datafolder + "jade.png"
+    minStd = 5 # Min STD of each block
+    minSize = 20 # Min size of each block
+    imgcolor = cv2.imread(img) # Read the image in color for plotting purposes
+    img = cv2.imread(img, 0) # Read the image in grayscale
+    # Symmetry using QuadTree decomposition
+    h, w = img.shape
+    print(getSymmetry(img, minSize, minStd, plot=True)) # Print the degree of symmetry

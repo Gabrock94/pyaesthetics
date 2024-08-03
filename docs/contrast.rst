@@ -1,6 +1,0 @@
-Contrast
-=======================================
-.. automodule:: contrast
-    :members:
-
-

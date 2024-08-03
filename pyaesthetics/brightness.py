@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-This module contains function to evaluate the brightness of an image.
-It includes a converter for sRGB to RGB, evaluation of relative luminance according to
-BT.709 and BT.601
+This module contains functions to evaluate the brightness of an image.
+It includes a converter for sRGB to RGB and evaluation of relative luminance according to
+BT.709 and BT.601 standards.
 
-@author: Giulio Gabrieli
+Created on Mon Apr 16 22:40:46 2018
+Last edited on Fri Aug 2 11:34:10 2024
+
+@author: Giulio Gabrieli (gack94@gmail.com)
 """
 
 ###############################################################################
@@ -14,10 +17,10 @@ BT.709 and BT.601
 #                                                                             #
 ###############################################################################
 
-import os #to handle filesystem files
-import cv2 #for image manipulation
-import numpy as np #numerical computation
-import pandas as pd 
+import os  # To handle filesystem files
+import cv2  # For image manipulation
+import numpy as np  # Numerical computation
+import pandas as pd
 
 ###############################################################################
 #                                                                             #
@@ -25,80 +28,69 @@ import pandas as pd
 #                                                                             #
 ###############################################################################
 
-""" Thìs sections handles brigthness estimation. """
-
-def sRGB2RGB(img):
-    """ this function converts a sRGB img to  linear RGB values.
-    
-        It loops through each pixel, and apply a conversion to pass from sRGB to linear RGB value.
-        
-    
-        :param img: image to analyze, in sRGB
-        :type img: numpy.ndarray
-        :return: image to analyze, in RGB
-        :rtyipe: numpy.ndarray
-    """
-
-    img = img.flatten()
-    def converter(p):
-        if(p < 0.04045):
-            return(p/3294.6)
-        else:
-            return((((p/255) + 0.055) / 1.055)**2.4)
-
-    newimg = pd.Series(img).apply(converter).to_numpy()
-    return(newimg)
+""" This section handles brightness estimation. """
     
 def relativeLuminance_BT709(img):
-    """ This function evaluates the brightness of an image by mean of Y, where Y is evaluated as:
+    """ 
+    This function evaluates the brightness of an image by means of Y, where Y is evaluated as:
             
-        Y = 0.7152G + 0.0722B + 0.2126R
-        B = mean(Y)
+    Y = 0.7152G + 0.0722B + 0.2126R
+    B = mean(Y)
         
-        :param img: image to analyze, in RGB
-        :type img: numpy.ndarray
-        :return: mean brightness
-        :rtype: float
+    :param img: image to analyze, in RGB
+    :type img: numpy.ndarray
+    :return: mean brightness
+    :rtype: float
     """
-    
+    # Flatten the image array and reshape it to separate color channels
     img = np.array(img).flatten()
-    img = img.reshape(int(len(img)/3),3)
+    img = img.reshape(int(len(img) / 3), 3)
     img = np.transpose(img)
+    
+    # Calculate the mean brightness using BT.709 standard
     B = np.mean(img[0]) * 0.2126 + np.mean(img[1]) * 0.7152 + np.mean(img[2]) * 0.0722
-    return(B) #return the brigthness index
+    
+    return B  # Return the brightness index
 
 def relativeLuminance_BT601(img):
-    """ This function evaluates the brightness of an image by mean of Y, where Y is evaluated as:
+    """ 
+    This function evaluates the brightness of an image by means of Y, where Y is evaluated as:
             
-        Y = 0.587G + 0.114B + 0.299R
-        B = mean(Y)
+    Y = 0.587G + 0.114B + 0.299R
+    B = mean(Y)
         
-        :param img: image to analyze, in RGB
-        :type img: numpy.ndarray
-        :return: mean brightness
-        :rtype: float
+    :param img: image to analyze, in RGB
+    :type img: numpy.ndarray
+    :return: mean brightness
+    :rtype: float
     """
-    
-    
+    # Flatten the image array and reshape it to separate color channels
     img = np.array(img).flatten()
-    img = img.reshape(int(len(img)/3),3)
+    img = img.reshape(int(len(img) / 3), 3)
     img = np.transpose(img)
+    
+    # Calculate the mean brightness using BT.601 standard
     B = np.mean(img[0]) * 0.299 + np.mean(img[1]) * 0.587 + np.mean(img[2]) * 0.114
-
-    return(B) #return the brigthness index
+    
+    return B  # Return the brightness index
 
 ###############################################################################
 #                                                                             #
 #                                  DEBUG                                      #
 #                                                                             #
 ###############################################################################
-        
-if(__name__=='__main__'):
 
-        img = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample.jpg" #path to a sample image
-
-        img = cv2.imread(img)
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        img = sRGB2RGB(img)
-        print(relativeLuminance_BT709(img))  
-        print(relativeLuminance_BT601(img))
+if __name__ == '__main__':
+    import utils  # Importing utility functions
+    
+    # Path to a sample image
+    img_path = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample.jpg"
+    
+    # Read and preprocess the sample image
+    img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = utils.sRGB2RGB(img)
+    
+    # Calculate and print brightness using BT.709 and BT.601 standards
+    print(relativeLuminance_BT709(img))  
+    print(relativeLuminance_BT601(img))

@@ -14,6 +14,7 @@
 #
 import os
 import sys
+import sphinx_autosummary_accessors
 sys.path.insert(0, os.path.abspath('../'))
 
 
@@ -44,8 +45,13 @@ extensions = [
 ]
 
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
+autosummary_imported_members = True
+
+autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ['_templates', sphinx_autosummary_accessors.templates_path]
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -61,7 +67,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -76,11 +82,11 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "classic"
-html_theme_options = {
-    "rightsidebar": "false",
-    "relbarbgcolor": "black"
-}
+html_theme = "alabaster"
+# html_theme_options = {
+#     "rightsidebar": "false",
+#     "relbarbgcolor": "black"
+# }
 
 
 # Theme options are theme-specific and customize the look and feel of a theme
@@ -104,7 +110,7 @@ html_static_path = ['_static']
 #
 # html_sidebars = {}
 
-
+sidebar_includehidden=True
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.

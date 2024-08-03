@@ -3,7 +3,7 @@
 """
 This is an entrypoint for the automatic analysis of images using pyaeshtetics.
 
-@author: Giulio Gabrieli
+@author: Giulio Gabrieli (gack94@gmail.com).com)
 """
 
 ###############################################################################

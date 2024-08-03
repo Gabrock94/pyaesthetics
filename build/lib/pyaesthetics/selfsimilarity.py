@@ -6,7 +6,7 @@ This module contains functions to compute the degree of selfsimilarity of an ima
 
 Created on Mon Oct 18 17:22:45 2021
 
-@author: giulio
+@author: Giulio Gabrieli (gack94@gmail.com)
 """
 
 
@@ -35,6 +35,15 @@ class selfsimilarity:
     :rtype: float
     """
     def getHogs(self, img):
+        """ This function returns the degree of self similarity (0-1) of an image 
+    
+        :param img: img to analyze
+        :type img: numpy.ndarray
+        :maxlevel: Maximum number of level to analyze.
+        :type minStd: int
+        :return: degree of self similarity
+        :rtype: float
+        """
         h,w,_ = img.shape
         Il, Ia, Ib = cv2.split(img)
         gIl, gIa, gIb = np.gradient(Il, edge_order = 2, axis=0), np.gradient(Ia, edge_order = 2, axis=0), np.gradient(Ib, edge_order = 2, axis=0)
@@ -48,7 +57,15 @@ class selfsimilarity:
         return(hogs)
 
     def getSimilarity(self, img, groundhogs, parenthogs, level):
-        #divide the image in four
+        """ This function returns the degree of self similarity (0-1) of an image 
+
+        :param img: img to analyze
+        :type img: numpy.ndarray
+        :maxlevel: Maximum number of level to analyze.
+        :type minStd: int
+        :return: degree of self similarity
+        :rtype: float
+        """
         h, w, _ = img.shape
         w2 = int(w/2)
         h2 = int(h/2)
@@ -80,6 +97,6 @@ class selfsimilarity:
 """ For debug purposes."""
 
 if(__name__=='__main__'):   
-    img = "/home/giulio/Repositories/PrettyWebsite/prettywebsite/sample.jpg" #path to a sample image
+    img = "/home/giulio/Repositories/pyaesthetics/share/data/jade2.png" #path to a sample image
     img = cv2.imread(img) #read the image in color for plotting purposes
     selfsimilarity(img)

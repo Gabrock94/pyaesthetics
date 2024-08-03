@@ -1,6 +1,0 @@
-Saturation
-=======================================
-.. automodule:: saturation
-    :members:
-
-

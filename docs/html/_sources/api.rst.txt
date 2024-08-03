@@ -1,0 +1,20 @@
+.. Website Aesthetic Analyzer documentation master file, created by
+   sphinx-quickstart on Thu Apr 12 14:42:35 2018.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+.. _API:
+
+API reference
+========================================================== 
+
+
+This is the reference for modules and functions (underscore camel case) of pyaesthetics. Each module refers to a type of feature that can be estimated, an entrypoint for simplified analysis (e.g. the analysis module) or to functions shared across modules (e.g. utils).
+
+.. autosummary::
+    :toctree: _autosummary
+    :template: custom-module-template.rst
+    :recursive:
+
+   pyaesthetics
+
