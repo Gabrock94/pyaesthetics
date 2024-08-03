@@ -41,8 +41,7 @@ release = '0.0.8'
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary'
-    'sphinx_autosummary_accessors',  # Create neat summary tables
+    'sphinx.ext.autosummary' # Create neat summary tables
 ]
 
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
@@ -52,7 +51,7 @@ autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
 # Add any paths that contain templates here, relative to this directory.
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates', sphinx_autosummary_accessors.templates_path]
+templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
