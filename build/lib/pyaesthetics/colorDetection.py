@@ -262,9 +262,11 @@ def getColorsW3C(img, ncolors=16, plot=False, plotncolors=5):
 ###############################################################################
 
 if __name__ == '__main__':
-    basepath = os.path.dirname(os.path.realpath(__file__))  # Get the base path of the script
-    datafolder = basepath + "/../share/data/"  # Set the data path for sample images
-    sampleImg = datafolder + "jade.png"  # Path to a sample image
+    # basepath = os.path.dirname(os.path.realpath(__file__))  # Get the base path of the script
+    # datafolder = basepath + "/../share/data/"  # Set the data path for sample images
+    # sampleImg = datafolder + "jade.png"  # Path to a sample image
+    
+    sampleImg = "/home/giulio/Repositories/pyaesthetics/docs/examples/pyaesthetics_small.png"  # Path to a sample image
     
     # Read and preprocess the sample image
     img = cv2.imread(sampleImg, cv2.IMREAD_UNCHANGED)
@@ -274,5 +276,5 @@ if __name__ == '__main__':
     plt.imshow(img)
     
     # Calculate and print the color scheme using 16 W3C colors and plot the results
-    results = getColorsW3C(img, ncolors=140, plot=True)
-    print("Color scheme of the image is:", results)
+    results = getColorsW3C(img, ncolors=140, plot=True, plotncolors=5)
+    # print("Color scheme of the image is:", results)

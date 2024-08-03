@@ -15,8 +15,8 @@ pyaesthetics.contrast
       :toctree:
       :nosignatures:
    
-      contrast_Michelson
-      contrast_RMS
+      contrast_michelson
+      contrast_rms
    
    
 

@@ -56,13 +56,13 @@ Then we extract aesthetic features from the images.
 >>> for painting in tqdm(df.painting):
 >>>    rating = int(df[df['painting'] == painting].to_numpy()[0][0:48].mean())
 >>>    filename = painting.replace(' ','').replace(',','').replace('.','').replace('\'','') + '.jpg'
->>>    results = pyaesthetics.analysis.analyzeImage(PAINTINGS + filename)
+>>>    results = pyaesthetics.analysis.analyze_image(PAINTINGS + filename)
 >>>    res.append([painting, results['brightness_BT709'],results['VC_quadTree'],results['Symmetry_QTD'], results['Colorfulness_RGB'], rating])
 
 We then save the estimated features' values into a new dataframe.
 
->>>trainSet = pd.DataFrame(res, columns=['Painting','Brightness','VisualComplexity','Symmetry','Colorfulness','Rating'])
->>>trainSet.to_csv(PROCESSED + 'results.csv')
+>>> trainSet = pd.DataFrame(res, columns=['Painting','Brightness','VisualComplexity','Symmetry','Colorfulness','Rating'])
+>>> trainSet.to_csv(PROCESSED + 'results.csv')
 
 Subsequently, we can train and test a Linear Regressor to estimate the judgements of the normal Mona Lisa and its caked version.
 
@@ -103,5 +103,5 @@ This example is part of:
 
 * Gabrieli, G., Scapin, G., & Esposito, G. (2022). Pyaesthetic, a python package for empirical aesthetic analysis. XXVII Conference of the International Association of Empirical Aesthetics, Philadelphia, United States.
 
-More details are available `here <https://giuliogabrieli.it/posters/iaea2022/>`_.
+More details are available `here <https://giuliogabrieli.it/posters/iaea2022/>`_. Please note that the notebook provided in the website is using an older version of pyaeshtetics. Some functions' names may have changed.
 

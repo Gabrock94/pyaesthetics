@@ -15,20 +15,11 @@ pyaesthetics.symmetry
       :toctree:
       :nosignatures:
    
-      getSymmetry
+      get_symmetry
    
    
 
    
-   
-   .. rubric:: Classes
-
-   .. autosummary::
-      :toctree:
-      :template: custom-class-template.rst
-      :nosignatures:
-   
-      quadTree
    
    
 

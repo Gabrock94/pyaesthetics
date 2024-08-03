@@ -15,8 +15,8 @@ pyaesthetics.colorfulness
       :toctree:
       :nosignatures:
    
-      colorfulnessHSV
-      colorfulnessRGB
+      colorfulness_hsv
+      colorfulness_rgb
    
    
 

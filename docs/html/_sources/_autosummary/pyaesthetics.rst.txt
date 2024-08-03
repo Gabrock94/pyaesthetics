@@ -28,16 +28,17 @@
 
    analysis
    brightness
-   colorDetection
+   colordetection
    colorfulness
    contrast
-   faceDetection
-   linesDetection
-   quadTreeDecomposition
+   facedetection
+   linesdetection
+   quadtreedecomposition
    saturation
    selfsimilarity
-   spaceBasedDecomposition
+   spacebaseddecomposition
    symmetry
    utils
+   visualcomplexity
 
 

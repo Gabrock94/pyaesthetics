@@ -7,7 +7,7 @@ Pyaesthetics supports the estimation of the following features:
 * Brightness (in both the BT709 and BT601 standards)
 * Contrast (RMS or Michelson contrast)
 * Saturation
-* Visual Complexity (either by using the weight of the image or by Quadratic Tree Decomposition)
+* Visual Complexity (either by using the weight of the image, by Quadratic Tree Decomposition, or by gradients)
 * Simmetry (using Quadratic Tree Decomposition)
 * Colorfulness (in both the HSV and RGB color spaces)
 * Presence and number of human faces
@@ -16,5 +16,7 @@ Pyaesthetics supports the estimation of the following features:
 * Surface of visual and textual areas within the image
 * Ratio between visual and textual areas
 * Ratio between straight and curved lines
+* Anisotropy
+* Self-similarity (using either the ground, parent, or neighbors method)
 
 For detailed information about the extraction of each feature visit the :ref:`API` page.

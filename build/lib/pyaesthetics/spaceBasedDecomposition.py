@@ -133,7 +133,6 @@ def getAreas(img, minArea=100, resize=True, newSize=[600, 400], plot=False, coor
             
             minX, minY, maxX, maxY = box
             area = (maxX - minX) * (maxY - minY)
-            print(area)
             if area > minArea:
                 boxes.append(box)
         
@@ -153,7 +152,7 @@ def getAreas(img, minArea=100, resize=True, newSize=[600, 400], plot=False, coor
             minX, minY, maxX, maxY = box
             imgportion = img_original[minY:maxY, minX:maxX]
             area = (maxX - minX) * (maxY - minY)
-            print(area)
+            
             if len(imgportion) > 0:
                 if areatype:
                     if textDetection(imgportion) > 0:

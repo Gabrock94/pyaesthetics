@@ -15,8 +15,8 @@ pyaesthetics.brightness
       :toctree:
       :nosignatures:
    
-      relativeLuminance_BT601
-      relativeLuminance_BT709
+      relativeluminance_bt601
+      relativeluminance_bt709
    
    
 

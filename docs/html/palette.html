@@ -34,17 +34,23 @@
   <section id="extraction-of-color-palette-from-an-image">
 <span id="colorpalette"></span><h1>Extraction of Color Palette from an Image<a class="headerlink" href="#extraction-of-color-palette-from-an-image" title="Link to this heading">¶</a></h1>
 <p>In pyaesthetics, it is possible to extract the palette of an image using the <em>colorDetection</em> module.
-The function getColorsW3C can be used not only to extract the percentage of colors accordingly to the W3C specification, but can also be used to generate a palette of n colors from an image.</p>
+The function get_colors_w3c can be used not only to extract the percentage of colors accordingly to the W3C specification, but can also be used to generate a palette of n colors from an image.</p>
 <p>Let’s test on a sample image, the pyaesthetics logo.</p>
 <a class="reference internal image-reference" href="_images/pyaesthetics_small.png"><img alt="_images/pyaesthetics_small.png" class="align-center" src="_images/pyaesthetics_small.png" style="width: 300px;" />
 </a>
 <p>To extract a palette of the 5 most dominant colors closer to a named color from the W3C’s 140 named colors, the following snippet can be used.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pysiology</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">sampleImg</span> <span class="o">=</span> <span class="s2">&quot;path/to/logo&quot;</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyaesthetics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cv2</span>
+<span class="gp">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sampleImg</span> <span class="o">=</span> <span class="s2">&quot;path/to/image&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">sampleImg</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_UNCHANGED</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGRA2RGBA</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1">#Generate a palette of 5 colors using the 140 W3C specification and plot the results</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pyaeshtetics</span><span class="o">.</span><span class="n">colorDetection</span><span class="o">.</span><span class="n">getColorsW3C</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ncolors</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">plotncolors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Generate a palette of 5 colors using the 140</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># W3C specification and plot the results</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pyaesthetics</span><span class="o">.</span><span class="n">colordetection</span><span class="o">.</span><span class="n">get_colors_w3c</span><span class="p">(</span><span class="n">img</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                           <span class="n">ncolors</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                           <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                                           <span class="n">plotncolors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This generates the following output.</p>

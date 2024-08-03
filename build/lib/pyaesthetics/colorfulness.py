@@ -21,7 +21,7 @@ import numpy as np #numerical computation
 
 """ This section handles colorfulness estimation. """
 
-def colorfulnessHSV(img):
+def colorfulness_hsv(img):
     """ 
     This function evaluates the colorfulness of a picture using the formula described in Yendrikhovskij et al., 1998.
     Input image is first converted to the HSV color space, then the S values are selected.
@@ -50,7 +50,7 @@ def colorfulnessHSV(img):
     C = np.mean(S) + np.std(S)
     return C
 
-def colorfulnessRGB(img):
+def colorfulness_rgb(img):
     """ 
     This function evaluates the colorfulness of a picture using Metric 3 described in Hasler & Suesstrunk, 2003.
     Ci is evaluated with as:
@@ -101,14 +101,13 @@ def colorfulnessRGB(img):
 
 if __name__ == '__main__':
     
-    # Get the base path of the script
     basepath = os.path.dirname(os.path.realpath(__file__))
-    
-    # Set the data path in order to use sample images
-    datafolder = basepath + "/../share/data/"
+
+    # Path to a sample image for debugging   # Set the data path to use sample images
+    data_folder = basepath + "/../share/data/"
     
     # Path to a sample image
-    img = datafolder + "sample.png"
+    sample_img = data_folder + "panda.jpg"
     
     # Read and convert the image
     img = cv2.imread(img)

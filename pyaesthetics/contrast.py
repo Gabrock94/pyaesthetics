@@ -29,7 +29,7 @@ import pandas as pd # for data manipulation (not used in this script, but import
 
 """ This section handles contrast estimation. """
 
-def contrast_RMS(img):
+def contrast_rms(img):
     """ 
     This function evaluates the RMS (Root Mean Square) contrast of an image.
     The RMS contrast is calculated as the standard deviation of pixel intensities 
@@ -55,7 +55,7 @@ def contrast_RMS(img):
     
     return contrast
 
-def contrast_Michelson(img):
+def contrast_michelson(img):
     """ 
     This function evaluates the Michelson contrast of an image.
     The Michelson contrast is calculated based on the luminance channel (Y) of the YUV color space:
@@ -90,13 +90,17 @@ def contrast_Michelson(img):
 
 if __name__ == '__main__':
     
-    # List of image paths to test
-    for source in ["/home/giulio/Repositories/pyaesthetics/share/data/800px-Multi-color_leaf_without_saturation.jpg",
-                   "/home/giulio/Repositories/pyaesthetics/share/data/800px-Multi-color_leaf_with_saturation.jpg"]:
-        
-        # Read the image from file
-        img = cv2.imread(source)
-        
-        # Print the RMS and Michelson contrast values for the image
-        print("RMS Contrast:", contrast_RMS(img))  
-        print("Michelson Contrast:", contrast_Michelson(img))
+    basepath = os.path.dirname(os.path.realpath(__file__))
+
+    # Path to a sample image for debugging   # Set the data path to use sample images
+    data_folder = basepath + "/../share/data/"
+    
+    # Path to a sample image
+    sample_img = data_folder + "panda.jpg"
+    
+    # Read the image from file
+    img = cv2.imread(sample_img)
+    
+    # Print the RMS and Michelson contrast values for the image
+    print("RMS Contrast:", contrast_rms(img))  
+    print("Michelson Contrast:", contrast_michelson(img))

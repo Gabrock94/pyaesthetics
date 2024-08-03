@@ -30,7 +30,7 @@ import pandas as pd
 
 """ This section handles brightness estimation. """
     
-def relativeLuminance_BT709(img):
+def relativeluminance_bt709(img):
     """ 
     This function evaluates the brightness of an image by means of Y, where Y is evaluated as:
             
@@ -52,7 +52,7 @@ def relativeLuminance_BT709(img):
     
     return B  # Return the brightness index
 
-def relativeLuminance_BT601(img):
+def relativeluminance_bt601(img):
     """ 
     This function evaluates the brightness of an image by means of Y, where Y is evaluated as:
             
@@ -83,14 +83,19 @@ def relativeLuminance_BT601(img):
 if __name__ == '__main__':
     import utils  # Importing utility functions
     
+    basepath = os.path.dirname(os.path.realpath(__file__))
+
+    # Path to a sample image for debugging   # Set the data path to use sample images
+    data_folder = basepath + "/../share/data/"
+    
     # Path to a sample image
-    img_path = "/home/giulio/Repositories/pyaesthetics/pyaesthetics/sample.jpg"
+    sample_img = data_folder + "panda.jpg"
     
     # Read and preprocess the sample image
-    img = cv2.imread(img_path)
+    img = cv2.imread(sample_img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img = utils.sRGB2RGB(img)
     
     # Calculate and print brightness using BT.709 and BT.601 standards
-    print(relativeLuminance_BT709(img))  
-    print(relativeLuminance_BT601(img))
+    print(relativeluminance_bt709(img))  
+    print(relativeluminance_bt601(img))

@@ -15,8 +15,7 @@ pyaesthetics.analysis
       :toctree:
       :nosignatures:
    
-      analyzeImage
-      textDetection
+      analyze_image
    
    
 

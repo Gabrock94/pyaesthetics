@@ -43,15 +43,18 @@ Here a list of examples of both methods are provided.</p>
 Below, an example of the estimation of the brightness of an image, using the BT601 method.</p>
 <p>First load the modules you need.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#load only the neede functions from the specific module</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyaesthetics.brightness</span> <span class="kn">import</span> <span class="n">relativeLuminance_BT601</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyaesthetics.brightness</span> <span class="kn">import</span> <span class="n">relativeluminance_bt601</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyaeshtetics.utils</span> <span class="kn">import</span> <span class="n">sRGB2RGB</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cv2</span>
 </pre></div>
 </div>
 <p>Then load the image using cv2.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="s2">&quot;/path/to/image/image.jpg&quot;</span> <span class="c1">#path to a sample image</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="c1">#load the image</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span> <span class="c1">#convert to the RGB colorscheme</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">#define the path to a sample image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_to_img</span> <span class="o">=</span> <span class="s2">&quot;/path/to/image/image.jpg&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#load the image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">path_to_img</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#convert the image to the RGB colorscheme</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2RGB</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We then convert the pixels to linear RGB values.</p>
@@ -61,7 +64,7 @@ Below, an example of the estimation of the brightness of an image, using the BT6
 <blockquote>
 <div><p>Finally, extract the luminance.</p>
 </div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">relativeLuminance_BT601</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">relativeluminance_bt601</span><span class="p">(</span><span class="n">img</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -70,19 +73,20 @@ Below, an example of the estimation of the brightness of an image, using the BT6
 <p>Pyaesthetics comes with an <em>analysis</em> module, which is an entrypoint to perform two types of analysis (“fast” and “comeplete”), with limited coding.</p>
 <p>The “fast” method performs the following analysis:</p>
 <ul class="simple">
-<li><p>brightness (BT709)</p></li>
+<li><p>Brightness (BT709)</p></li>
 <li><p>Visual Complexity (using quadtree decomposition)</p></li>
 <li><p>Symmetry (using quadtree decomposition)</p></li>
 <li><p>Colorfulness (in the RGB color scheme)</p></li>
-<li><p>contrast (Root Mean Square (RMS) method)</p></li>
-<li><p>saturation</p></li>
-<li><p>ratio between straight and curved lines</p></li>
+<li><p>Contrast (Root Mean Square (RMS) method)</p></li>
+<li><p>Saturation</p></li>
+<li><p>Ratio between straight and curved lines</p></li>
 </ul>
 <p>The “complete” method performs the following analysis:</p>
 <ul class="simple">
-<li><p>brightness (BT709 and BT601)</p></li>
+<li><p>Brightness (BT709 and BT601)</p></li>
 <li><p>Visual Complexity (using quadtree decomposition)</p></li>
 <li><p>Visual Complexity (using the weight method)</p></li>
+<li><p>Visual Complexity (using the gradient method)</p></li>
 <li><p>Symmetry (using quadtree decomposition)</p></li>
 <li><p>Colorfulness (in HSV and RGB color schemes)</p></li>
 <li><p>Face detection and number of faces</p></li>
@@ -90,21 +94,27 @@ Below, an example of the estimation of the brightness of an image, using the BT6
 <li><p>Number of images within an image</p></li>
 <li><p>Text to image ratio</p></li>
 <li><p>Surface area occupied by text and images</p></li>
-<li><p>contrast (Root Mean Square (RMS) and Michelson methods)</p></li>
-<li><p>saturation</p></li>
-<li><p>ratio between straight and curved lines</p></li>
+<li><p>Contrast (Root Mean Square (RMS) and Michelson methods)</p></li>
+<li><p>Saturation</p></li>
+<li><p>Ratio between straight and curved lines</p></li>
+<li><p>Anisotropy</p></li>
+<li><p>Self-similarity (using either the ground, parent, or neighbors method)</p></li>
 </ul>
 <p>To run a fast analysis, use the following snippet of code:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyaesthetics</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="s2">&quot;/path/to/image/image.jpg&quot;</span> <span class="c1">#path to a sample image</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">pyaesthetics</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">analyzeImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;fast&quot;</span><span class="p">)</span> <span class="c1">#perform a subset of the analysis using standard parameters.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#define the path to a sample image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_to_img</span> <span class="o">=</span> <span class="s2">&quot;/path/to/image/image.jpg&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#perform a subset of the analysis using standard parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">pyaesthetics</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">analyzeImage</span><span class="p">(</span><span class="n">path_to_img</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;fast&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>While to run a complete analysis, you can use the following snippet:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyaesthetics</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">img</span> <span class="o">=</span> <span class="s2">&quot;/path/to/image/image.jpg&quot;</span> <span class="c1">#path to a sample image</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">pyaesthetics</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">analyzeImage</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;complete&quot;</span><span class="p">)</span> <span class="c1">#perform a subset of the analysis using standard parameters.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#define the path to a sample image</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path_to_img</span> <span class="o">=</span> <span class="s2">&quot;/path/to/image/image.jpg&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#perform a subset of the analysis using standard parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">results</span> <span class="o">=</span> <span class="n">pyaesthetics</span><span class="o">.</span><span class="n">analysis</span><span class="o">.</span><span class="n">analyzeImage</span><span class="p">(</span><span class="n">path_to_img</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;complete&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
 </pre></div>
 </div>

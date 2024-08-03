@@ -55,11 +55,13 @@ def saturation(img):
 
 if __name__ == '__main__':
 
-    # List of sample image paths to test the saturation function
-    for source in [
-        "/home/giulio/Repositories/pyaesthetics/share/data/800px-Multi-color_leaf_without_saturation.jpg",
-        "/home/giulio/Repositories/pyaesthetics/share/data/800px-Multi-color_leaf_with_saturation.jpg"
-    ]:
-        img = source  # Path to the image file
-        img = cv2.imread(img)  # Read the image
-        print(source, saturation(img))  # Print the image path and its saturation value
+    basepath = os.path.dirname(os.path.realpath(__file__))
+
+    # Path to a sample image for debugging   # Set the data path to use sample images
+    data_folder = basepath + "/../share/data/"
+    
+    # Path to a sample image
+    sample_img = data_folder + "panda.jpg"
+    
+    img = cv2.imread(sample_img)  # Read the image
+    print(sample_img, saturation(img))  # Print the image path and its saturation value

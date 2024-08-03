@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyaesthetics.quadtreedecomposition.quadTree &#8212; pyaesthetics 0.0.8 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=53b53b71"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="pyaesthetics-quadtreedecomposition-quadtree">
+<h1>pyaesthetics.quadtreedecomposition.quadTree<a class="headerlink" href="#pyaesthetics-quadtreedecomposition-quadtree" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyaesthetics.quadtreedecomposition.quadTree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyaesthetics.quadtreedecomposition.</span></span><span class="sig-name descname"><span class="pre">quadTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minStd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minSize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.quadtreedecomposition.quadTree" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class performs a QuadTree decomposition of an image.</p>
+<p>During initialization, the QuadTree decomposition is done and results are stored in <cite>self.blocks</cite> 
+as a list containing [x, y, height, width, Std]. To visualize the results, use the <cite>plot()</cite> method.</p>
+<p>Initialize the QuadTree decomposition analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>numpy.ndarray</em>) – Image to analyze</p></li>
+<li><p><strong>minStd</strong> (<em>int</em>) – Standard deviation threshold for subsequent splitting</p></li>
+<li><p><strong>minSize</strong> (<em>int</em>) – Size threshold for subsequent splitting, in pixels</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyaesthetics.quadtreedecomposition.quadTree.plot" title="pyaesthetics.quadtreedecomposition.quadTree.plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot</span></code></a></p></td>
+<td><p>Generate a graphical representation of the QuadTree decomposition.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyaesthetics.quadtreedecomposition.quadTree.quad_tree_decomposition" title="pyaesthetics.quadtreedecomposition.quadTree.quad_tree_decomposition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">quad_tree_decomposition</span></code></a></p></td>
+<td><p>Evaluate the mean and standard deviation of an image block, and decide whether to perform  further splits of the block.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.quadtreedecomposition.quadTree.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edgecolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'red'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">facecolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">linewidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.quadtreedecomposition.quadTree.plot" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a graphical representation of the QuadTree decomposition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edgecolor</strong> (<em>string</em>) – Color of the rectangle edges, default is red</p></li>
+<li><p><strong>facecolor</strong> (<em>string</em>) – Color used for rectangle fills. Default is none.</p></li>
+<li><p><strong>linewidth</strong> (<em>int</em>) – Width of the rectangles’ borders in pixels. Default is 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plot with image and leaves of the QuadTree Decomposition</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyaesthetics.quadtreedecomposition.quadTree.quad_tree_decomposition">
+<span class="sig-name descname"><span class="pre">quad_tree_decomposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minStd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minSize</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyaesthetics.quadtreedecomposition.quadTree.quad_tree_decomposition" title="Link to this definition">¶</a></dt>
+<dd><p>Evaluate the mean and standard deviation of an image block, and decide whether to perform 
+further splits of the block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img</strong> (<em>numpy.ndarray</em>) – Image to analyze</p></li>
+<li><p><strong>x</strong> (<em>int</em>) – X offset of the block to analyze</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – Y offset of the block to analyze</p></li>
+<li><p><strong>minStd</strong> (<em>int</em>) – Standard deviation threshold for subsequent splitting</p></li>
+<li><p><strong>minSize</strong> (<em>int</em>) – Size threshold for subsequent splitting, in pixels</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pyaesthetics</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Giulio Gabrieli.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/_autosummary/pyaesthetics.quadtreedecomposition.quadTree.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

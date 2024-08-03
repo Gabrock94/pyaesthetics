@@ -1,0 +1,122 @@
+pyaesthetics/analysis.py:import os
+pyaesthetics/analysis.py:import cv2  # OpenCV library for image processing
+pyaesthetics/analysis.py:import matplotlib.pyplot as plt  # Matplotlib for plotting images
+pyaesthetics/analysis.py:import pytesseract  # Pytesseract for Optical Character Recognition (OCR)
+pyaesthetics/analysis.py:from PIL import Image  # Python Imaging Library for image processing
+pyaesthetics/analysis.py:# Attempt to import internal modules of pyaesthetics, handling both relative and absolute imports
+pyaesthetics/analysis.py:    from . import quadTreeDecomposition
+pyaesthetics/analysis.py:    from . import colorfulness
+pyaesthetics/analysis.py:    from . import brightness
+pyaesthetics/analysis.py:    from . import symmetry
+pyaesthetics/analysis.py:    from . import faceDetection
+pyaesthetics/analysis.py:    from . import colorDetection
+pyaesthetics/analysis.py:    from . import spaceBasedDecomposition
+pyaesthetics/analysis.py:    from . import contrast
+pyaesthetics/analysis.py:    from . import saturation
+pyaesthetics/analysis.py:    from . import linesDetection
+pyaesthetics/analysis.py:    from . import utils
+pyaesthetics/analysis.py:    from . import visualComplexity
+pyaesthetics/analysis.py:    from . import selfSimilarity
+pyaesthetics/analysis.py:    import quadTreeDecomposition
+pyaesthetics/analysis.py:    import spaceBasedDecomposition
+pyaesthetics/analysis.py:    import colorfulness
+pyaesthetics/analysis.py:    import brightness
+pyaesthetics/analysis.py:    import symmetry
+pyaesthetics/analysis.py:    import faceDetection
+pyaesthetics/analysis.py:    import colorDetection
+pyaesthetics/analysis.py:    import contrast
+pyaesthetics/analysis.py:    import saturation
+pyaesthetics/analysis.py:    import linesDetection
+pyaesthetics/analysis.py:    import utils
+pyaesthetics/analysis.py:    import visualComplexity
+pyaesthetics/analysis.py:    import selfSimilarity
+pyaesthetics/brightness.py:import os  # To handle filesystem files
+pyaesthetics/brightness.py:import cv2  # For image manipulation
+pyaesthetics/brightness.py:import numpy as np  # Numerical computation
+pyaesthetics/brightness.py:import pandas as pd
+pyaesthetics/brightness.py:    import utils  # Importing utility functions
+pyaesthetics/colorDetection.py:import os
+pyaesthetics/colorDetection.py:import cv2
+pyaesthetics/colorDetection.py:import matplotlib.pyplot as plt
+pyaesthetics/colorDetection.py:import numpy as np
+pyaesthetics/colorDetection.py:import matplotlib.patches as patches
+pyaesthetics/colorDetection.py:import time
+pyaesthetics/colorfulness.py:import os #to handle filesystem files
+pyaesthetics/colorfulness.py:import cv2 #for image manipulation
+pyaesthetics/colorfulness.py:import numpy as np #numerical computation
+pyaesthetics/contrast.py:import os # to handle filesystem files
+pyaesthetics/contrast.py:import cv2 # for image manipulation
+pyaesthetics/contrast.py:import numpy as np # numerical computation
+pyaesthetics/contrast.py:import pandas as pd # for data manipulation (not used in this script, but imported)
+pyaesthetics/faceDetection.py:import os
+pyaesthetics/faceDetection.py:import cv2
+pyaesthetics/faceDetection.py:import matplotlib.pyplot as plt
+pyaesthetics/faceDetection.py:import numpy as np
+pyaesthetics/faceDetection.py:import face_recognition
+pyaesthetics/faceDetection.py:from PIL import Image
+pyaesthetics/__init__.py:from . import quadTreeDecomposition
+pyaesthetics/__init__.py:from . import spaceBasedDecomposition
+pyaesthetics/__init__.py:from . import colorfulness
+pyaesthetics/__init__.py:from . import brightness
+pyaesthetics/__init__.py:from . import symmetry
+pyaesthetics/__init__.py:from . import faceDetection
+pyaesthetics/__init__.py:from . import analysis
+pyaesthetics/__init__.py:from . import contrast
+pyaesthetics/__init__.py:from . import saturation
+pyaesthetics/__init__.py:# from . import selfsimilarity
+pyaesthetics/__init__.py:from . import linesDetection
+pyaesthetics/__init__.py:from . import utils
+pyaesthetics/linesDetection.py:import os # to handle filesystem files
+pyaesthetics/linesDetection.py:import cv2 # for image manipulation
+pyaesthetics/linesDetection.py:import numpy as np # numerical computation
+pyaesthetics/linesDetection.py:import pandas as pd # for data manipulation (not used in this script, but imported)
+pyaesthetics/linesDetection.py:import math # for mathematical operations (not used in this script)
+pyaesthetics/linesDetection.py:import matplotlib.pyplot as plt # for plotting images and results
+pyaesthetics/quadTreeDecomposition.py:import os # to handle filesystem files
+pyaesthetics/quadTreeDecomposition.py:import cv2 # for image manipulation
+pyaesthetics/quadTreeDecomposition.py:import numpy as np # numerical computation
+pyaesthetics/quadTreeDecomposition.py:import matplotlib.pyplot as plt # for data visualization
+pyaesthetics/quadTreeDecomposition.py:import matplotlib.patches as patches # for drawing rectangles in the plot
+pyaesthetics/saturation.py:import os # to handle filesystem files
+pyaesthetics/saturation.py:import cv2 # for image manipulation
+pyaesthetics/saturation.py:import numpy as np # numerical computation
+pyaesthetics/saturation.py:import pandas as pd # (not used in this script, but imported)
+pyaesthetics/selfSimilarity.py:import cv2
+pyaesthetics/selfSimilarity.py:import numpy as np
+pyaesthetics/selfSimilarity.py:import matplotlib.pyplot as plt
+pyaesthetics/selfSimilarity.py:from skimage.feature import hog
+pyaesthetics/selfSimilarity.py:from skimage import exposure
+pyaesthetics/selfSimilarity.py:from tqdm import tqdm
+pyaesthetics/selfSimilarity.py:    from . import utils
+pyaesthetics/selfSimilarity.py:    import utils
+pyaesthetics/spaceBasedDecomposition.py:import os  # To handle filesystem files
+pyaesthetics/spaceBasedDecomposition.py:import cv2  # For image manipulation
+pyaesthetics/spaceBasedDecomposition.py:import numpy as np  # For numerical operations
+pyaesthetics/spaceBasedDecomposition.py:from imutils import perspective  # For image perspective transformations
+pyaesthetics/spaceBasedDecomposition.py:from imutils import contours  # For contour-related utilities
+pyaesthetics/spaceBasedDecomposition.py:import imutils  # For various image utilities
+pyaesthetics/spaceBasedDecomposition.py:from scipy import ndimage  # For scientific image processing
+pyaesthetics/spaceBasedDecomposition.py:import matplotlib.pyplot as plt  # For data visualization
+pyaesthetics/spaceBasedDecomposition.py:import matplotlib.patches as patches  # For legends and rectangle drawing
+pyaesthetics/spaceBasedDecomposition.py:import pytesseract  # For OCR
+pyaesthetics/spaceBasedDecomposition.py:from PIL import Image  # For image processing with PIL
+pyaesthetics/spaceBasedDecomposition.py:import math
+pyaesthetics/symmetry.py:import os # to handle filesystem files
+pyaesthetics/symmetry.py:import cv2 # for image manipulation
+pyaesthetics/symmetry.py:import numpy as np # numerical computation
+pyaesthetics/symmetry.py:import matplotlib.pyplot as plt # for data visualization
+pyaesthetics/symmetry.py:import matplotlib.patches as patches # for legends and rectangle drawing in QTD
+pyaesthetics/utils.py:import os #to handle filesystem files
+pyaesthetics/utils.py:import cv2 #for image manipulation
+pyaesthetics/utils.py:import numpy as np #numerical computation
+pyaesthetics/utils.py:import pandas as pd 
+pyaesthetics/visualComplexity.py:import os
+pyaesthetics/visualComplexity.py:import cv2  # OpenCV library for image processing
+pyaesthetics/visualComplexity.py:import matplotlib.pyplot as plt  # Matplotlib for plotting images
+pyaesthetics/visualComplexity.py:from PIL import Image  # Python Imaging Library for image processing
+pyaesthetics/visualComplexity.py:import numpy as np
+pyaesthetics/visualComplexity.py:# Attempt to import internal modules of pyaesthetics, handling both relative and absolute imports
+pyaesthetics/visualComplexity.py:    from . import quadTreeDecomposition
+pyaesthetics/visualComplexity.py:    from . import utils
+pyaesthetics/visualComplexity.py:    import quadTreeDecomposition
+pyaesthetics/visualComplexity.py:    import utils

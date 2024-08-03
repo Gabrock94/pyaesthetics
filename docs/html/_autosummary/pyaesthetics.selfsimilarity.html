@@ -33,26 +33,41 @@
             
   <section id="module-pyaesthetics.selfsimilarity">
 <span id="pyaesthetics-selfsimilarity"></span><h1>pyaesthetics.selfsimilarity<a class="headerlink" href="#module-pyaesthetics.selfsimilarity" title="Link to this heading">¶</a></h1>
-<p>This module contains functions to compute the degree of selfsimilarity of an image.
-- Self Similarity is evaluated using the PHOG method proposed in Amirshahi, S. A., Koch, M., Denzler, J., &amp; Redies, C. (2012, February). PHOG analysis of self-similarity in aesthetic images. In Human Vision and Electronic Imaging XVII (Vol. 8291, p. 82911J). International Society for Optics and Photonics.</p>
-<p>Created on Mon Oct 18 17:22:45 2021</p>
+<p>This module is used to evaluate the self-similarity and anisotropy of an image.
+It is based on Braun, J., Amirshahi, S. A., Denzler, J., &amp; Redies, C. (2013).
+Statistical image properties of print advertisements, visual artworks, and images of architecture.
+Frontiers in Psychology, 4, 808.</p>
+<p>Created on Sat Aug 3 11:34:57 2024
+Last edited on Sat Aug 3 14:09:43 2024</p>
 <p>&#64;author: Giulio Gabrieli (<a class="reference external" href="mailto:gack94&#37;&#52;&#48;gmail&#46;com">gack94<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p>
 <p class="rubric">Functions</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.hog.html#pyaesthetics.selfsimilarity.hog" title="pyaesthetics.selfsimilarity.hog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hog</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.bin_hog_features.html#pyaesthetics.selfsimilarity.bin_hog_features" title="pyaesthetics.selfsimilarity.bin_hog_features"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bin_hog_features</span></code></a></p></td>
+<td><p>Bin the HOG features into n bins.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.calculate_hog.html#pyaesthetics.selfsimilarity.calculate_hog" title="pyaesthetics.selfsimilarity.calculate_hog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_hog</span></code></a></p></td>
+<td><p>Calculate the Histogram of Oriented Gradients (HOG) for a given image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.get_self_similarity.html#pyaesthetics.selfsimilarity.get_self_similarity" title="pyaesthetics.selfsimilarity.get_self_similarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_self_similarity</span></code></a></p></td>
+<td><p>Calculate the self-similarity and anisotropy of an image using HOG features.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.hog.html#pyaesthetics.selfsimilarity.hog" title="pyaesthetics.selfsimilarity.hog"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hog</span></code></a></p></td>
 <td><p>Extract Histogram of Oriented Gradients (HOG) for a given image.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.resize.html#pyaesthetics.selfsimilarity.resize" title="pyaesthetics.selfsimilarity.resize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resize</span></code></a></p></td>
-<td><p>Resize image to match a certain size.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.plot_hog_histogram.html#pyaesthetics.selfsimilarity.plot_hog_histogram" title="pyaesthetics.selfsimilarity.plot_hog_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_hog_histogram</span></code></a></p></td>
+<td><p>Plot the histogram of the binned HOG features.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.preprocess_image.html#pyaesthetics.selfsimilarity.preprocess_image" title="pyaesthetics.selfsimilarity.preprocess_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">preprocess_image</span></code></a></p></td>
+<td><p>Open an image, convert it to LAB color space, split into L, a, and b channels,  and calculate the gradient of each channel.</p></td>
 </tr>
 </tbody>
 </table>
 <p class="rubric">Classes</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.selfsimilarity.html#pyaesthetics.selfsimilarity.selfsimilarity" title="pyaesthetics.selfsimilarity.selfsimilarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">selfsimilarity</span></code></a></p></td>
-<td><p>This function returns the degree of self similarity (0-1) of an image</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="pyaesthetics.selfsimilarity.tqdm.html#pyaesthetics.selfsimilarity.tqdm" title="pyaesthetics.selfsimilarity.tqdm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tqdm</span></code></a></p></td>
+<td><p>Decorate an iterable object, returning an iterator which acts exactly like the original iterable, but prints a dynamically updating progressbar every time a value is requested.</p></td>
 </tr>
 </tbody>
 </table>

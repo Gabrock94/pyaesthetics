@@ -1,36 +1,33 @@
-from setuptools import setup
+#!/usr/bin/env python
+
+from distutils.core import setup
 import os
 
 datadir = os.path.join("share","data")
 datafiles = [(d,[os.path.join(d,f) for f in files]) for d, folders, files in os.walk(datadir)]
 
 setup(name='pyaesthetics',
-    version='0.0.8.0',
+    version='0.0.8.1',
     description='Images aesthetic analysis',
-    long_description="A python package to estimate aesthetics visual features from still images.",
-    url='https://github.com/Gabrock94/pyaesthetics',
     author='Giulio Gabrieli',
     author_email='gack94@gmail.com',
-    packages=['pyaesthetics'],      
-    install_requires=[
-        'numpy',
-        'opencv-python',
-        'scipy',
-        'matplotlib',
-        'imutils',
-        'pytesseract',
-        'pandas'
-    ],
+    url='https://github.com/Gabrock94/pyaesthetics',
+    packages=['pyaesthetics'],
+        install_requires=[
+            'numpy',
+            'opencv-python',
+            'scipy',
+            'matplotlib',
+            'imutils',
+            'pytesseract',
+            'pandas'
+            'pillow',
+            'face-recognition'
+        ],
     keywords = ["Image","Analysis","Aesthetic",'Visual','Features'],
     classifiers = [ 
-        # How mature is this project? Common values are
-        #   3 - Alpha
-        #   4 - Beta
-        #   5 - Production/Stable
         'Development Status :: 5 - Production/Stable',
         
-        # Specify the Python versions you support here. In particular, ensure
-        # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
@@ -43,6 +40,12 @@ setup(name='pyaesthetics',
         'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3.11',
         'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.14',
+
+        'Topic :: Multimedia :: Graphics',
+        'Topic :: Scientific/Engineering :: Image Processing',
+        'Topic :: Scientific/Engineering :: Information Analysis'
     ],
     zip_safe=False,
     include_package_data=True,

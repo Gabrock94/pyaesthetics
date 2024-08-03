@@ -15,8 +15,12 @@ pyaesthetics.selfsimilarity
       :toctree:
       :nosignatures:
    
+      bin_hog_features
+      calculate_hog
+      get_self_similarity
       hog
-      resize
+      plot_hog_histogram
+      preprocess_image
    
    
 
@@ -29,7 +33,7 @@ pyaesthetics.selfsimilarity
       :template: custom-class-template.rst
       :nosignatures:
    
-      selfsimilarity
+      tqdm
    
    
 
