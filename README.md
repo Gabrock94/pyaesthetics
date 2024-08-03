@@ -1,6 +1,10 @@
-<p align="center">
+<!-- <p align="center">
     <img width="200" src="https://github.com/Gabrock94/pyaesthetics/blob/master/docs/pyaesthetics_small.png" alt="Logo">
-</p>
+</p> -->
+
+![Logo](https://raw.githubusercontent.com/greyli/flask-share/master/images/demo.png)
+
+https://raw.githubusercontent.com/gabrock94/pyaesthetics/master/docs/pyaesthetics_small.png
 
 # pyaesthetics
 ![GitHub release](https://img.shields.io/github/release/Gabrock94/prettywebsite.svg)
