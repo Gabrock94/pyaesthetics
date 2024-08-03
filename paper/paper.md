@@ -1,34 +1,22 @@
 ---
-title: 'Gala: A Python package for galactic dynamics'
+title: 'pyaesthetics: A Python package for the estimation of visual features from images'
 tags:
   - Python
-  - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+  - Aesthetics
+  - Features extraction
+  - Image analysis
+
 authors:
-  - name: Adrian M. Price-Whelan
-    orcid: 0000-0000-0000-0000
-    equal-contrib: true
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    equal-contrib: true # (This is how you can denote equal contributions between multiple authors)
-    affiliation: 2
-  - name: Author with no affiliation
-    corresponding: true # (This is how to denote the corresponding author)
-    affiliation: 3
-  - given-names: Ludwig
-    dropping-particle: van
-    surname: Beethoven
-    affiliation: 3
+  - name: Giulio Gabrieli
+    orcid: 0000-0002-9846-5767
+    equal-contrib: false
+    affiliation: "1"
+
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University, USA
+ - name: Italian Institute of Technology, Rome, Italy
    index: 1
- - name: Institution Name, Country
-   index: 2
- - name: Independent Researcher, Country
-   index: 3
-date: 13 August 2017
+
+date: 3 August 2024
 bibliography: paper.bib
 
 # Optional fields if submitting to a AAS journal too, see this blog post:
@@ -39,19 +27,11 @@ aas-journal: Astrophysical Journal <- The name of the AAS journal.
 
 # Summary
 
-The forces on stars, galaxies, and dark matter under external gravitational
-fields lead to the dynamical evolution of structures in the universe. The orbits
-of these bodies are therefore key to understanding the formation, history, and
-future state of galaxies. The field of "galactic dynamics," which aims to model
-the gravitating components of galaxies to study their structure and evolution,
-is now well-established, commonly taught, and frequently used in astronomy.
-Aside from toy problems and demonstrations, the majority of problems require
-efficient numerical tools, many of which require the same base code (e.g., for
-performing numerical orbit integration).
+The growing amount of research in neuroaesthetics, an interdisciplinary field exploring the neural basis of aesthetic experiences and preferences, particularly concerning the aesthetics of visual stimuli, highlights the interest of researchers in the complex interplay between sensory perception and emotional response. Despite the volume of research, the number of features analyzed by each study is generally limited to a small subset of visual properties. This lack of interest in multiple and more complex features can be partly explained by the absence of tools that allow for the efficient estimation of a wide range of features from images, making the process very time-consuming and leading to significant challenges in result reproducibility, as variations in implementation and feature estimation occur. The pyaesthetics package is designed to streamline and simplify the feature estimation process by providing access to a multitude of functions that can be used to extract the most commonly analyzed visual features.
 
 # Statement of need
 
-`Gala` is an Astropy-affiliated Python package for galactic dynamics. Python
+`pyaesthetics` is an Astropy-affiliated Python package for galactic dynamics. Python
 enables wrapping low-level languages (e.g., C) for speed without losing
 flexibility or ease-of-use in the user-interface. The API for `Gala` was
 designed to provide a class-based and user-friendly interface to fast (C or
@@ -71,22 +51,6 @@ design, and support for Astropy functionality in `Gala` will enable exciting
 scientific explorations of forthcoming data releases from the *Gaia* mission
 [@gaia] by students and experts alike.
 
-# Mathematics
-
-Single dollars ($) are required for inline mathematics e.g. $f(x) = e^{\pi/x}$
-
-Double dollars make self-standing equations:
-
-$$\Theta(x) = \left\{\begin{array}{l}
-0\textrm{ if } x < 0\cr
-1\textrm{ else}
-\end{array}\right.$$
-
-You can also use plain \LaTeX for equations
-\begin{equation}\label{eq:fourier}
-\hat f(\omega) = \int_{-\infty}^{\infty} f(x) e^{i\omega x} dx
-\end{equation}
-and refer to \autoref{eq:fourier} from text.
 
 # Citations
 
