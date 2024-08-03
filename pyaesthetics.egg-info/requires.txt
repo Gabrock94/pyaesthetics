@@ -4,4 +4,5 @@ scipy
 matplotlib
 imutils
 pytesseract
-pandas
+pandaspillow
+face-recognition
