@@ -94,7 +94,7 @@ print(results)
 ```
 
 ## Documentation
-You can check the full documentation here: https://prettywebsite.readthedocs.io/en/latest/
+The updated documentation of pyaesthetics, its modules, as well as a getting started guide and a list of examples can be found on [Read the Docs](https://prettywebsite.readthedocs.io/en/latest/). 
 
 ## Requirements
 - numpy
