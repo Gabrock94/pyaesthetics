@@ -26,9 +26,9 @@ copyright = '2024, Giulio Gabrieli'
 author = 'Giulio Gabrieli'
 
 # The short X.Y version
-version = ''
+version = '0.0.8.1'
 # The full version, including alpha/beta/rc tags
-release = '0.0.8'
+release = '0.0.8.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -46,7 +46,7 @@ extensions = [
 ]
 
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
-autosummary_imported_members = False
+autosummary_imported_members = True
 
 autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
 # Add any paths that contain templates here, relative to this directory.

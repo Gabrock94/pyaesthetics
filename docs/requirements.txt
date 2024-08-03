@@ -1,1 +1,1 @@
-sphinx_autosummary_accessors
+opencv-python
