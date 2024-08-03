@@ -8,3 +8,4 @@ pytesseract>=0.3
 pillow>=10.4
 sphinx_autosummary_accessors
 scikit-image>=0.24
+tqdm>=4.66
