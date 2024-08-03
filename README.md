@@ -55,30 +55,45 @@ pyaeshtetics modules can be used one at the time to estimate one specific featur
 
 ```python
 #load only the neede functions from the specific module
-from pyaesthetics.brightness import relativeLuminance_BT601, sRGB2RGB
+from pyaesthetics.brightness import relativeluminance_bt601
+from pyaeshtetics.utils import sRGB2RGB
 import cv2 #to open and handle images
 
-img = "/path/to/image/image.jpg" #path to a sample image
+#define the path to a sample image
+path_to_img = "/path/to/image/image.jpg"
 
-img = cv2.imread(img) #load the image
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) #convert to the RGB colorscheme
-img = sRGB2RGB(img) #convert pixels to their linear RGB values
-print(relativeLuminance_BT601(img)) #evaluate luminance on the BT601 standard
+#load the image
+img = cv2.imread(path_to_img)
+
+#convert the image to the RGB colorscheme
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+img = sRGB2RGB(img)
+print(relativeluminance_bt601(img))
+
 ```
 ### Example 2: Complete analysis
 
 ```python
 import pyaesthetics
-img = "/path/to/image/image.jpg" #path to a sample image
-results = pyaesthetics.analysis.analyzeImage(img, method="complete") #perform all the availabe analysis using standard parameters
+
+#define the path to a sample image
+path_to_img = "/path/to/image/image.jpg"
+
+#perform a subset of the analysis using standard parameters
+results = pyaesthetics.analysis.analyzeImage(path_to_img, method="fast")
 print(results)
+
 ```
 Or for a faster analysis:
 
 ```python
 import pyaesthetics
-img = "/path/to/image/image.jpg" #path to a sample image
-results = pyaesthetics.analysis.analyzeImage(img, method="fast") #perform a subset of the analysis using standard parameters.
+
+#define the path to a sample image
+path_to_img = "/path/to/image/image.jpg"
+
+#perform a subset of the analysis using standard parameters
+results = pyaesthetics.analysis.analyzeImage(path_to_img, method="complete")
 print(results)
 ```
 
