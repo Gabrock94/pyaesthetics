@@ -13,16 +13,11 @@ authors:
     affiliation: "1"
 
 affiliations:
- - name: Italian Institute of Technology, Rome, Italy
+ - name: Center for Life Nano- and Neuro-Science, Istituto Italiano di Tecnologia, 00161, Rome, Italy
    index: 1
 
 date: 3 August 2024
 bibliography: paper.bib
-
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
 ---
 
 # Summary
