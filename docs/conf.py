@@ -49,7 +49,7 @@ extensions = [
 ]
 
 autosummary_generate = True  # Turn on sphinx.ext.autosummary
-autosummary_imported_members = True
+autosummary_imported_members = False
 
 autoclass_content = "both"  # Add __init__ doc (ie. params) to class summaries
 # Add any paths that contain templates here, relative to this directory.
