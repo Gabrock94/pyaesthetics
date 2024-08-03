@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>analysis.analyze_image &#8212; pyaesthetics 0.0.8.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=c058f7c8" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=27fed22d" />
+    <script src="../_static/documentation_options.js?v=a6cd5f1d"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="analysis-analyze-image">
+<h1>analysis.analyze_image<a class="headerlink" href="#analysis-analyze-image" title="Link to this heading">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="analysis.analyze_image">
+<span class="sig-prename descclassname"><span class="pre">analysis.</span></span><span class="sig-name descname"><span class="pre">analyze_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pathToImg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fast'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(600,</span> <span class="pre">400)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minStd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#analysis.analyze_image" title="Link to this definition">¶</a></dt>
+<dd><p>This function acts as an entry point for the automatic analysis of an image’s aesthetic features.
+There are two methods available: ‘fast’ (default) and ‘complete’.</p>
+<p>The ‘fast’ method performs the following analysis: 
+- brightness (BT709)
+- Visual Complexity (using quadtree decomposition)
+- Symmetry (using quadtree decomposition)
+- Colorfulness (in the RGB color scheme)
+- contrast (Root Mean Square (RMS) method)
+- saturation
+- ratio between straight and curved lines</p>
+<p>The ‘complete’ method performs the following analysis:
+- brightness (BT709 and BT601)
+- Visual Complexity (using quadtree decomposition)
+- Visual Complexity (using the weight method)
+- Symmetry (using quadtree decomposition)
+- Colorfulness (in HSV and RGB color schemes)
+- Face detection and number of faces
+- Color detection
+- Number of images within an image
+- Text to image ratio
+- Surface area occupied by text and images
+- contrast (Root Mean Square (RMS) and Michelson methods)
+- saturation
+- ratio between straight and curved lines</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pathToImg</strong> (<em>str</em>) – path to the image to analyze</p></li>
+<li><p><strong>method</strong> (<em>str</em>) – set the analysis method to use. Valid methods are ‘fast’ and ‘complete’. Default is ‘fast’.</p></li>
+<li><p><strong>resize</strong> (<em>bool</em>) – indicate whether to resize the image (reduces computational workload, this reducing processing time)</p></li>
+<li><p><strong>newSize</strong> (<em>tuple</em>) – if the image has to be resized, this tuple indicates the new size of the image</p></li>
+<li><p><strong>minStd</strong> (<em>int</em>) – minimum standard deviation for the quadtree decomposition</p></li>
+<li><p><strong>minSize</strong> (<em>int</em>) – minimum size for the quadtree decomposition</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary containing the analysis results</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">pyaesthetics</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../gettingstarted.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Examples</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Giulio Gabrieli.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.0.2</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../_sources/_autosummary/analysis.analyze_image.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
