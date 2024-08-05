@@ -74,7 +74,7 @@ To run a fast analysis, use the following snippet of code:
 >>> #define the path to a sample image
 >>> path_to_img = "/path/to/image/image.jpg" 
 >>> #perform a subset of the analysis using standard parameters
->>> results = pyaesthetics.analysis.analyzeImage(path_to_img, method="fast") 
+>>> results = pyaesthetics.analysis.analyze_image(path_to_img, method="fast") 
 >>> print(results)
 
 While to run a complete analysis, you can use the following snippet:
@@ -83,5 +83,5 @@ While to run a complete analysis, you can use the following snippet:
 >>> #define the path to a sample image
 >>> path_to_img = "/path/to/image/image.jpg" 
 >>> #perform a subset of the analysis using standard parameters
->>> results = pyaesthetics.analysis.analyzeImage(path_to_img, method="complete") 
+>>> results = pyaesthetics.analysis.analyze_image(path_to_img, method="complete") 
 >>> print(results)
