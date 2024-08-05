@@ -1,5 +1,5 @@
 ---
-title: 'pyaesthetics: A Python package for the estimation of visual features from images'
+title: 'pyaesthetics: A Python package for the estimation of visual features from still images'
 tags:
   - Python
   - Aesthetics
@@ -16,51 +16,45 @@ affiliations:
  - name: Center for Life Nano- and Neuro-Science, Istituto Italiano di Tecnologia, 00161, Rome, Italy
    index: 1
 
-date: 3 August 2024
+date: 5 August 2024
 bibliography: paper.bib
 ---
 
 # Summary
 
-The growing amount of research in neuroaesthetics, an interdisciplinary field exploring the neural basis of aesthetic experiences and preferences, particularly concerning the aesthetics of visual stimuli, highlights the interest of researchers in the complex interplay between sensory perception and emotional response. Despite the volume of research, the number of features analyzed by each study is generally limited to a small subset of visual properties. This lack of interest in multiple and more complex features can be partly explained by the absence of tools that allow for the efficient estimation of a wide range of features from images, making the process very time-consuming and leading to significant challenges in result reproducibility, as variations in implementation and feature estimation occur. The pyaesthetics package is designed to streamline and simplify the feature estimation process by providing access to a multitude of functions that can be used to extract the most commonly analyzed visual features.
+Neuroaesthetics is an interdisciplinary field that explores the neural mechanisms underlying aesthetic experiences and preferences. It combines insights from neuroscience, psychology, and aesthetics to understand how the brain processes and responds to visual and auditory stimuli, with a particular focus on beauty and artistic expression.
 
-# Statement of need
+Despite the volume of research, studies often analyze only a limited subset of visual properties. This narrow focus on a few features can be partly attributed to the lack of tools that efficiently estimate a wide range of visual features from images. The current methods can be very time-consuming and lead to significant challenges in result reproducibility due to variations in implementation and feature estimation. The `pyaesthetics` package is designed to streamline and simplify the feature estimation process by providing access to a variety of functions for extracting commonly analyzed visual features.
 
-`pyaesthetics` is an Python package for the estimation of visual features from still images. The API for `pyaesthetics` was
-designed to provide modules for different visual features that are commonly used in studies of empirical aesthetics, and it also provides
-a simple entrypoints to conduct automati analysis or users with limited coding knowledge.
-Among the features, pyaesthetics allows for the estimation of the brightness, contrast, saturation, visual complexity, symmetry, colorfulness, and color distribution. The updated list of features estimable with `pyaesthetics` is available in the [repository of the project](https://github.com/Gabrock94/pyaesthetics), as well as in the [documentation of the project](https://prettywebsite.readthedocs.io/en/latest/index.html). 
-`pyaesthetics` is aimed at researchers in the field of empirical aesthetics, however its modules can be of help also for researchers in the Social Sciences, and especially Psychology, as well as Neuroscience, to explore the visual properties of stimuli employed in different research projects. Moreover, `pyaesthetics` may be employed by visual designers, artists, and other individuals who need to explore the visual properties of images of various nature.
+# Statement of Need
 
-The package has already been used a number of peer-reviewed scientific publications [@bizzego2022dataset; @gabrieli2023machine; @cianfanelli2023binding;@music2023beautification; @liu2024mothers], as well as master and Ph.D. theses [@Gabrieli2018; @Gabrieli2021; @Veldhuizen2024]. 
+`pyaesthetics` is a Python package for estimating visual features from still images. The package addresses the lack of available free, open-source, and easy-to-use tools for estimating a wide range of visual features. The API for `pyaesthetics` was designed to provide modules for various visual features commonly used in empirical aesthetics studies. It also offers simple entry points for conducting automated analysis for users with limited coding knowledge.
+
+Among the features, `pyaesthetics` allows for the estimation of brightness, contrast, saturation, visual complexity, symmetry, colorfulness, and color distribution. The updated list of features that can be estimated with `pyaesthetics` is available in the [repository of the project](https://github.com/Gabrock94/pyaesthetics) as well as in the [documentation of the project](https://prettywebsite.readthedocs.io/en/latest/index.html).
+
+`pyaesthetics` is primarily aimed at researchers in the field of empirical aesthetics. However, its modules can also be useful for researchers in the Social Sciences, particularly Psychology, and Neuroscience, to explore the visual properties of stimuli used in various research projects. Additionally, `pyaesthetics` may be employed by visual designers, artists, and other individuals who need to analyze the visual properties of diverse images.
+
+The package has already been utilized in several peer-reviewed scientific publications. The code was used by @bizzego2022dataset and by @liu2024mothers to verify that the visual complexity of different visual stimuli was consistent across trials, by @gabrieli2023machine to investigate the effect of different visual features of still images of websites on participants' aesthetic judgments of the websites, by @cianfanelli2023binding to investigate the visual complexity of IAPS images, by @music2023beautification to investigate which visual features concurr in the perception of beaty of images. Moreover, the package was employed by @Veldhuizen2024 to investigate which aesthetic features are more important in influencing consumers’ aesthetic judgments of packaging labels.
 
 
-# Citations
+# Ease of Use
 
-<!-- Citations to entries in paper.bib should be in
-[rMarkdown](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
-format.
+In order to simplify the usage of `pyaesthetics`, the package provides a module that automatyze the estimation of all the possible features available. This modulus allows users who are not familiar with python or any other coding language to easily integrate `pyaesthetics` in their workflow. The module provide functions to conduct a complete analysis with default parameters that are suitable for a variety of applications. 
 
-If you want to cite a software repository URL (e.g. something on GitHub without a preferred
-citation) then you can do it with the example BibTeX entry below for @fidgit.
+An example of usage of the automated analysis module is reported below:
 
-For a quick reference, the following citation commands can be used:
-- `@author:2001`  ->  "Author et al. (2001)"
-- `[@author:2001]` -> "(Author et al., 2001)"
-- `[@author1:2001; @author2:2001]` -> "(Author1 et al., 2001; Author2 et al., 2002)" -->
+```python
+import pyaesthetics
 
-# Figures
+#define the path to a sample image
+path_to_img = "/path/to/image/image.jpg"
 
-<!-- Figures can be included like this:
-![Caption for example figure.\label{fig:example}](figure.png)
-and referenced from text using \autoref{fig:example}.
-
-Figure sizes can be customized by adding an optional second parameter:
-![Caption for example figure.](figure.png){ width=20% } -->
+#perform a subset of the analysis using standard parameters
+results = pyaesthetics.analysis.analyzeImage(path_to_img, method="complete")
+```
 
 # Acknowledgements
 
-We acknowledge contributions from Brigitta Sipocz, Syrtis Major, and Semyeong
-Oh, and support from Kathryn Johnston during the genesis of this project.
+We acknowledge support from Gianluca Esposito and Giulia Scapin during the genesis of this project, and Marith Veldhuizen for her inputs about the introduction of novel features. 
 
 # References
