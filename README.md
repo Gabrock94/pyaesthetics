@@ -131,8 +131,5 @@ Pyaesthetics has been used in different scientific publication. The most relevan
 - Gabrieli, G., Scapin, G., & Esposito, G. (2022). Pyaesthetic, a python package for empirical aesthetic analysis. XXVII
 Conference of the International Association of Empirical Aesthetics, Philadelphia, United States. https://giuliogabrieli.it/posters/iaea2022/
 
-## Sponsors
+## Sponsorship
 The project has received a one-shot sponsorship for open-source projects by Gitkraken. 
-
-## Coffee?
-<a href='https://ko-fi.com/B0B3K45F' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
