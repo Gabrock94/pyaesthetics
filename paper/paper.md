@@ -26,25 +26,13 @@ The growing amount of research in neuroaesthetics, an interdisciplinary field ex
 
 # Statement of need
 
-`pyaesthetics` is an Astropy-affiliated Python package for galactic dynamics. Python
-enables wrapping low-level languages (e.g., C) for speed without losing
-flexibility or ease-of-use in the user-interface. The API for `Gala` was
-designed to provide a class-based and user-friendly interface to fast (C or
-Cython-optimized) implementations of common operations such as gravitational
-potential and force evaluation, orbit integration, dynamical transformations,
-and chaos indicators for nonlinear dynamics. `Gala` also relies heavily on and
-interfaces well with the implementations of physical units and astronomical
-coordinate systems in the `Astropy` package [@astropy] (`astropy.units` and
-`astropy.coordinates`).
+`pyaesthetics` is an Python package for the estimation of visual features from still images. The API for `pyaesthetics` was
+designed to provide modules for different visual features that are commonly used in studies of empirical aesthetics, and it also provides
+a simple entrypoints to conduct automati analysis or users with limited coding knowledge.
+Among the features, pyaesthetics allows for the estimation of the brightness, contrast, saturation, visual complexity, symmetry, colorfulness, and color distribution. The updated list of features estimable with `pyaesthetics` is available in the [repository of the project](https://github.com/Gabrock94/pyaesthetics), as well as in the [documentation of the project](https://prettywebsite.readthedocs.io/en/latest/index.html). 
+`pyaesthetics` is aimed at researchers in the field of empirical aesthetics, however its modules can be of help also for researchers in the Social Sciences, and especially Psychology, as well as Neuroscience, to explore the visual properties of stimuli employed in different research projects. Moreover, `pyaesthetics` may be employed by visual designers, artists, and other individuals who need to explore the visual properties of images of various nature.
 
-`Gala` was designed to be used by both astronomical researchers and by
-students in courses on gravitational dynamics or astronomy. It has already been
-used in a number of scientific publications [@Pearson:2017] and has also been
-used in graduate courses on Galactic dynamics to, e.g., provide interactive
-visualizations of textbook material [@Binney:2008]. The combination of speed,
-design, and support for Astropy functionality in `Gala` will enable exciting
-scientific explorations of forthcoming data releases from the *Gaia* mission
-[@gaia] by students and experts alike.
+The package has already been used a number of peer-reviewed scientific publications [bizzego2022dataset;gabrieli2023machine;cianfanelli2023binding;music2023beautification;liu2024mothers], as well as master's and Ph.D.'s theses [Gabrieli2018;Gabrieli2021;Veldhuizen2024]. 
 
 
 # Citations
