@@ -76,7 +76,7 @@ import pyaesthetics
 path_to_img = "/path/to/image/image.jpg"
 
 #perform a subset of the analysis using standard parameters
-results = pyaesthetics.analysis.analyzeImage(path_to_img, method="fast")
+results = pyaesthetics.analysis.analyze_image(path_to_img, method="fast")
 print(results)
 
 ```
@@ -89,7 +89,7 @@ import pyaesthetics
 path_to_img = "/path/to/image/image.jpg"
 
 #perform a subset of the analysis using standard parameters
-results = pyaesthetics.analysis.analyzeImage(path_to_img, method="complete")
+results = pyaesthetics.analysis.analyze_image(path_to_img, method="complete")
 print(results)
 ```
 
