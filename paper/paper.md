@@ -32,7 +32,7 @@ a simple entrypoints to conduct automati analysis or users with limited coding k
 Among the features, pyaesthetics allows for the estimation of the brightness, contrast, saturation, visual complexity, symmetry, colorfulness, and color distribution. The updated list of features estimable with `pyaesthetics` is available in the [repository of the project](https://github.com/Gabrock94/pyaesthetics), as well as in the [documentation of the project](https://prettywebsite.readthedocs.io/en/latest/index.html). 
 `pyaesthetics` is aimed at researchers in the field of empirical aesthetics, however its modules can be of help also for researchers in the Social Sciences, and especially Psychology, as well as Neuroscience, to explore the visual properties of stimuli employed in different research projects. Moreover, `pyaesthetics` may be employed by visual designers, artists, and other individuals who need to explore the visual properties of images of various nature.
 
-The package has already been used a number of peer-reviewed scientific publications [bizzego2022dataset; gabrieli2023machine; cianfanelli2023binding;music2023beautification; liu2024mothers], as well as master's and Ph.D.'s theses [Gabrieli2018; Gabrieli2021; Veldhuizen2024]. 
+The package has already been used a number of peer-reviewed scientific publications [@bizzego2022dataset; @gabrieli2023machine; @cianfanelli2023binding;@music2023beautification; @liu2024mothers], as well as master and Ph.D. theses [@Gabrieli2018; @Gabrieli2021; @Veldhuizen2024]. 
 
 
 # Citations
