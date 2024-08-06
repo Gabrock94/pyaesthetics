@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.patches as patches
 import time
-
+import pandas as pd
 ###############################################################################
 #                                                                             #
 #                  This section handles color recognition                     #
@@ -193,16 +193,18 @@ def get_colors_w3c(img, ncolors=16, plot=False, plotncolors=5):
     It can be used with 16 (https://www.html-color-names.com/basic-color-names.php) 
     or 140 colors (https://www.w3schools.com/colors/colors_names.asp).
     
-    :param img: image to analyze in RGB
+    :param img: Image to analyze in RGB format.
     :type img: numpy.ndarray
-    :param ncolors: number of colors to use (16 or 140)
+    :param ncolors: Number of colors to use (e.g., 16 or 140). Default is 16.
     :type ncolors: int
-    :param plot: whether to plot a color palette image
-    :type plot: boolean        
-    :param plotncolors: number of colors to use in the palette image
+    :param plot: Whether to plot a color palette image showing the top colors.
+    :type plot: bool
+    :param plotncolors: Number of colors to display in the palette image. Default is 5.
     :type plotncolors: int
-    :return: percentage distribution of colors according to the W3C basic colors
-    :rtype: list of shape ncolors x 2, where x[0] is the color name and x[1] the percentage of pixels most similar to that color in the image
+    :param clusterfactor: Factor to cluster similar colors. Default is 50.
+    :type clusterfactor: int
+    :return: An array of RGB values representing the most frequent colors.
+    :rtype: numpy.ndarray
     """
     
     # Validate ncolors
@@ -255,6 +257,51 @@ def get_colors_w3c(img, ncolors=16, plot=False, plotncolors=5):
     
     return colorscheme
 
+def get_colors(img, plot=False, plotncolors=5, clusterfactor = 50):
+    """
+    Extracts and optionally plots the most frequent colors in an image.
+
+    This function reshapes the image to a list of RGB values, clusters these colors 
+    based on the specified cluster factor to reduce the number of unique colors, and 
+    returns the most common colors. Optionally, it can plot the top `plotncolors` colors 
+    as rectangles.
+
+    Parameters:
+    - img (numpy.ndarray): The input image as a NumPy array of shape (height, width, 3).
+    - plot (bool): If True, a plot of the top `plotncolors` colors is displayed. Default is False.
+    - plotncolors (int): The number of top colors to plot. Default is 5.
+    - clusterfactor (int): The factor by which to cluster similar colors. Default is 50.
+
+    Returns:
+    - numpy.ndarray: An array of RGB values representing the most frequent colors.
+    """
+    
+    # Reshape the image array to a list of RGB values
+    data = img.reshape(img.shape[0] * img.shape[1], 3)
+    
+    # Apply clustering by rounding the RGB values based on clusterfactor
+    data = data // clusterfactor
+    data = data.astype(int)
+    data = data * clusterfactor
+    
+    # Convert to DataFrame to use value_counts for finding the most frequent colors
+    df = pd.DataFrame(data, columns=['R', 'G', 'B'])
+    sorted_data = df.value_counts().index.to_numpy()
+    
+    if plot:
+        # Plot the top `plotncolors` colors
+        fig, ax = plt.subplots()
+        plt.suptitle(f'Top {plotncolors} colors')
+        for i in range(min(plotncolors, len(sorted_data))):
+            ax.add_patch(patches.Rectangle((i, 0), 1, 1, facecolor=[x/255 for x in sorted_data[i]]))
+        plt.xlim(0, plotncolors)
+        plt.axis('off')  # Hide axes
+        plt.show()
+    
+    return sorted_data
+
+
+
 ###############################################################################
 #                                                                             #
 #                                   DEBUG                                     #
@@ -269,14 +316,19 @@ if __name__ == '__main__':
     
     # Path to a sample image
     sample_img = data_folder + "panda.jpg"
+    sample_img = "/home/giulio/Repositories/pyaesthetics/docs/examples/guardianscreen.png"
     
     # Read and preprocess the sample image
     img = cv2.imread(sample_img, cv2.IMREAD_UNCHANGED)
-    img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
+    img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGB)
     
     # Display the image
     plt.imshow(img)
-    
+
     # Calculate and print the color scheme using 16 W3C colors and plot the results
     results = get_colors_w3c(img, ncolors=140, plot=True, plotncolors=5)
-    # print("Color scheme of the image is:", results)
+    print("Color scheme of the image is:", results)
+
+    # Calculate and print the color scheme using RGB colors (reduced to cluster similar colors) and plot the results
+    results = get_colors(img, plot=True, plotncolors=5, clusterfactor = 10)
+    print("Color scheme of the image is:", results)

@@ -30,19 +30,32 @@ except:
 #                                                                             #
 ###############################################################################
 
-def get_visual_complexity_quadtree(image, minStd, minSize):
+def get_visual_complexity_quadtree(image, minStd, minSize, standardized=True):
     """
     Calculate the visual complexity of an image using quadtree decomposition.
+    It can return the standardized (default) visual complexity, with 1 being the 
+    highest complexity possible, or unstandardized (which is the number of leaves
+    resulting from the quadratic tree decomposition).
 
     :param image: Input image (grayscale).
+    :type image: numpy.ndarray
     :param minStd: Minimum standard deviation for splitting blocks.
+    :type minStd: int
     :param minSize: Minimum size of blocks.
-    :return: Number of blocks after quadtree decomposition.
+    :type minSize: int
+    :param standardized: Whether to return standardized complexity.
+    :type standardized: bool
+    :return: Standardized complexity if `standardized` is True, otherwise the number of blocks.
+    :rtype: float or int
     """
     # Perform quadtree decomposition
-    blocks = quadtreedecomposition.quadTree(image, minStd, minSize).blocks
-    # Return the number of blocks
-    return len(blocks)
+    quadtree = quadtreedecomposition.quadTree(image, minStd, minSize)
+    
+    if(standardized):
+        return(quadtree.standardized_complexity)
+    else:
+        # Return the number of blocks
+        return(quadtree.nblocks)
 
 def get_visual_complexity_gradient(image):
     """
@@ -80,7 +93,6 @@ def get_visual_complexity_weight(path_to_image):
     """
     # Return the file size in bytes
     return(os.stat(path_to_image).st_size)
-
 
 ###############################################################################
 #                                                                             #
