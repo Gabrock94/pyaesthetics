@@ -316,7 +316,8 @@ if __name__ == '__main__':
     
     # Path to a sample image
     sample_img = data_folder + "panda.jpg"
-    sample_img = "/home/giulio/Repositories/pyaesthetics/docs/examples/guardianscreen.png"
+    sample_img = "/home/giulio/Repositories/pyaesthetics/docs/examples/pyaesthetics_small.png"
+
     
     # Read and preprocess the sample image
     img = cv2.imread(sample_img, cv2.IMREAD_UNCHANGED)

@@ -63,6 +63,8 @@ class quadTree:
             )
             fig.axes.add_patch(rect) # Add rectangle to the plot
             plt.title("QuadTree Decomposition") # Set the plot title
+            plt.xticks([],[])
+            plt.yticks([],[])
         plt.show() # Display the plot
         
     def quad_tree_decomposition(self, img, x, y, minStd, minSize):
@@ -215,7 +217,7 @@ if __name__ == '__main__':
     # Path to a sample image
     sample_img = data_folder + "panda.jpg"
 
-    minStd = 50 #Minimum standard deviation for each block
+    minStd = 20 #Minimum standard deviation for each block
     minSize = 30 # Minimum size of each block in pixels
     
     imgcolor = cv2.imread(sample_img) # Read the image in color for plotting purposes

@@ -63,6 +63,8 @@ class quadTree:
             )
             fig.axes.add_patch(rect) # Add rectangle to the plot
             plt.title("QuadTree Decomposition") # Set the plot title
+            plt.xticks([],[])
+            plt.yticks([],[])
         plt.show() # Display the plot
         
     def quad_tree_decomposition(self, img, x, y, minStd, minSize):

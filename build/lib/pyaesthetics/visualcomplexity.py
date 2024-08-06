@@ -30,7 +30,7 @@ except:
 #                                                                             #
 ###############################################################################
 
-def get_visual_complexity_quadtree(image, minStd, minSize, standardized=True):
+def get_visual_complexity_quadtree(image, minStd, minSize, standardized=True, autoadjust=False):
     """
     Calculate the visual complexity of an image using quadtree decomposition.
     It can return the standardized (default) visual complexity, with 1 being the 
@@ -45,11 +45,13 @@ def get_visual_complexity_quadtree(image, minStd, minSize, standardized=True):
     :type minSize: int
     :param standardized: Whether to return standardized complexity.
     :type standardized: bool
+    :param autoadjust: Whether to automatically adjust the minSize parameter.
+    :type autoadjust: bool
     :return: Standardized complexity if `standardized` is True, otherwise the number of blocks.
     :rtype: float or int
     """
     # Perform quadtree decomposition
-    quadtree = quadtreedecomposition.quadTree(image, minStd, minSize)
+    quadtree = quadtreedecomposition.quadTree(image, minStd, minSize, autoadjust)
     
     if(standardized):
         return(quadtree.standardized_complexity)

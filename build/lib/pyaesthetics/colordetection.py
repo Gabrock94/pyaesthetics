@@ -257,7 +257,7 @@ def get_colors_w3c(img, ncolors=16, plot=False, plotncolors=5):
     
     return colorscheme
 
-def get_colors(img, ncolors=16, plot=False, plotncolors=5, clusterfactor = 50):
+def get_colors(img, plot=False, plotncolors=5, clusterfactor = 50):
     """
     Extracts and optionally plots the most frequent colors in an image.
 
@@ -268,7 +268,6 @@ def get_colors(img, ncolors=16, plot=False, plotncolors=5, clusterfactor = 50):
 
     Parameters:
     - img (numpy.ndarray): The input image as a NumPy array of shape (height, width, 3).
-    - ncolors (int): The number of most frequent colors to return. Default is 16.
     - plot (bool): If True, a plot of the top `plotncolors` colors is displayed. Default is False.
     - plotncolors (int): The number of top colors to plot. Default is 5.
     - clusterfactor (int): The factor by which to cluster similar colors. Default is 50.
@@ -325,6 +324,11 @@ if __name__ == '__main__':
     
     # Display the image
     plt.imshow(img)
+
     # Calculate and print the color scheme using 16 W3C colors and plot the results
-    # results = get_colors_w3c(img, ncolors=140, plot=True, plotncolors=5)
-    # print("Color scheme of the image is:", results)
+    results = get_colors_w3c(img, ncolors=140, plot=True, plotncolors=5)
+    print("Color scheme of the image is:", results)
+
+    # Calculate and print the color scheme using RGB colors (reduced to cluster similar colors) and plot the results
+    results = get_colors(img, plot=True, plotncolors=5, clusterfactor = 10)
+    print("Color scheme of the image is:", results)
