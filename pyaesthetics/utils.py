@@ -16,6 +16,7 @@ import cv2 #for image manipulation
 import numpy as np #numerical computation
 import pandas as pd 
 import pytesseract  # Pytesseract for Optical Character Recognition (OCR)
+import rembg
 
 try:
     from . import analysis
@@ -176,6 +177,37 @@ def textdetection(img):
     # Return the length of the extracted text
     return len(text)
 
+def birdeyeview:
+    image_nobg = rembg.remove(image) 
+    
+    # Load image, grayscale, Gaussian blur, Otsu's threshold
+    oh, ow,dept = image.shape #shape of the orignal image
+    img = cv2.cvtColor(image_nobg,cv2.COLOR_BGR2GRAY) #conversion to greyscale
+
+    img = cv2.GaussianBlur(img, (3,3), 0)#apply a Gaussian filter
+    edged = cv2.Canny(img, 10,100) 
+    edged = cv2.dilate(edged, None, iterations=1)
+    edged = cv2.erode(edged, None, iterations=1) #improved edge detection
+
+    # cv2_imshow(edged)
+    cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) #get the contours
+    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
+    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+    displayCnt = None
+    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
+
+    peri = cv2.arcLength(cnts[0], True)
+    approx = cv2.approxPolyDP(cnts[0], 0.02 * peri, True)
+    if len(approx) == 4:
+        displayCnt = approx
+    if(len(approx) > 4):
+        displayCnt = approx[0:4]
+    image_warped = four_point_transform(image, displayCnt.reshape(4, 2))
+    image_warped = cv2.resize(image_warped, (350, 550), interpolation = cv2.INTER_AREA)
+    
+    image_bw = cv2.cvtColor(image_warped, cv2.COLOR_BGR2GRAY)
+
+    return(image, image_nobg, image_warped, image_bw)
 ###############################################################################
 #                                                                             #
 #                                  DEBUG                                      #

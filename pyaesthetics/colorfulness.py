@@ -110,9 +110,9 @@ if __name__ == '__main__':
     sample_img = data_folder + "panda.jpg"
     
     # Read and convert the image
-    img = cv2.imread(img)
+    img = cv2.imread(sample_img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     
     # Print the colorfulness indices
-    print(colorfulnessHSV(img))    
-    print(colorfulnessRGB(img))
+    print(colorfulness_hsv(img))    
+    print(colorfulness_rgb(img))

@@ -8,7 +8,7 @@ The function get_colors_w3c can be used not only to extract the percentage of co
 
 Let's test on a sample image, the pyaesthetics logo.
 
-.. image:: examples/pyaesthetics_small_nt.png
+.. image:: examples/pyaesthetics_small.png
    :width: 300 px
    :align: center
 
@@ -71,7 +71,7 @@ number of colors), we can also analyze the full spectrum of colors. To do so, we
 
 This is definitely more accurate as opposed to the previous two.
 
-.. image:: examples/palette.png
+.. image:: examples/palette_custom.png
    :width: 300 px
    :align: center
 
