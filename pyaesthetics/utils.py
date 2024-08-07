@@ -16,7 +16,6 @@ import cv2 #for image manipulation
 import numpy as np #numerical computation
 import pandas as pd 
 import pytesseract  # Pytesseract for Optical Character Recognition (OCR)
-import rembg
 from imutils.perspective import four_point_transform
 import matplotlib.pyplot as plt 
 
@@ -179,64 +178,6 @@ def textdetection(img):
     # Return the length of the extracted text
     return len(text)
 
-def birdeyeview(image, filter = True):
-    """
-    This function transforms an input image to a bird's eye view perspective by removing the background,
-    detecting edges, and performing a perspective transform.
-
-        :param image: The input image on which the transformation is to be applied, in BGR format.
-        :type image: numpy.ndarray
-        :param filter: If True, applies Gaussian blur and Canny edge detection to the image before contour detection. Default is True.
-        :type filter: bool
-        :return: The warped image with a bird's eye view perspective.
-        :rtype: numpy.ndarray
-        
-    """
-    
-    # Remove background from the image using rembg
-    image = rembg.remove(image) 
-    
-    # Get the shape of the original image
-    oh, ow, dept = image.shape
-
-    # Convert image to grayscale
-    img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    if filter:
-        # Apply Gaussian blur to the image
-        img = cv2.GaussianBlur(img, (3, 3), 0)
-        
-        # Detect edges using Canny edge detector
-        img = cv2.Canny(img, 10, 100)
-        
-        # Apply dilation followed by erosion to improve edge detection
-        img = cv2.dilate(img, None, iterations=1)
-        img = cv2.erode(img, None, iterations=1)
-
-    # Find contours in the image
-    cnts = cv2.findContours(img.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    cnts = cnts[0] if len(cnts) == 2 else cnts[1]
-    
-    # Sort contours by area in descending order
-    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)
-    
-    # Initialize the display contour
-    displayCnt = None
-
-    # Approximate the largest contour to a polygon
-    peri = cv2.arcLength(cnts[0], True)
-    approx = cv2.approxPolyDP(cnts[0], 0.02 * peri, True)
-    
-    # Select the largest contour with 4 points or the first 4 points if more than 4
-    if len(approx) == 4:
-        displayCnt = approx
-    if len(approx) > 4:
-        displayCnt = approx[0:4]
-
-    # Perform a perspective transform to get a bird's eye view
-    image_warped = four_point_transform(image, displayCnt.reshape(4, 2))
-    
-    return(image_warped)
 
 ###############################################################################
 #                                                                             #
