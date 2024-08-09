@@ -12,7 +12,7 @@ Below, an example of the estimation of the brightness of an image, using the BT6
 
 First load the modules you need.
 
->>> #load only the neede functions from the specific module
+>>> #load only the needed functions from the specific module
 >>> from pyaesthetics.brightness import relativeluminance_bt601
 >>> from pyaeshtetics.utils import sRGB2RGB
 >>> import cv2 
