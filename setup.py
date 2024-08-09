@@ -25,7 +25,7 @@ setup(name='pyaesthetics',
             'matplotlib',
             'imutils',
             'pytesseract',
-            'pandas'
+            'pandas',
             'pillow',
             'face-recognition'
         ],
