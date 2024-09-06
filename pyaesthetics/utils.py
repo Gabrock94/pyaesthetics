@@ -146,6 +146,13 @@ def calculate_gradient(image):
 
 
 def runtest():
+    """ This function runs a complete test to verify the integroty
+            of the installation.
+
+        :return: a funny string
+        :rtype: string
+
+    """
     basepath = os.path.dirname(os.path.realpath(__file__))
     # Path to a sample image for debugging   # Set the data path to use sample images
     datafolder = basepath + "/../share/data/"

@@ -16,15 +16,14 @@ affiliations:
  - name: Center for Life Nano- and Neuro-Science, Istituto Italiano di Tecnologia, 00161, Rome, Italy
    index: 1
 
-date: 5 August 2024
+date: 6 September 2024
 bibliography: paper.bib
 ---
 
 # Summary
 
-Neuroaesthetics is an interdisciplinary field that explores the neural mechanisms underlying aesthetic experiences and preferences. It combines insights from neuroscience, psychology, and aesthetics to understand how the brain processes and responds to visual and auditory stimuli, with a particular focus on beauty and artistic expression.
-
-Despite the volume of research, studies often analyze only a limited subset of visual properties. This narrow focus on a few features can be partly attributed to the lack of tools that efficiently estimate a wide range of visual features from images. The current methods can be very time-consuming and lead to significant challenges in result reproducibility due to variations in implementation and feature estimation. The `pyaesthetics` package is designed to streamline and simplify the feature estimation process by providing access to a variety of functions for extracting commonly analyzed visual features.
+Empirical aesthetics is an interdisciplinary research field that aims to understand how people experience, evaluate, and create objects aesthetically, combining insights from psychology and neuroscience and aesthetics. The focus of empirical aesthetics are mainly  visual and auditory stimuli, with a particular focus on beauty and artistic expression.
+Despite the volume of research on visual empirical aesthetics, the majority of the studies studies often analyze only a limited subset of visual properties. This narrow focus on a few features can be partly attributed to the lack of tools that efficiently estimate a wide range of visual features from images. The current methods can be very time-consuming and lead to significant challenges in result reproducibility due to variations in implementation and feature estimation. The `pyaesthetics` package is designed to streamline and simplify the feature estimation process by providing access to a variety of functions for extracting commonly analyzed visual features.
 
 # Statement of Need
 
