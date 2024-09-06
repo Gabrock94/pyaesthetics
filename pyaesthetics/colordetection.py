@@ -253,6 +253,7 @@ def get_colors_w3c(img, ncolors=16, plot=False, plotncolors=5):
         for i in range(plotncolors):
             ax.add_patch(patches.Rectangle((i, 0), 1, 1, facecolor=sorted_data[i][0].lower()))
         plt.xlim(0, plotncolors)
+        plt.axis('off')  # H
         plt.show()
     
     return colorscheme
@@ -331,6 +332,11 @@ if __name__ == '__main__':
     
     # Display the image
     plt.imshow(img)
+    
+    
+    # Calculate and print the color scheme using 16 W3C colors and plot the results
+    results = get_colors_w3c(img, ncolors=16, plot=True, plotncolors=5)
+    print("Color scheme of the image is:", results)
 
     # Calculate and print the color scheme using 16 W3C colors and plot the results
     results = get_colors_w3c(img, ncolors=140, plot=True, plotncolors=5)
