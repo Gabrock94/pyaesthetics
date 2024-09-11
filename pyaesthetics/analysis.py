@@ -126,13 +126,12 @@ def analyze_image(pathToImg, method='fast', resize=True, newSize=(600, 400), min
     # Perform analysis based on the selected method
     if method == 'fast':
         # Fast method: fewer and quicker calculations
-        resultdict["brightness_BT709"] = brightness.relativeLuminance_BT709(imgsRGB2RGB)
+        resultdict["brightness_BT709"] = brightness.relativeluminance_bt709(imgsRGB2RGB)
         resultdict["VC_quadTree"] = visualcomplexity.get_visual_complexity_quadtree(imageBW, minStd, minSize)
         resultdict["Symmetry_QTD"] = symmetry.get_symmetry(imageBW, minStd, minSize)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulness_rgb(imageColor)
-        resultdict["contrast_RMS"] = contrast.contrast_RMS(imageColor)
+        resultdict["contrast_RMS"] = contrast.contrast_rms(imageColor)
         resultdict["saturation"] = saturation.saturation(imageColor)
-        resultdict["linesRatio"] = linesdetection.analyse_lines(imageColor)
 
     elif method == 'complete':
         # Complete method: more detailed and extensive calculations
@@ -164,13 +163,11 @@ def analyze_image(pathToImg, method='fast', resize=True, newSize=(600, 400), min
     # Return the result dictionary
     return resultdict
 
-
 ###############################################################################
 #                                                                             #
 #                                   DEBUG                                     #
 #                                                                             #
 ###############################################################################
-
 
 if __name__ == '__main__':
     basepath = os.path.dirname(os.path.realpath(__file__))
@@ -182,7 +179,7 @@ if __name__ == '__main__':
     sample_img = data_folder + "panda.jpg"
     
     # Analyze the sample image using the 'complete' method
-    results = analyze_image(sample_img, method='complete')
+    results = analyze_image(sample_img, method='fast')
     # Print the analysis results
     print(results)
 
