@@ -1,8 +1,10 @@
+face-recognition
+imutils
+matplotlib
 numpy
 opencv-python
-scipy
-matplotlib
-imutils
+pandas
+pillow
 pytesseract
-pandaspillow
-face-recognition
+remb
+scipy

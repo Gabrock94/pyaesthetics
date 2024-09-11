@@ -253,6 +253,7 @@ def get_colors_w3c(img, ncolors=16, plot=False, plotncolors=5):
         for i in range(plotncolors):
             ax.add_patch(patches.Rectangle((i, 0), 1, 1, facecolor=sorted_data[i][0].lower()))
         plt.xlim(0, plotncolors)
+        plt.axis('off')  # H
         plt.show()
     
     return colorscheme
@@ -277,8 +278,16 @@ def get_colors(img, plot=False, plotncolors=5, clusterfactor = 50):
     """
     
     # Reshape the image array to a list of RGB values
-    data = img.reshape(img.shape[0] * img.shape[1], 3)
+    data = img[:, :, :3].reshape(img.shape[0] * img.shape[1], 3)
     
+    # Handle alpha channel
+    if img.shape[2] == 4:
+        alpha = img[:, :, 3]
+        # Exclude completely transparent pixels (alpha == 0) from distance calculation
+        mask = alpha > 100 
+        mask = mask.ravel()
+        data = np.array(data)[mask]
+        
     # Apply clustering by rounding the RGB values based on clusterfactor
     data = data // clusterfactor
     data = data.astype(int)
@@ -300,8 +309,6 @@ def get_colors(img, plot=False, plotncolors=5, clusterfactor = 50):
     
     return sorted_data
 
-
-
 ###############################################################################
 #                                                                             #
 #                                   DEBUG                                     #
@@ -316,14 +323,20 @@ if __name__ == '__main__':
     
     # Path to a sample image
     sample_img = data_folder + "panda.jpg"
-    sample_img = "/home/giulio/Repositories/pyaesthetics/docs/examples/guardianscreen.png"
+    sample_img = "/home/giulio/Repositories/pyaesthetics/docs/examples/pyaesthetics_small.png"
+
     
     # Read and preprocess the sample image
     img = cv2.imread(sample_img, cv2.IMREAD_UNCHANGED)
-    img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGB)
+    img = cv2.cvtColor(img, cv2.COLOR_BGRA2RGBA)
     
     # Display the image
     plt.imshow(img)
+    
+    
+    # Calculate and print the color scheme using 16 W3C colors and plot the results
+    results = get_colors_w3c(img, ncolors=16, plot=True, plotncolors=5)
+    print("Color scheme of the image is:", results)
 
     # Calculate and print the color scheme using 16 W3C colors and plot the results
     results = get_colors_w3c(img, ncolors=140, plot=True, plotncolors=5)

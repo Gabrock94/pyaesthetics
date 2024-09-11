@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "pyaesthetics"
+version = "0.0.8.3"
+description = "A python package to estimate visual features about the aesthetic appearance of still images."
+authors = ["Giulio Gabrieli <gack94@gmail.com>"]
+license = "GPL-3.0"
+
+[project.urls]
+homepage = "https://github.com/Gabrock94/pyaesthetics"
+documentation = "https://prettywebsite.readthedocs.io/en/latest/?badge=latest"
+source = "https://github.com/Gabrock94/pyaesthetics"
+download = "https://pypi.org/project/pyaesthetics/#files"
+tracker = "https://github.com/Gabrock94/pyaesthetics/issues"
+"release notes" = "https://github.com/Gabrock94/pyaesthetics/releases"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^2.0"
+scipy = "^1.14"
+matplotlib = "^3.9"
+imutils = "^0.5"
+pandas = "^2.2"
+opencv-python = "^4.10"
+pytesseract = "^0.3"
+pillow = "^10.4"
+face-recognition = "^1.3"
+scikit-image = "^0.24"
+tqdm = "^4.66"
+rembg = "^2.0.59"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

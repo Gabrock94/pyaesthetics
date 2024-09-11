@@ -23,8 +23,7 @@ try:
     from . import analysis
 except:
     import analysis
-    
-    
+
 def sRGB2RGB(img):
     """ this function converts a sRGB img to linear RGB values.
     
@@ -185,7 +184,6 @@ def textdetection(img):
     # Return the length of the extracted text
     return len(text)
 
-
 ###############################################################################
 #                                                                             #
 #                                  DEBUG                                      #
@@ -201,8 +199,8 @@ if __name__ == "__main__":
     
     # Path to a sample image
     sample_img = data_folder + "panda.jpg"
-    sample_img = "/home/giulio/Repositories/pyaesthetics/docs/examples/book.jpg"
+    sample_img = "/home/giulio/Documents/whisky.jpg"
     
     img = cv2.imread(sample_img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    plt.imshow(birdeyeview(img))
+    

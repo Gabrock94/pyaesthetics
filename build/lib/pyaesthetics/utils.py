@@ -16,6 +16,8 @@ import cv2 #for image manipulation
 import numpy as np #numerical computation
 import pandas as pd 
 import pytesseract  # Pytesseract for Optical Character Recognition (OCR)
+from imutils.perspective import four_point_transform
+import matplotlib.pyplot as plt 
 
 try:
     from . import analysis
@@ -144,6 +146,13 @@ def calculate_gradient(image):
 
 
 def runtest():
+    """ This function runs a complete test to verify the integroty
+            of the installation.
+
+        :return: a funny string
+        :rtype: string
+
+    """
     basepath = os.path.dirname(os.path.realpath(__file__))
     # Path to a sample image for debugging   # Set the data path to use sample images
     datafolder = basepath + "/../share/data/"
@@ -176,6 +185,7 @@ def textdetection(img):
     # Return the length of the extracted text
     return len(text)
 
+
 ###############################################################################
 #                                                                             #
 #                                  DEBUG                                      #
@@ -184,6 +194,15 @@ def textdetection(img):
 """ For debug purposes."""
 
 if __name__ == "__main__":
-    pass
+    basepath = os.path.dirname(os.path.realpath(__file__))
 
-
+    # Path to a sample image for debugging   # Set the data path to use sample images
+    data_folder = basepath + "/../share/data/"
+    
+    # Path to a sample image
+    sample_img = data_folder + "panda.jpg"
+    sample_img = "/home/giulio/Repositories/pyaesthetics/docs/examples/book.jpg"
+    
+    img = cv2.imread(sample_img)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    plt.imshow(birdeyeview(img))

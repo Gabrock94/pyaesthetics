@@ -38,6 +38,7 @@ share/data/coffee.jpg
 share/data/haarcascade_frontalface_default.xml
 share/data/jade.png
 share/data/jade2.png
+share/data/noise.jpg
 share/data/panda.jpg
 share/data/pandasymmetric.jpg
 share/data/sample.jpg
