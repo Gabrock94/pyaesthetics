@@ -1,4 +1,4 @@
-.. _brightnessadjustment:
+.. _brightnessadjusment:
 
 Brightness adjustment
 =========================
