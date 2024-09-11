@@ -7,5 +7,4 @@ In this page, a few different examples of usage as provided.
 
 :ref:`cakedLisa`
 
-
-:ref:`brightnessAdjustments`
+:ref:`brightnessadjustment`
