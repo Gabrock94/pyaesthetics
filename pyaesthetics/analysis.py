@@ -102,7 +102,9 @@ def analyze_image(pathToImg, method='fast', resize=True, newSize=(600, 400), min
         :return: dictionary containing the analysis results
         :rtype: dict
     """
-
+    if method not in ['fast','complete']:
+        raise ValueError(f'The specified method "{method}" is not supported. Method must be either fast or complete')
+        
     resultdict = {}
     # Read the image from the provided path
     img = cv2.imread(pathToImg)
@@ -179,7 +181,7 @@ if __name__ == '__main__':
     sample_img = data_folder + "panda.jpg"
     
     # Analyze the sample image using the 'complete' method
-    results = analyze_image(sample_img, method='fast')
+    results = analyze_image(sample_img, method='complete')
     # Print the analysis results
     print(results)
 
