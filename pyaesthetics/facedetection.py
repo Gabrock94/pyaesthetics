@@ -100,7 +100,7 @@ if __name__ == '__main__':
     data_folder = basepath + "/../share/data/"
     
     # Path to a sample image
-    sample_img = data_folder + "panda.jpg"
+    sample_img = data_folder + "face1.png"
     
     # Read the sample image
     img = cv2.imread(sample_img)
@@ -112,7 +112,7 @@ if __name__ == '__main__':
     faces = detect_faces_cv2(img, plot=True)
     
     # Print the number of faces detected
-    # print("Number of faces in the picture is:", len(faces))
+    print("Number of faces in the picture is:", len(faces))
 
     # Detect faces in the image and plot the results
     faces = detect_faces(sample_img, plot=True)

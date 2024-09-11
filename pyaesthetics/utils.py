@@ -156,7 +156,7 @@ def runtest():
     # Path to a sample image for debugging   # Set the data path to use sample images
     datafolder = basepath + "/../share/data/"
     # Path to a sample image
-    sampleImg = datafolder + "books.jpg"
+    sampleImg = datafolder + "test.png"
     # Analyze the sample image using the 'complete' method
     print('Running test')
     analysis.analyze_image(sampleImg, method='complete')
@@ -199,8 +199,9 @@ if __name__ == "__main__":
     
     # Path to a sample image
     sample_img = data_folder + "panda.jpg"
-    sample_img = "/home/giulio/Documents/whisky.jpg"
     
     img = cv2.imread(sample_img)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    
+    runtest()
     
