@@ -1,4 +1,4 @@
-.. _cakedLisa:
+.. _brightnessadjustment:
 
 Brightness adjustment
 =========================
