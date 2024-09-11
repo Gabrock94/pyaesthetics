@@ -137,6 +137,6 @@ Now that the images have been preprocessed, we can perform the quadratic tree de
    :width: 400 px
    :align: center
 
-   .. image:: examples/qtdbook2.png
+.. image:: examples/qtdbook2.png
    :width: 400 px
    :align: center
