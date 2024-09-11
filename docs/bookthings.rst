@@ -6,7 +6,7 @@ Visual Complexity of books' cover
 In this tutorial we will analyze the visual complexity of two books' cover. We will start from two images taken in the wild, we will remove the background, interpolate the cover, and subsequently evaluate the visual complexity of the two covers.
 
 Please note that this tutorial uses rembg `https://github.com/danielgatis/rembg <https://github.com/danielgatis/rembg>`_ to remove the backgound. 
-If you are having issues getting rembg working with numpy>=2, please use a nightly version (see `https://github.com/microsoft/onnxruntime/issues/21063 <https://github.com/microsoft/onnxruntime/issues/21063>`  for more details):
+If you are having issues getting rembg working with numpy>=2, please use a nightly version (see `https://github.com/microsoft/onnxruntime/issues/21063 <https://github.com/microsoft/onnxruntime/issues/21063>`_ for more details):
 
 >>> python -m pip install coloredlogs flatbuffers numpy packaging protobuf sympy
 >>> python -m pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ ort_nightly
@@ -86,11 +86,13 @@ Then, we define a function to preprocess our images.
 >>>     return([image, image_nobg, warped_image, warped_gray])
 
 We can then preprocess our images:
+
 >>> # Preprocess images
 >>> book1, book1_nobg, book1_warped, book1_bw = preprocess_image(path_to_book1)
 >>> book2, book2_nobg, book2_warped, book2_bw = preprocess_image(path_to_book2)
 
 We can now visualize the results of the background removal and bird-eye view transform.
+
 >>> # Display results
 >>> fig = plt.figure('Image Processing Examples')
 >>> plt.clf()
@@ -122,7 +124,7 @@ We can now visualize the results of the background removal and bird-eye view tra
 >>> plt.show()
 
 .. image:: examples/Image_Processing_Examples.png
-   :width: 400 px
+   :width: 700 px
    :align: center
 
 Now that the images have been preprocessed, we can perform the quadratic tree decomposition.
