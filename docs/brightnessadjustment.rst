@@ -106,5 +106,5 @@ Subsequently, we loop again through the images and adjust the brightness until i
 >>> plt.tight_layout()
 
 .. image:: examples/brightnessAdjustments.png
-   :width: 300 px
+   :width: 400 px
    :align: center
