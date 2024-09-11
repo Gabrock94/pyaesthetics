@@ -154,9 +154,9 @@ def runtest():
     """
     basepath = os.path.dirname(os.path.realpath(__file__))
     # Path to a sample image for debugging   # Set the data path to use sample images
-    datafolder = basepath + "/../share/data/"
+    datafolder = basepath + "/data/"
     # Path to a sample image
-    sampleImg = datafolder + "test.png"
+    sampleImg = datafolder + "face1.png"
     # Analyze the sample image using the 'complete' method
     print('Running test')
     analysis.analyze_image(sampleImg, method='complete')
