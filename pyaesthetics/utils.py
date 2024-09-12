@@ -188,6 +188,40 @@ def textdetection(img):
     # Return the length of the extracted text
     return len(text)
 
+def tablify_results(results_dict):
+    """This function converts a dictionary of results into a pandas DataFrame, 
+       where keys become column headers and values are the corresponding row data.
+
+       :param results_dict: A dictionary containing result data. Can include nested dictionaries.
+       :type results_dict: dict
+       :return: A pandas DataFrame with one row containing the values from the dictionary.
+       :rtype: pandas.DataFrame
+    """
+    # Initialize empty lists to store column names and their corresponding values
+    cols = []
+    values = []
+    
+    # Iterate over the dictionary keys
+    for key in results_dict.keys():
+        # If the value is a nested dictionary, iterate over its keys
+        if type(results_dict[key]) == dict:
+            for subkey in results_dict[key].keys():
+                # Create new column names by combining the outer and inner keys
+                cols.append(key + '_' + subkey)
+                # Append the corresponding value
+                values.append(results_dict[key][subkey])
+        else:
+            # For non-nested keys, directly append the key and value
+            cols.append(key)
+            values.append(results_dict[key])
+    
+    # Create a DataFrame with the collected values and column names
+    results_table = pd.DataFrame([values], columns=cols)
+    
+    # Return the results as a pandas DataFrame
+    return results_table
+
+
 ###############################################################################
 #                                                                             #
 #                                  DEBUG                                      #

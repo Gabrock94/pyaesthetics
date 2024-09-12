@@ -66,6 +66,7 @@ def get_visual_complexity_gradient(image):
     :param image: Input image (color).
     :return: Mean of the merged gradient magnitudes.
     """
+    
     # Resize the image to 1024x1024
     image = cv2.resize(image, (1024, 1024), interpolation=cv2.INTER_CUBIC)
     
@@ -81,6 +82,7 @@ def get_visual_complexity_gradient(image):
     grad_b = utils.calculate_gradient(b)
     
     # Merge the gradients by taking the maximum value for each pixel
+    
     merged_gradient = np.maximum(np.maximum(grad_L, grad_a), grad_b)
     
     # Return the mean of the merged gradient magnitudes

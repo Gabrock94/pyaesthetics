@@ -21,6 +21,7 @@ import cv2  # OpenCV library for image processing
 import matplotlib.pyplot as plt  # Matplotlib for plotting images
 import pytesseract  # Pytesseract for Optical Character Recognition (OCR)
 from PIL import Image  # Python Imaging Library for image processing
+import pandas as pd #for pandas tables
 
 # Attempt to import internal modules of pyaesthetics, handling both relative and absolute imports
 try:
@@ -170,6 +171,7 @@ def analyze_image(pathToImg, method='fast', resize=True, newSize=(600, 400), min
 #                                                                             #
 ###############################################################################
 
+
 if __name__ == '__main__':
     basepath = os.path.dirname(os.path.realpath(__file__))
 
@@ -183,4 +185,6 @@ if __name__ == '__main__':
     results = analyze_image(sample_img, method='complete')
     # Print the analysis results
     print(results)
+    
+    print(utils.tablify_results(results).transpose())
 

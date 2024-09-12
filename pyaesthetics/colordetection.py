@@ -236,22 +236,24 @@ def get_colors_w3c(img, ncolors=16, plot=False, plotncolors=5):
         
     # Calculate the percentage of each color
     unique_colors, counts = np.unique(colorscheme, return_counts=True)
-    colorscheme = sorted([[c, count / len(colorscheme) * 100] for c, count in zip(unique_colors, counts)])
+    colorscheme = dict(sorted([[str(c), float(count / len(colorscheme) * 100)] for c, count in zip(unique_colors, counts)]))
     
     # Add missing colors with 0% presence
     missingcolors = list(set(colors) - set(unique_colors))
     for color in missingcolors:
-        colorscheme.append([color, 0.0])
+        colorscheme[color] =  0.0
     
-    colorscheme = sorted(colorscheme)
+    
+    colorscheme = {k: v for k, v in sorted(colorscheme.items(), key=lambda item: item[1], reverse=True)}
+    # print(colorscheme)
     
     # Plot the color palette if required
     if plot:
-        sorted_data = sorted(colorscheme, key=lambda x: x[1], reverse=True)
+        # print()
         fig, ax = plt.subplots()
         plt.suptitle(f'Top {plotncolors} colors ({ncolors} colors mode)')
         for i in range(plotncolors):
-            ax.add_patch(patches.Rectangle((i, 0), 1, 1, facecolor=sorted_data[i][0].lower()))
+            ax.add_patch(patches.Rectangle((i, 0), 1, 1, facecolor=list(colorscheme.keys())[i].lower()))
         plt.xlim(0, plotncolors)
         plt.axis('off')  # H
         plt.show()
@@ -343,4 +345,4 @@ if __name__ == '__main__':
 
     # Calculate and print the color scheme using RGB colors (reduced to cluster similar colors) and plot the results
     results = get_colors(img, plot=True, plotncolors=5, clusterfactor = 10)
-    print("Color scheme of the image is:", results)
+    # print("Color scheme of the image is:", results)

@@ -18,3 +18,4 @@ __version__ = '0.0.8.7' #Version Control
 
 print("Thank you for using pyaesthetics. If you use it in your work, please cite:")
 print("Gabrieli, G., Bornstein, M. H., Setoh, P., & Esposito, G. (2023). Machine learning estimation of users’ implicit and explicit aesthetic judgments of web-pages. Behaviour & Information Technology, 42(4), 392-402.")
+
