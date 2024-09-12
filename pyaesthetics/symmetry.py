@@ -79,13 +79,14 @@ def get_symmetry(img, minStd, minSize, plot=False):
 """ For debug purposes. """
 
 if __name__ == '__main__':
+    
     basepath = os.path.dirname(os.path.realpath(__file__))
 
     # Path to a sample image for debugging   # Set the data path to use sample images
-    data_folder = basepath + "/../share/data/"
+    data_folder = basepath + "/data/"
     
     # Path to a sample image
-    sample_img = data_folder + "panda.jpg"
+    sample_img = data_folder + "face1.png"
     
     minStd = 5 # Min STD of each block
     minSize = 20 # Min size of each block

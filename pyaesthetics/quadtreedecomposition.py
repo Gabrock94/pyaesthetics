@@ -212,10 +212,10 @@ if __name__ == '__main__':
     basepath = os.path.dirname(os.path.realpath(__file__))
 
     # Path to a sample image for debugging   # Set the data path to use sample images
-    data_folder = basepath + "/../share/data/"
+    data_folder = basepath + "/data/"
     
     # Path to a sample image
-    sample_img = data_folder + "panda.jpg"
+    sample_img = data_folder + "face1.png"
 
     minStd = 20 #Minimum standard deviation for each block
     minSize = 30 # Minimum size of each block in pixels

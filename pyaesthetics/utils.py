@@ -4,7 +4,7 @@
 This modules contains different utilities  that are used across different modules in pyaesthetics.
 
 Created on Fri Aug 2 10:51:17 2024
-Last Edited on Sat Aug 3 11:53:30 2024
+Last Edited on Wed Sep 11 18:53:30 2024
 
 @author: Giulio Gabrieli (gack94@gmail.com)
 """

@@ -97,7 +97,7 @@ print(results)
 ```
 
 ## Documentation
-The updated documentation of pyaesthetics, its modules, as well as a getting started guide and a list of examples can be found on [Read the Docs](https://prettywebsite.readthedocs.io/en/latest/). The documentation of each release version of CLIMADA can be accessed separately through the drop-down menu at the bottom of the left sidebar. 
+The updated documentation of pyaesthetics, its modules, as well as a getting started guide and a list of examples can be found on [Read the Docs](https://prettywebsite.readthedocs.io/en/latest/). The documentation of each release version of pyaesthetics can be accessed separately through the drop-down menu at the bottom of the left sidebar. 
 
 ## Requirements
 In order to work correctly, pyaesthetics requires the installation of the following packages.

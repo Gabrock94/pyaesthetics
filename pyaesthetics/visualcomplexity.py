@@ -103,21 +103,23 @@ def get_visual_complexity_weight(path_to_image):
 ###############################################################################
 
 if __name__ == '__main__':
+    
     basepath = os.path.dirname(os.path.realpath(__file__))
 
-    # Set the data path to use sample images
-    datafolder = os.path.join(basepath, "../share/data/")
+    # Path to a sample image for debugging   # Set the data path to use sample images
+    data_folder = basepath + "/data/"
     
     # Path to a sample image
-    sample_img_path = os.path.join(datafolder, "panda.jpg")
+    sample_img = data_folder + "face1.png"
 
     # Read the sample image in color and grayscale
-    image = cv2.imread(sample_img_path)
-    image_bw = cv2.imread(sample_img_path, 0)
+    image = cv2.imread(sample_img)
+    image_bw = cv2.imread(sample_img, 0)
 
     # Analyze the sample image using quadtree decomposition and gradient magnitude methods
     qt_complexity = get_visual_complexity_quadtree(image_bw, minStd=10, minSize=20)
     grad_complexity = get_visual_complexity_gradient(image)
+    weight_complexity = get_visual_complexity_weight(sample_img)
     
     # Print the analysis results
-    print(qt_complexity, grad_complexity)
+    print(qt_complexity, grad_complexity, weight_complexity)
