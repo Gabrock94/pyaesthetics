@@ -23,7 +23,7 @@ try:
     from . import analysis
 except:
     import analysis
-
+    
 def sRGB2RGB(img):
     """ this function converts a sRGB img to linear RGB values.
     
@@ -37,13 +37,17 @@ def sRGB2RGB(img):
     """
 
     img = img.flatten()
+    
     def converter(p):
         if(p < 0.04045):
             return(p/3294.6)
         else:
             return((((p/255) + 0.055) / 1.055)**2.4)
 
-    newimg = pd.Series(img).apply(converter).to_numpy()
+    newimg = np.stack(np.vectorize(converter)(img), axis=0)
+
+    # newimg = pd.Series(img).apply(converter)
+    
     return(newimg)
 
 def find_parent_node(i):

@@ -38,7 +38,6 @@ try:
     from . import utils
     from . import visualcomplexity
 except:
-    import analysis
     import brightness
     import colordetection
     import colorfulness
