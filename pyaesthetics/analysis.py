@@ -145,9 +145,9 @@ def analyze_image(pathToImg, method='fast', resize=True, newSize=(600, 400), min
         resultdict["Colorfulness_HSV"] = colorfulness.colorfulness_hsv(imageColor)
         resultdict["Colorfulness_RGB"] = colorfulness.colorfulness_rgb(imageColor)
         resultdict["FacesCv2"] = facedetection.detect_faces_cv2(imageColor)
-        resultdict["FacesFd"] = facedetection.detect_faces(pathToImg)
+        # resultdict["FacesFd"] = facedetection.detect_faces(pathToImg)
         resultdict["Number_of_Faces_Cv2"] = len(resultdict["FacesCv2"])
-        resultdict["Number_of_Faces_fd"] = len(resultdict["FacesFd"])
+        # resultdict["Number_of_Faces_fd"] = len(resultdict["FacesFd"])
         resultdict["Colors"] = colordetection.get_colors_w3c(imageColor, ncolors=140)
         A = spacebaseddecomposition.get_areas(imageColor_O)
         Adict = spacebaseddecomposition.text2image_ratio(A)
@@ -180,7 +180,7 @@ if __name__ == '__main__':
     sample_img = data_folder + "face1.png"
     
     # Analyze the sample image using the 'complete' method
-    results = analyze_image(sample_img, method='fast')
+    results = analyze_image(sample_img, method='complete')
     # Print the analysis results
     print(results)
 
