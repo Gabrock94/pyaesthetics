@@ -123,7 +123,7 @@ def get_self_similarity(image, methods=['ground', 'parent', 'neighbors', 'anisot
     results = {}
     
     # Resize the image to a standard size
-    image = cv2.resize(image, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+    image = cv2.resize(image, (512, 512), interpolation=cv2.INTER_CUBIC)
     
     # Convert the image to LAB color space
     lab_image = cv2.cvtColor(image, cv2.COLOR_BGR2Lab)
