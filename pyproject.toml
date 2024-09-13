@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyaesthetics"
-version = "0.0.8.8"
+version = "0.0.8.9"
 description = "A python package to estimate visual features about the aesthetic appearance of still images."
 authors = ["Giulio Gabrieli <gack94@gmail.com>"]
 license = "GPL-3.0"
