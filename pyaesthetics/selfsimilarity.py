@@ -7,7 +7,7 @@ Statistical image properties of print advertisements, visual artworks, and image
 Frontiers in Psychology, 4, 808.
 
 Created on Sat Aug 3 11:34:57 2024
-Last edited on Sat Aug 3 14:09:43 2024
+Last edited on Fri Sep 13 16:30:43 2024
 
 @author: Giulio Gabrieli (gack94@gmail.com)
 """
@@ -69,11 +69,17 @@ def calculate_hog(image, orientations=16, pixels_per_cell=(16, 16), cells_per_bl
     Calculate the Histogram of Oriented Gradients (HOG) for a given image.
     
     :param image: Input image.
+    :type image: numpy.ndarray
     :param orientations: Number of orientation bins.
+    :type orientation: int
     :param pixels_per_cell: Size (in pixels) of a cell.
+    :type pixels_per_cell: tuple
     :param cells_per_block: Number of cells in each block.
+    type cells_per_block: tuple 
     :param visualize: Whether to return an image of the HOG.
+    :type visualize: bool
     :return: HOG feature vector and HOG image (if visualize is True).
+    :rtype: numpy.ndarray
     """
     hog_features, hog_image = hog(image, orientations=orientations, pixels_per_cell=pixels_per_cell,
                                   cells_per_block=cells_per_block, visualize=visualize, block_norm='L2-Hys')
@@ -84,8 +90,11 @@ def bin_hog_features(hog_features, n_bins):
     Bin the HOG features into n bins.
     
     :param hog_features: HOG feature vector.
+    :type hog_features: numpy.ndarray
     :param n_bins: Number of bins.
+    :type n_bins: int
     :return: Binned HOG feature vector.
+    :rtype: numpy.ndarray
     """
     # Calculate the size of each bin
     bin_size = len(hog_features) // n_bins
@@ -103,7 +112,9 @@ def plot_hog_histogram(binned_hog_features, n_bins):
     Plot the histogram of the binned HOG features.
     
     :param binned_hog_features: Binned HOG feature vector.
+    :type hog_features: numpy.ndarray
     :param n_bins: Number of bins.
+    :type n_bins: int
     """
     plt.figure(figsize=(10, 6))
     plt.bar(range(n_bins), binned_hog_features, align='center', alpha=0.7)
@@ -112,13 +123,16 @@ def plot_hog_histogram(binned_hog_features, n_bins):
     plt.title('Histogram of Oriented Gradients (HOG) with 16 Bins')
     plt.show()
 
-def get_self_similarity(image, methods=['ground', 'parent', 'neighbors', 'anisotropy']):
+def get_self_similarity(image, methods=['ground', 'parent', 'neighbors', 'anisotropy'], resize=True, newsize = (512, 512)):
     """
     Calculate the self-similarity and anisotropy of an image using HOG features.
 
     :param image: Input image.
+    :type image: numpy.ndarray
     :param methods: List of methods to calculate self-similarity. Options are 'ground', 'parent', 'neighbors', 'anisotropy'.
+    :type methods: list
     :return: Dictionary of self-similarity measures.
+    :rtype: dict
     """
     results = {}
     

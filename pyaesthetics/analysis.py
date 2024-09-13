@@ -5,7 +5,7 @@ This is an entrypoint for the automatic analysis of images using pyaesthetics.
 
 
 Created on Mon Apr 16 22:40:46 2018
-Last edited on Fri Aug 2 09:53:57 2024
+Last edited on Fri Sep 13 16:30:00 2024
 
 @author: Giulio Gabrieli (gack94@gmail.com)
 """
