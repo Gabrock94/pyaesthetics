@@ -95,6 +95,8 @@ path_to_img = "/path/to/image/image.jpg"
 results = pyaesthetics.analysis.analyze_image(path_to_img, method="complete")
 print(results)
 ```
+## Colab Demo
+A simple demo that explain how to install the package, verify the installation, and run an analysis is available as [IPython Notebook](https://colab.research.google.com/drive/1courg5alLiyBcaIg2SMuDMsJOw2mfTJm?usp=sharing). 
 
 ## Documentation
 The updated documentation of pyaesthetics, its modules, as well as a getting started guide and a list of examples can be found on [Read the Docs](https://prettywebsite.readthedocs.io/en/latest/). The documentation of each release version of pyaesthetics can be accessed separately through the drop-down menu at the bottom of the left sidebar. 
