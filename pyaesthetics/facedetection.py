@@ -17,7 +17,6 @@ import os
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-import face_recognition
 from PIL import Image
 
 ###############################################################################
@@ -54,39 +53,6 @@ def detect_faces_cv2(img, plot=False):
     # Return the list of detected faces
     return faces
 
-# TODO: Wait for patch
-# def detect_faces(imgpath, plot=False, model='hog'):
-#     """ This function uses face-recognition to detect faces in a picture.
-#         By default it uses the hog method. cnn method can be passed as model parameter.
-    
-#         :param img: path to the image to analyze
-#         :type img: string
-#         :param plot: whether to plot or not the results
-#         :type plot: bool
-#         :param model: which model to use for the detection of faces (hog or cnn). Default is 'hog'.
-#         :type model: string
-#         :return: list of detected faces as rectangles
-#         :rtype: list
-#     """
-
-#     # Convert the image to grayscale as Haar cascades work better on grayscale images
-#     image = face_recognition.load_image_file(imgpath)
-#     faces = face_recognition.face_locations(image, model=model)
-#     # If plot is True, draw rectangles around detected faces and display the image
-#     if plot:
-#         for top, right, bottom, left in faces:
-#             cv2.rectangle(image, (left, top), (right, bottom), (255, 0, 0), 2)
-#             plt.imshow(image)
-
-#     # if plot:
-#     #     for top, right, bottom, left in faces:
-#     #     # You can access the actual face itself like this:
-#     #         face_image = image[top:bottom, left:right]
-#     #         pil_image = Image.fromarray(face_image)
-#     #         pil_image.show()
-        
-#     # Return the list of detected faces
-#     return faces
 
 ###############################################################################
 #                                                                             #
@@ -115,9 +81,6 @@ if __name__ == '__main__':
     
     # Print the number of faces detected
     print("Number of faces in the picture is:", len(faces))
-
-    # Detect faces in the image and plot the results
-    # faces = detect_faces(sample_img, plot=True)
     
     # Print the number of faces detected
     print("Number of faces in the picture is:", len(faces))

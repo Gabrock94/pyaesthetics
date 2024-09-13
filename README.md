@@ -110,7 +110,6 @@ In order to work correctly, pyaesthetics requires the installation of the follow
 - imutils
 - pytesseract
 - pillow
-- face-recognition
 - scikit-image
 
 ## Contacts
