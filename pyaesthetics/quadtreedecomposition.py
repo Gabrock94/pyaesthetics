@@ -34,7 +34,7 @@ class quadTree:
     blocks divided by the total possible number of blocks is stored in `self.standardized_complexity`. 
     Standardized complexity may range from 0 to 1 (with one being the highest complexity possible).
     The minSize parameter can be automatically adjusted to the common divisor of image width and height closest 
-    to the imputted minSize via the `autoadjust` parameter (default to False). The adjusted `minSize` can be 
+    to the inputted minSize via the `autoadjust` parameter (default to False). The adjusted `minSize` can be 
     obtained (if `autoadjust` = True) by accessing self.minSize.
     """
     

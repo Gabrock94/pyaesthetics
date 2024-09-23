@@ -77,7 +77,7 @@ To test your installation you can run:
 >>> import pyaesthetics
 >>> pyaesthetics.utils.runtest()
 
-If no error is reported, your installation is sucessful. 
+If no error is reported, your installation is successful. 
 
 Updating pyaeshtetics
 ***************************
@@ -106,7 +106,7 @@ Scientific Publications that used pyaesthetic
 * Music A., Maerten A., Wagemans J. (2023).Beautification of images by generative adversarial networks. Journal of Vision 2023;23(10):14.
 * Liu, Q., Zhu, S., Zhou, X., Liu, F., Becker, B., Kendrick, K. M., & Zhao, W. (2024). Mothers and fathers show different neural synchrony with their children during shared experiences. NeuroImage, 288, 120529.
 
-Theses
+Thesis
 *********************
 * Gabrieli G. (2018), Using users' physiological response to predict aesthetic experience of websites, Master Degree in Human-Computer Interaction, University of Trento (Italy)
 * Veldhuizen M. (2024), Analyzing the Role of Aesthetic Features in Packaging Designs  on Consumer Responses: The Case of Specialty Coffee, Master Degree in Communication Science, Vrije Universiteit (Netherlands)

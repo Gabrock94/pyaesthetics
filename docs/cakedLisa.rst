@@ -3,7 +3,7 @@
 Mona Lisa vs Caked Lisa
 =========================
 
-In May 2022 a man was arrested after he smeared the protective glass of Leonardo's famous panting with a cake.
+In May 2022 a man was arrested after he smeared the protective glass of Leonardo's famous painting with a cake.
 Pictures of the Mona Lisa covered in Cake were taken by visitors of the Louvre Museum, and rapidly published online. 
 
 .. image:: examples/guardianscreen.png
@@ -40,7 +40,7 @@ Then we defined required files and paths.
 
 >>> # Define the path to the different files and folders
 >>> BASEPATH = 'path/to/project/'
->>> DB = BASEPATH + 'Raw/db.csv' #ratings' databse
+>>> DB = BASEPATH + 'Raw/db.csv' #ratings' database
 >>> PAINTINGS = BASEPATH + 'Raw/paintings/' #folder with paintings' images
 >>> PROCESSED = BASEPATH + 'Processed/' #empty folder for processed data
 

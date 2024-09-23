@@ -49,10 +49,10 @@ pip install --user --upgrade pyaesthetics
 
 
 ### Verifying the installation
-To verify wether all the modules are working correctly, you can run:
+To verify whether all the modules are working correctly, you can run:
 
 ```python
-#load only the neede functions from the specific module
+#load only the needed functions from the specific module
 import pyaesthetics
 pyaesthetics.utils.runtest()
 ```
@@ -60,10 +60,10 @@ pyaesthetics.utils.runtest()
 ## Example
 pyaeshtetics modules can be used one at the time to estimate one specific feature, or they can be automatically called using an automated entrypoint that calls all the available modules at once. 
 
-### Example 1: one single feature (e.g. Brigthness BT601)
+### Example 1: one single feature (e.g. Brightness BT601)
 
 ```python
-#load only the neede functions from the specific module
+#load only the needed functions from the specific module
 from pyaesthetics.brightness import relativeluminance_bt601
 from pyaeshtetics.utils import sRGB2RGB
 import cv2 #to open and handle images
@@ -137,7 +137,7 @@ Pyaesthetics has been used in different scientific publication. The most relevan
 - Music A., Maerten A., Wagemans J. (2023).*Beautification of images by generative adversarial networks*. Journal of Vision 2023;23(10):14.
 - Liu, Q., Zhu, S., Zhou, X., Liu, F., Becker, B., Kendrick, K. M., & Zhao, W. (2024). Mothers and fathers show different neural synchrony with their children during shared experiences. NeuroImage, 288, 120529.
 
-### Theses
+### Thesis
 - Gabrieli G. (2018), Using users' physiological response to predict aesthetic experience of websites, Master Degree in Human-Computer Interaction, University of Trento (Italy)
 - Veldhuizen M. (2024), Analyzing the Role of Aesthetic Features in Packaging Designs  on Consumer Responses: The Case of Specialty Coffee, Master Degree in Communication Science, Vrije Universiteit (Netherlands)
 
