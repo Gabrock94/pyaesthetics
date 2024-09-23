@@ -85,3 +85,7 @@ While to run a complete analysis, you can use the following snippet:
 >>> #perform a subset of the analysis using standard parameters
 >>> results = pyaesthetics.analysis.analyze_image(path_to_img, method="complete") 
 >>> print(results)
+
+Colab Demo
+######################################
+A demo is available in the form of a `Colab notebook<https://colab.research.google.com/drive/1courg5alLiyBcaIg2SMuDMsJOw2mfTJm?usp=sharing>`_ or `Gist<https://gist.github.com/Gabrock94/9c88f620914897b3290eef57aaf2ef64>_`.
