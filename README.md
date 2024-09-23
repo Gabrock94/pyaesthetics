@@ -47,6 +47,16 @@ To update the package via pip, you can use:
 pip install --user --upgrade pyaesthetics
 ```
 
+
+### Verifying the installation
+To verify wether all the modules are working correctly, you can run:
+
+```python
+#load only the neede functions from the specific module
+import pyaesthetics
+pyaesthetics.utils.runtest()
+```
+
 ## Example
 pyaeshtetics modules can be used one at the time to estimate one specific feature, or they can be automatically called using an automated entrypoint that calls all the available modules at once. 
 
