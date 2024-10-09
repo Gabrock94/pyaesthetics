@@ -145,10 +145,10 @@ Pyaesthetics has been used in different scientific publication. The most relevan
 - Gabrieli, G., Scapin, G., & Esposito, G. (2022). Pyaesthetic, a python package for empirical aesthetic analysis. XXVII
 Conference of the International Association of Empirical Aesthetics, Philadelphia, United States. https://giuliogabrieli.it/posters/iaea2022/
 - Gabrieli, G., & Esposito, G. (2018a, May 3–5). Neuroaesthetics and web design: How expertise shapes our perception of
-web pages. Concepts, Actions and Objects (CAOS), Rovereto, Italy.
+web pages. Concepts, Actions and Objects (CAOS), Rovereto, Italy.http://dx.doi.org/10.13140/RG.2.2.21297.89440
 - Gabrieli, G., & Esposito, G. (2018b, August 30–September 2). Neuroaesthetic of websites: Evaluating the impact of
 expertise and exposure to website on aesthetic judgment. International Association of Empirical Aesthetics Congress
-(IAEA), Toronto, Canada. http://dx.doi.org/10.13140/RG.2.2.21297.89440
+(IAEA), Toronto, Canada.
 
 ## Contribution Guidelines for pyaesthetics
 
