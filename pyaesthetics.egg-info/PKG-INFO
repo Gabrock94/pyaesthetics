@@ -88,10 +88,10 @@ pip install --user --upgrade pyaesthetics
 ## Example
 pyaeshtetics modules can be used one at the time to estimate one specific feature, or they can be automatically called using an automated entrypoint that calls all the available modules at once. 
 
-### Example 1: one single feature (e.g. Brigthness BT601)
+### Example 1: one single feature (e.g. Brightness BT601)
 
 ```python
-#load only the neede functions from the specific module
+#load only the needed functions from the specific module
 from pyaesthetics.brightness import relativeLuminance_BT601, sRGB2RGB
 import cv2 #to open and handle images
 
@@ -107,7 +107,7 @@ print(relativeLuminance_BT601(img)) #evaluate luminance on the BT601 standard
 ```python
 import pyaesthetics
 img = "/path/to/image/image.jpg" #path to a sample image
-results = pyaesthetics.analysis.analyzeImage(img, method="complete") #perform all the availabe analysis using standard parameters
+results = pyaesthetics.analysis.analyzeImage(img, method="complete") #perform all the available analysis using standard parameters
 print(results)
 ```
 Or for a faster analysis:

@@ -5,7 +5,7 @@ Visual Complexity of books' cover
 
 In this tutorial we will analyze the visual complexity of two books' cover. We will start from two images taken in the wild, we will remove the background, interpolate the cover, and subsequently evaluate the visual complexity of the two covers.
 
-Please note that this tutorial uses rembg `https://github.com/danielgatis/rembg <https://github.com/danielgatis/rembg>`_ to remove the backgound. 
+Please note that this tutorial uses rembg `https://github.com/danielgatis/rembg <https://github.com/danielgatis/rembg>`_ to remove the background. 
 If you are having issues getting rembg working with numpy>=2, please use a nightly version (see `https://github.com/microsoft/onnxruntime/issues/21063 <https://github.com/microsoft/onnxruntime/issues/21063>`_ for more details):
 
 >>> python -m pip install coloredlogs flatbuffers numpy packaging protobuf sympy

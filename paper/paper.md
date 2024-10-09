@@ -57,7 +57,7 @@ results = pyaesthetics.analysis.analyze_image(path_to_img, method="complete")
 
 # Use in Scientific Publications
 
-The package has already been utilized in several peer-reviewed scientific publications and theses. The package was used by @bizzego2022dataset and @liu2024mothers to verify that the visual complexity of different visual stimuli was consistent across trials, by @gabrieli2023machine to investigate the effect of various visual features of still images of websites on participants' aesthetic judgments of the websites, by @cianfanelli2023binding to investigate the visual complexity of IAPS images, by @music2023beautification to explore which visual features contribute to the perception of beauty in images, and by @Veldhuizen2024 to investigate which aesthetic features are most important in influencing consumers’ aesthetic judgments of packaging labels.
+The package has already been utilized in several peer-reviewed scientific publications and thesis. The package was used by @bizzego2022dataset and @liu2024mothers to verify that the visual complexity of different visual stimuli was consistent across trials, by @gabrieli2023machine to investigate the effect of various visual features of still images of websites on participants' aesthetic judgments of the websites, by @cianfanelli2023binding to investigate the visual complexity of IAPS images, by @music2023beautification to explore which visual features contribute to the perception of beauty in images, and by @Veldhuizen2024 to investigate which aesthetic features are most important in influencing consumers’ aesthetic judgments of packaging labels.
 
 # Acknowledgements
 
