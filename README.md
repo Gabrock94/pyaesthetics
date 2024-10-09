@@ -148,7 +148,7 @@ Conference of the International Association of Empirical Aesthetics, Philadelphi
 web pages. Concepts, Actions and Objects (CAOS), Rovereto, Italy.
 - Gabrieli, G., & Esposito, G. (2018b, August 30–September 2). Neuroaesthetic of websites: Evaluating the impact of
 expertise and exposure to website on aesthetic judgment. International Association of Empirical Aesthetics Congress
-(IAEA), Toronto, Canada.
+(IAEA), Toronto, Canada. http://dx.doi.org/10.13140/RG.2.2.21297.89440
 
 ## Contribution Guidelines for pyaesthetics
 
