@@ -37,6 +37,16 @@ pyaesthetics can be installed using pip:
 pip install pyaesthetics
 ```
 
+We reccomend using a virtual environment to avoid conflicts between packages versions.
+For example, you can install it in a virtualenv by running:
+
+```bash
+python3 -m venv pyaesthetics
+cd pyaesthetics
+source bin/activate
+pip install pyaesthetics
+```
+
 ### Tesseract and pytesseract
 Tesseract and pytesseract are also required. 
 To install tesseract please visit: https://tesseract-ocr.github.io/tessdoc/Installation.html

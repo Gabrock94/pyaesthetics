@@ -90,6 +90,13 @@ or
 
 >>> $ pip install pyaesthetics --upgrade
 
+If you want to install pyaeshtetics in a virtual environment, you can use:
+
+>>> $ python3 -m venv pyaesthetics
+>>> $ cd pyaesthetics
+>>> $ source bin/activate
+>>> $ pip install pyaesthetics
+
 About the project 
 ###################
 
