@@ -13,9 +13,10 @@ authors:
     affiliation: "1"
 
 affiliations:
- - name: Center for Life Nano- and Neuro-Science, Istituto Italiano di Tecnologia, 00161, Rome, Italy
+ - name: Digital Futures Research Hub, Technological University Dublin (TU Dublin), D07 H6K8, Dublin, Ireland
    index: 1
-
+ - name: Center for Life Nano- and Neuro-Science, Istituto Italiano di Tecnologia (IIT), 00161, Rome, Italy
+   index: 2
 date: 26 November 2024
 bibliography: paper.bib
 ---
