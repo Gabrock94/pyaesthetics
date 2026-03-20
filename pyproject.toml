@@ -1,10 +1,11 @@
-[tool.poetry]
+[project]
 name = "pyaesthetics"
 version = "0.0.8.10"
 description = "A python package to estimate visual features about the aesthetic appearance of still images."
-authors = ["Giulio Gabrieli <gack94@gmail.com>"]
-license = "GPL-3.0"
+authors = [{name = "Giulio Gabrieli", email = "gack94@gmail.com"}]
+license = {text = "GPL-3.0"}
 readme = "README.md"
+keywords = ["Image", "Analysis", "Aesthetic", "Visual", "Features", "Empirical Aesthetic"]
 classifiers = [
     'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Science/Research',
@@ -25,9 +26,21 @@ classifiers = [
     'Operating System :: POSIX',
     'Operating System :: Unix',
     'Operating System :: MacOS',
-]
-keywords = ["Image", "Analysis", "Aesthetic", "Visual", "Features", "Empirical Aesthetic"]
 
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.0",
+    "scipy>=1.14",
+    "matplotlib>=3.9",
+    "imutils>=0.5",
+    "pandas>=2.2",
+    "opencv-python>=4.10",
+    "pytesseract>=0.3",
+    "pillow>=12.1.1",
+    "scikit-image>=0.24",
+    "tqdm>=4.66",
+    "rembg>=2.0.59",
+]
 
 [project.urls]
 homepage = "https://github.com/Gabrock94/pyaesthetics"
@@ -37,22 +50,8 @@ download = "https://pypi.org/project/pyaesthetics/#files"
 tracker = "https://github.com/Gabrock94/pyaesthetics/issues"
 "release notes" = "https://github.com/Gabrock94/pyaesthetics/releases"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-numpy = "^2.0"
-scipy = "^1.14"
-matplotlib = "^3.9"
-imutils = "^0.5"
-pandas = "^2.2"
-opencv-python = "^4.10"
-pytesseract = "^0.3"
-pillow = "^12.1.1"
-scikit-image = "^0.24"
-tqdm = "^4.66"
-rembg = "^2.0.59"
-
 [tool.poetry.dev-dependencies]
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.9.0"]
 build-backend = "poetry.core.masonry.api"
